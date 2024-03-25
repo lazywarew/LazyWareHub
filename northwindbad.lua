@@ -712,12 +712,6 @@ local function removeespts(tablenamearg)
 end
 
 local function sendtoxicmessagets(playername)
-    if not checkifwhitelisted then 
-    while true do end
-    return
-    end
-    
-    checkifwhitelisted()
     local toxicwords  = {"L "..playername,"jeeper creeper on top","tightstudios on top  | gg/bcT9w8r","quit this game","the jeeper creeper is back and hungrier than ever. keep your windows closed and your doors locked.","quit this game "..playername}
     local randomtoxicmsgts = toxicwords[math.random(1,#toxicwords)]
     if chatremotevar then
@@ -727,11 +721,6 @@ end
 
 
 local function setchargedelay(Value)
-    if not checkifwhitelisted then 
-    while true do end
-    return
-    end
-    checkifwhitelisted()
 for i,v in pairs(swingdelay) do
     if tonumber(v.ChargeDelay) then
 
@@ -741,11 +730,6 @@ end
 end
 
 local function setspread(Value)
-    if not checkifwhitelisted then 
-    while true do end
-    return
-    end
-    checkifwhitelisted()
 for i,v in pairs(spread) do
 if tonumber(v.Spread) then
 rawset(v,"Spread",tonumber(Value))
@@ -756,11 +740,6 @@ end
 
 
 local function setswingdelay(Value)
-if not checkifwhitelisted then 
-    while true do end
-    return
-    end
-checkifwhitelisted()
 for i,v in pairs(swingdelay) do
 if tonumber(v.SwingDelay) then
 
@@ -770,11 +749,6 @@ end
 end
 
 local function changerange(Value)
-    if not checkifwhitelisted then 
-    while true do end
-    return
-    end
-checkifwhitelisted()
 for i,v in pairs(spread) do
 if tonumber(v.ProjectileMaxDistance) then
 rawset(v,"ProjectileMaxDistance",tonumber(Value))
@@ -789,11 +763,6 @@ local myplrclienttoupdatestaminaon = sharedgetplayertable:GetPlayer()
 if not tonumber(Value) then 
 Value = tonumber(Value)
 end 
-if not checkifwhitelisted then 
-while true do end
-return
-end
-checkifwhitelisted()
 infstaminafuncts(myplrclienttoupdatestaminaon,Value)
 end
 
@@ -802,11 +771,6 @@ end
 
 
 function setbagspace(Value)
-    if not checkifwhitelisted then 
-    while true do end
-    return
-    end
-    checkifwhitelisted()
 for i,v in pairs(maxbagspace) do
 if tonumber(v.MaxBaseInventorySpace) then
 
@@ -1435,26 +1399,6 @@ end
 
 
 
-
-if not checkifwhitelisted then
-    while true do end
-    return
-end
-
-
-
-if not tsisverifiedb or not iswhitelisted or not checkifwhitelisted then
-    blplrts()
-    return
-end
-
-
-if tsisverifiedb and iswhitelisted == false then
-    blplrts()
-    return
-end
-
-checkifwhitelisted()
 
 while task.wait() do
 pcall(function()
