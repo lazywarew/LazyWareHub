@@ -1425,7 +1425,6 @@ end
             if closestlootplayerts then
             for index,item in pairs(itemsframeslootcrollvar:GetChildren()) do
                 if item:IsA("Frame") and item:FindFirstChild("Flare") then
-		print("looting player")
                     lootrequestremotets:InvokeServer(closestlootplayerts,item.Name)
                 end
                 end
