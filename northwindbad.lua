@@ -1,12 +1,5 @@
---[[
-    This script was made by Bura.
-
-    Tight Studios has been existing for over 2-3 years but due to the recent updates, the key system has been removed and I decided to keep the script open-sourced for everyone to use.
-
-    If you wish to get in touch, you can add me on Discord (dx95).
-
-    - Bura
---]]
+-- this script was made / created by bura
+-- if you wish to get in touch u can send friend request or somethingme my user is dx95
 
 
 
