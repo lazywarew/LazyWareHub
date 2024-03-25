@@ -124,7 +124,7 @@ changestatus("loading library")
 local Material
 
 xpcall(function()
-Material = loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/tnf/main/module.lua", Method="GET"}).Body)()
+Material = loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/Script/main/module.lua", Method="GET"}).Body)()
  end,function()
 while true do end
  return
