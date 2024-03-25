@@ -5,7 +5,7 @@ tight studios been existing for over 2-3 years but due to the recent updates the
 
 if you wish to get in touch u can add me on discord (dx95)
 
-- bura
+-bura
 --]]
 
 
