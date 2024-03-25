@@ -1,5 +1,5 @@
--- this script was made / created by bura
--- if you wish to get in touch u can send friend request or somethingme my user is dx95
+--// this script was made / created by bura
+--// if you wish to get in touch u can send friend request or somethingme my user is dx95
 
 
 
