@@ -322,7 +322,7 @@ cam.CFrame =  CFrame.new(mychar.HumanoidRootPart.Position,closesthoop.hoop.Posit
    
       local newposition, visibility = cam:WorldToScreenPoint(closesthoop.hoop.CFrame.Position)
     local distancebetweenmeandhoop = (mychar.HumanoidRootPart.Position-closesthoop.hoop.Position).magnitude
-   return (Vector2.new(math.floor(newposition.X,newposition.Y+silentaimoffset/distancebetweenmeandhoop/10)))
+   return (Vector2.new(math.floor(newposition.X,newposition.Y+silentaimoffset/distancebetweenmeandhoop+25)))
     end
 
 
