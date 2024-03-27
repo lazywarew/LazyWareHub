@@ -71,7 +71,7 @@ local mainframe2 = Instance.new("Frame")
 local outline = Instance.new("Frame")
 local statuslabel = Instance.new("TextLabel")
 
-loadinggui.Parent = game.CoreGui
+guiprotectionfunctionts(loadinggui)
 
 loadinggui.Name = "loadinggui"
 loadinggui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
