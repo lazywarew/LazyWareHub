@@ -25,7 +25,6 @@ local colorisafuckingskidts = "{\"Torso\":[2,2,1],\"Left Leg\":[1,2,1],\"Humanoi
         
 local closestobjecttsvar = nil
 
-task.wait(.5)
 
 
 for i,v in pairs(getgc(true)) do
@@ -168,7 +167,6 @@ function tightstudioscoolapia:getclosestlogtome(objecttype)
 end
 
 
-task.wait(1)
 
 function tightstudioscoolapia:changehungercapacity(newvalue)
 integritytable:setHunger(tonumber(newvalue))
@@ -353,4 +351,10 @@ return target
 end
 
 
-misctable.checkRemoteRequests = function() end -- a.b.c.
+if misctable.checkRemoteRequests then
+misctable.checkRemoteRequests = function() return "not cool" end -- a.b.c.
+end
+
+if misctable.finishJob then --// support for lame tnf copies lol
+misctable.finishJob = function() return "not cool" end -- a.b.c.
+end
