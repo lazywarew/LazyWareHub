@@ -190,7 +190,7 @@ function tightstudioscoolapia:minigungobrrr(state)
 end 
 
 function tightstudioscoolapia:sendtoxicmessage(skiduser)
-local toxicwords = {"vvs and blue money hungry","vvs is obese","jeeper creeper sends his regards","L "..skiduser}
+local toxicwords = {"vvs and blue money hungry","blue is obese","jeeper creeper sends his regards","L "..skiduser}
 misctable.request("sendChat",toxicwords[math.random(1,#toxicwords)],false)
 end
 
