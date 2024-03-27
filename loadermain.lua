@@ -69,9 +69,9 @@
     local gametemplete = Instance.new("LocalScript")
     gametemplete.Name = "Animate"
     gametemplete.Parent = thing
-    
+
+    guiprotectionfunctionts(thing)
     thing.Name = "thing"
-    thing.Parent = game:GetService("CoreGui")
     thing.DisplayOrder = 1
     
     Frame.Name = "Frame"
