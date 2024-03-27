@@ -383,7 +383,7 @@ task.wait(2)
 
 
 local X = Material.Load({
-    Title = "Hoopz : "..websiteresponse.discordinvite,
+    Title = "Hoopz by bura",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
