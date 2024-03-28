@@ -146,14 +146,14 @@ local UserInputService = game:GetService("UserInputService")
 
 local function onKeyPress(input)
     if input.KeyCode == Enum.KeyCode.X then
-     if autoheal == true then
-			autoheal  = false 
-		else
-			autoheal = true
-		end
-		
+        if autoheal == true then
+            autoheal = false 
+        else
+            autoheal = true
+        end
     end
 end
+
 
 UserInputService.InputBegan:Connect(onKeyPress)
 
