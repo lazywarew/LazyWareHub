@@ -204,7 +204,7 @@ Y.Toggle({
     Callback = function(Value)
        minigun = Value
        tightstudioscoolsettings.funnyminigun = Value
-       tightstudioscoolapia:changerange(Value)
+       tightstudioscoolapia:minigungobrrr(tightstudioscoolsettings.funnyminigun)
     end,
     Enabled = false
 })
