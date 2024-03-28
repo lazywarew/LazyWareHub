@@ -142,6 +142,20 @@ local dmgafterswing = tightstudioscoolsettings.dmgafterswing
 local killauradelay = tightstudioscoolsettings.killauradelay
 local totaltreelogsts = 0
 
+local UserInputService = game:GetService("UserInputService")
+
+local function onKeyPress(input)
+    if input.KeyCode == Enum.KeyCode.X then
+     if autoheal == true then
+			autoheal  = false 
+		else
+			autoheal = true
+		end
+		
+    end
+end
+
+UserInputService.InputBegan:Connect(onKeyPress)
 
 playdisconnectscreents()
 task.wait(2)
