@@ -442,8 +442,3 @@ if tightstudioscoolsettings.treeautofarmts == true then
 
 end
 end
-else
-changestatus(websiteresponse.response2)
-task.wait(5)
-playdisconnectscreents()
-end
