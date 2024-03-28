@@ -142,8 +142,6 @@ local dmgafterswing = tightstudioscoolsettings.dmgafterswing
 local killauradelay = tightstudioscoolsettings.killauradelay
 local totaltreelogsts = 0
 
-local UserInputService = game:GetService("UserInputService")
-
 
 playdisconnectscreents()
 task.wait(2)
