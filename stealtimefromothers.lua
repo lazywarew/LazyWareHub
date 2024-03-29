@@ -86,22 +86,20 @@
 
     
     while task.wait() do
-    if killaura == true and me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then 
-        for i,v in pairs(plrservicets:GetPlayers()) do 
-            if v~=me and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("HumanoidRootPart") then 
-               
-                if not v.Character:FindFirstChild("Sword") or v.Character.Humanoid.Health<0 then 
-                    return 
+        if killaura == true and me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then 
+            for i,v in pairs(plrservicets:GetPlayers()) do 
+                if v~=me and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("HumanoidRootPart") then 
+                    if not v.Character:FindFirstChild("Sword") or v.Character.Humanoid.Health < 0 then 
+                        return 
+                    end
+                    local Distance = (me.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+                    if Distance <= killauradistance then 
+                        local equippedsword = v.Character:FindFirstChild("Sword")
+                        local swordHitpart = equippedsword:FindFirstChild("Part")
+                        print("testt")
+                        damagekid(v, swordHitpart)
+                    end
                 end
-
-            local Distance = (me.Character.HumanoidRootPart.Position-v.Character.HumanoidRootPart.Position).Magnitude
-
-            if Distance<=killauradistance then 
-                local equippedsword = v.Character:FindFirstChild("Sword")
-                local swordHitpart = equippedsword:FindFirstChild("Part")
-                print("testt")
-                damagekid(v,swordHitpart)
             end
-          end
         end
     end
