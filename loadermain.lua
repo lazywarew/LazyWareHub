@@ -15,6 +15,13 @@
     gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4540286603&width=768&height=432&format=png",
     gameid = 4540286603,
     },
+  stealtimefromothers = {
+    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/StealTimeFromOthers.lua",
+    gamename = "stealtimefromothers",
+    status = "working",
+    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=10191847911&width=768&height=432&format=png",
+    gameid = 4540286603,
+    },
  --[[
     tnf = {
     gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/tnfuimain.lua",
