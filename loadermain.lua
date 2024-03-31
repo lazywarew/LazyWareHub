@@ -22,6 +22,13 @@
     gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=10191847911&width=768&height=432&format=png",
     gameid = 4540286603,
     },
+ aimblox = {
+    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/aimblox.lua",
+    gamename = "aimblox",
+    status = "working",
+    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6808416928&width=768&height=432&format=png",
+    gameid = 6808416928,
+    },
  --[[
     tnf = {
     gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/tnfuimain.lua",
