@@ -74,29 +74,3 @@ RunService.RenderStepped:Connect(function() -- update existing lines
 		UpdateLine(Line)
 	end
 end)
-
-spawn(function()
-	for _, Plr in pairs(Players:GetPlayers()) do -- handle existing players
-
-		if Plr.Name ~= LocalPlayer.Name then 
-			local HumanoidRootPart = Plr.Character:WaitForChild("HumanoidRootPart")
-			DrawLine(HumanoidRootPart, LineColor)
-
-		end
-
-	end
-end)
-
-Players.PlayerAdded:Connect(function(Player)
-	local Character = Player.Character or Player.CharacterAdded:Wait()
-	local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
-	DrawLine(HumanoidRootPart, LineColor)
-
-end)
-
-Players.PlayerRemoving:Connect(function(Player) -- player left
-	RemoveLine(Player)
-end)
-
-
-
