@@ -74,7 +74,7 @@ end
 
 RunService.RenderStepped:Connect(function() -- update existing lines
 	for _, Line in pairs(Lines) do
-		UpdateLine(Line)
+		cuteesplibraryowo.UpdateLine(Line)
 	end
 end)
 
