@@ -7,16 +7,15 @@ local LineColor = Color3.fromRGB(255, 182, 193)
 local Enabled = true
 local Lines = {}
 local Camera = workspace.CurrentCamera
-getgenv().cuteesplibraryowo = {}
 
-cuteesplibraryowo.Get2DPosition = function(PartPosition) 
+function Get2DPosition(PartPosition) 
 	local Vector, Visible = Camera:WorldToViewportPoint(PartPosition)
 	local ViewportPoint = Vector2.new(Vector.X, Vector.Y)
 	return ViewportPoint, Visible
 end
 
 
- cuteesplibraryowo.DrawLine = function(Part, Color) -- do when player joins
+ function DrawLine(Part, Color) -- do when player joins
 	local IsPlayer = false
 	if game.Players:GetPlayerFromCharacter(Part.Parent) then IsPlayer = true end
 	local Line = Drawing.new("Line")
@@ -39,7 +38,7 @@ end
 
 end
 
-cuteesplibraryowo.RemoveLine = function(Part) -- do when player leaves / not found -- PLAYER SUPPORT ONLY NOW
+ function RemoveLine(Part) -- do when player leaves / not found -- PLAYER SUPPORT ONLY NOW
 
 	for Index, Line in pairs(Lines) do
 		if Line[1] == Part.Name then
@@ -51,7 +50,7 @@ cuteesplibraryowo.RemoveLine = function(Part) -- do when player leaves / not fou
 
 end
 
-cuteesplibraryowo.UpdateLine = function(Line, Color) -- possibly reduces lag as we are not deleting
+function UpdateLine(Line, Color) -- possibly reduces lag as we are not deleting
 
 	for _, Player in pairs(Players:GetPlayers()) do
 		if Player.Name == Line[1] then
@@ -74,7 +73,7 @@ end
 
 RunService.RenderStepped:Connect(function() -- update existing lines
 	for _, Line in pairs(Lines) do
-		cuteesplibraryowo.UpdateLine(Line)
+		UpdateLine(Line)
 	end
 end)
 
