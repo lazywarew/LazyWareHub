@@ -77,5 +77,3 @@ RunService.RenderStepped:Connect(function() -- update existing lines
 		cuteesplibraryowo.UpdateLine(Line)
 	end
 end)
-
-return cuteesplibraryowo
