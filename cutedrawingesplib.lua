@@ -7,7 +7,7 @@ local LineColor = Color3.fromRGB(255, 182, 193)
 local Enabled = true
 local Lines = {}
 local Camera = workspace.CurrentCamera
-local cuteesplibraryowo = {}
+getgenv().cuteesplibraryowo = {}
 
 cuteesplibraryowo.Get2DPosition = function(PartPosition) 
 	local Vector, Visible = Camera:WorldToViewportPoint(PartPosition)
