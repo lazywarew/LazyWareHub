@@ -29,15 +29,14 @@
     gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6808416928&width=768&height=432&format=png",
     gameid = 6808416928,
     },
- --[[
     tnf = {
     gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/tnfuimain.lua",
     gamename = "tnf",
     status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=13300815607&width=768&height=432&format=png",
-    gameid = 13300815607,
+    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=16766387346&width=768&height=432&format=png",
+    gameid = 16766387346,
     },
- --]]
+ 
     }
     
     
