@@ -192,7 +192,7 @@ function tightstudioscoolapia:minigungobrrr(state)
 end 
 
 function tightstudioscoolapia:sendtoxicmessage(skiduser)
-local toxicwords = {"rian likes blackops feets","rianator is obese","color is skid","rian likes men","tightstudios on top  | gg/bcT9w8r","nice anti cheat","jeeper creeper sends his regards","L "..skiduser}
+local toxicwords = {"nv is obese","nv is skid","bura on top","tightstudios on top  | gg/bcT9w8r","nice anti cheat","jeeper creeper sends his regards","L "..skiduser}
 misctable.request("sendChat",toxicwords[math.random(1,#toxicwords)],false)
 end
 
