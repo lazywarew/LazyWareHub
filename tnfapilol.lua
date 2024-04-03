@@ -1,3 +1,5 @@
+
+
 getgenv().tightstudioscoolapia = {}
 
 getgenv().tightstudioscoolsettings = {
@@ -25,6 +27,7 @@ local colorisafuckingskidts = "{\"Torso\":[2,2,1],\"Left Leg\":[1,2,1],\"Humanoi
         
 local closestobjecttsvar = nil
 
+task.wait(.5)
 
 
 for i,v in pairs(getgc(true)) do
@@ -37,7 +40,7 @@ task.wait(1)
 local inventorytable = LTSS.inventory
 local integritytable = LTSS.integrity
 local itemtable = LTSS.item
-local misctable = LTSS.misc
+local misctable = LTSS.miscHandler
 local interactiontable = LTSS.interaction --// original name was interaction
 local operabletable = LTSS.operable
 local firingtable = LTSS.firing
@@ -167,6 +170,7 @@ function tightstudioscoolapia:getclosestlogtome(objecttype)
 end
 
 
+task.wait(1)
 
 function tightstudioscoolapia:changehungercapacity(newvalue)
 integritytable:setHunger(tonumber(newvalue))
@@ -188,7 +192,7 @@ function tightstudioscoolapia:minigungobrrr(state)
 end 
 
 function tightstudioscoolapia:sendtoxicmessage(skiduser)
-local toxicwords = {"vvs and blue money hungry","blue is obese","jeeper creeper sends his regards","L "..skiduser}
+local toxicwords = {"rian likes blackops feets","rianator is obese","color is skid","rian likes men","tightstudios on top  | gg/bcT9w8r","nice anti cheat","jeeper creeper sends his regards","L "..skiduser}
 misctable.request("sendChat",toxicwords[math.random(1,#toxicwords)],false)
 end
 
@@ -258,7 +262,7 @@ function tightstudioscoolapia:damageplayertss(killauradistance,killauradelay,dmg
 local me = game:GetService("Players").LocalPlayer
 pcall(function()
 for _,v in pairs(game:GetService('Players'):GetPlayers()) do
-if v.Name ~=me.Name and v.Status.Downed.Value ~= true  and integritytable.staminaAvailable == true and inventorytable.itemDrawn~=nil   then
+if v.Name ~=me.Name and v.Status.IsDead.Value ~= true  and integritytable.staminaAvailable == true and inventorytable.itemDrawn~=nil   then
 
     if inventorytable.itemDrawn.stats.weaponType == "bow" then
          local mag = (me.Character.Head.Position - v.Character.Head.Position).magnitude
@@ -287,7 +291,7 @@ end
   end
   
   misctable.request("damage",v,inventorytable.itemDrawn.name)
-  if autotoxicbool == true and v.Status.Downed.Value == true  then
+  if autotoxicbool == true and v.Status.IsDead.Value == true  then
    task.wait(.3)
   tightstudioscoolapia:sendtoxicmessage(v.Name)
 end
@@ -320,7 +324,7 @@ for _,v in pairs(plrs:GetPlayers()) do
 if v.Name~=me.Name and v.Character:FindFirstChild('HumanoidRootPart') and v:FindFirstChild("Status") then
 local victimroot = v.Character.HumanoidRootPart
 local mag = (root.Position-victimroot.Position).magnitude
-if mag<tonumber(silentdrydistance) and v.Status.Downed.Value == true then
+if mag<tonumber(silentdrydistance) and v.Status.IsDead.Value == true then
 target = v
 root.CFrame = victimroot.CFrame+Vector3.new(0,1,0)
 
@@ -342,7 +346,7 @@ end
 end
 root.CFrame = old
 if target:FindFirstChild("Status") then
-target.Status.Downed.Value = false
+target.Status.IsDead.Value = false
 end
 end
 end
@@ -351,10 +355,4 @@ return target
 end
 
 
-if misctable.checkRemoteRequests then
-misctable.checkRemoteRequests = function() return "not cool" end -- a.b.c.
-end
-
-if misctable.finishJob then --// support for lame tnf copies lol
-misctable.finishJob = function() return "not cool" end -- a.b.c.
-end
+misctable.finishJob = function() end -- a.b.c.
