@@ -397,7 +397,7 @@ Y.TextField({
 while wait() do
 if infstam == true then
 tightstudioscoolapia:changestaminacapacity(tonumber(100))
-end
+end 
 if autoheal == true and game:GetService('Players').LocalPlayer.Status.Health.Value<100 and  game:GetService('Players').LocalPlayer.Status.IsDead.Value~=true then
 pcall(function()
    if autohealdelay ~= tonumber(0) then
