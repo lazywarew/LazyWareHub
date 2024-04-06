@@ -398,7 +398,7 @@ while wait() do
 if infstam == true then
 tightstudioscoolapia:changestaminacapacity(tonumber(100))
 end 
-if autoheal == true and inventorytable.itemDrawn == nil and game:GetService('Players').LocalPlayer.Status.Health.Value<100 and  game:GetService('Players').LocalPlayer.Status.IsDead.Value~=true then
+if autoheal == true and inventorytable.itemDrawn.type == "bandage" and me.Status.Health.Value<100 and  me.Status.IsDead.Value~=true then
 pcall(function()
    if autohealdelay ~= tonumber(0) then
     task.wait(autohealdelay)
