@@ -33,16 +33,8 @@ local mainframe2 = Instance.new("Frame")
 local outline = Instance.new("Frame")
 local statuslabel = Instance.new("TextLabel")
 
-if get_hidden_gui or gethui then
-local hiddenUI = get_hidden_gui or gethui
-loadinggui.Parent = hiddenUI()
-elseif (syn and syn.protect_gui) then
-syn.protect_gui(loadinggui)
-loadinggui.Parent = CoreGuiService
-else
-loadinggui.Parent = CoreGuiService
-end
 
+guiprotectionfunctionts(loadinggui)
 loadinggui.Name = "loadinggui"
 loadinggui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
