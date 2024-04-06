@@ -271,7 +271,7 @@ if v.Name ~=me.Name and v.Status.IsDead.Value ~= true  and integritytable.stamin
    if isskidinsafezonets == false then
    if killauradelay ~= tonumber(0) then
    task.wait(killauradelay)
-     misctable.request("damage",v,inventorytable.itemDrawn.name,1,coolstring)
+     misctable.request("damage",v,inventorytable.itemDrawn.name,1,coolstring,1)
        return
        end
    end
@@ -290,7 +290,7 @@ end
    task.wait(dmgafterswing)
   end
   
-  misctable.request("damage",v,inventorytable.itemDrawn.name,coolstring)
+  misctable.request("damage",v,inventorytable.itemDrawn.name,coolstring,true)
   if autotoxicbool == true and v.Status.IsDead.Value == true  then
    task.wait(.3)
   tightstudioscoolapia:sendtoxicmessage(v.Name)
