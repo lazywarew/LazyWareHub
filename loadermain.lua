@@ -29,6 +29,13 @@
     gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6808416928&width=768&height=432&format=png",
     gameid = 6808416928,
     },
+  weaponary = {
+    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/weaponary.lua",
+    gamename = "weaponary",
+    status = "working",
+    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=3297964905&width=768&height=432&format=png",
+    gameid = 3297964905,
+    },
     tnf = {
     gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/tnfuimain.lua",
     gamename = "tnf",
