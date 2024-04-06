@@ -38,7 +38,7 @@
     },
    waterloo = {
     gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/waterloo.lua",
-    gamename = "weaponary",
+    gamename = "waterloo",
     status = "working",
     gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=12068120918&width=768&height=432&format=png",
     gameid = 12068120918,
