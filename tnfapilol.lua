@@ -21,7 +21,7 @@ local LTSS
 local rangetable = {}
 local itemstatstable = {}
 local reallyfunnystringts 
-local coolstring = "F0222B56-83B3-4588-AD40-A980C2B27804EEB6DBBB-3224-4D1D-B8CC-E4FE5B5A212D8290F2DC-7CB7-4A6B-B6F0-B9258B2FE5FBD5C78B1D-3CD5-4E10-9595-D61C0E67F11535B19110-1418-4A23-968A-F41D834A0EB13756DCAA-EC0B-46F9-BAEC-5CA35276E1A9E9891651-08D3-47BD-B030-317ECD8C8A17DFE0F302-0B4E-49C8-9A24-E2643D9C5F073E1A9209-5A99-41C5-8436-DD80BADA2E563D9DCEF0-3C90-4482-83D0-162905557543EAAE004A-6809-4DB5-A2D9-58498D6A47B4A"
+local coolstring = "F0222B56-83B3-4588-AD40-A980C2B27804EEB6DBBB-3224-4D1D-B8CC-E4FE5B5A212D8290F2DC-7CB7-4A6B-B6F0-B9258B2FE5FBD5C78B1D-3CD5-4E10-9595-D61C0E67F11535B19110-1418-4A23-968A-F41D834A0EB13756DCAA-EC0B-46F9-BAEC-5CA35276E1A9E9891651-08D3-47BD-B030-317ECD8C8A17DFE0F302-0B4E-49C8-9A24-E2643D9C5F073E1A9209-5A99-41C5-8436-DD80BADA2E563D9DCEF0-3C90-4482-83D0-162905557543EAAE004A-6809-4DB5-A2D9-58498D6A47B4"
 local alreadyinteracted = false
 local colorisafuckingskidts = "{\"Torso\":[2,2,1],\"Left Leg\":[1,2,1],\"HumanoidRootPart\":[2,2,1],\"Right Arm\":[1,2,1],\"Head\":[2,1,1],\"Right Leg\":[1,2,1],\"Left Arm\":[1,2,1]}"
         
@@ -271,7 +271,7 @@ if v.Name ~=me.Name and v.Status.IsDead.Value ~= true  and integritytable.stamin
    if isskidinsafezonets == false then
    if killauradelay ~= tonumber(0) then
    task.wait(killauradelay)
-     misctable.request("damage",v,inventorytable.itemDrawn.name,1)
+     misctable.request("damage",v,inventorytable.itemDrawn.name,1,coolstring)
        return
        end
    end
@@ -290,7 +290,7 @@ end
    task.wait(dmgafterswing)
   end
   
-  misctable.request("damage",v,inventorytable.itemDrawn.name)
+  misctable.request("damage",v,inventorytable.itemDrawn.name,coolstring)
   if autotoxicbool == true and v.Status.IsDead.Value == true  then
    task.wait(.3)
   tightstudioscoolapia:sendtoxicmessage(v.Name)
