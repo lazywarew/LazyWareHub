@@ -356,4 +356,9 @@ return target
 end
 
 
+if misctable.finishJob then 
 misctable.finishJob = function() end -- a.b.c.
+else 
+me:Kick("unsupported game,  you have been kicked to avoid getting detected")
+return
+end
