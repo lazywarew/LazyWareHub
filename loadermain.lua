@@ -1,66 +1,62 @@
- local games = {
-    
-
+local games = {
     hoopz = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/hoopz.lua",
-    gamename = "hoopz",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6229116934&width=768&height=432&format=png",
-    gameid = 6229116934,
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/hoopz.lua",
+        gamename = "hoopz",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6229116934&width=768&height=432&format=png",
+        gameid = 6229116934,
     },
     northwind = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/northwindbad.lua",
-    gamename = "northwind",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4540286603&width=768&height=432&format=png",
-    gameid = 4540286603,
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/northwindbad.lua",
+        gamename = "northwind",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4540286603&width=768&height=432&format=png",
+        gameid = 4540286603,
     },
-  stealtimefromothers = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/StealTimeFromOthers.lua",
-    gamename = "stealtimefromothers",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=10191847911&width=768&height=432&format=png",
-    gameid = 4540286603,
+    stealtimefromothers = {
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/StealTimeFromOthers.lua",
+        gamename = "stealtimefromothers",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=10191847911&width=768&height=432&format=png",
+        gameid = 4540286603,
     },
- 
     universalsilentaim = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/universalsilentaim.lua",
-    gamename = "universalsilentaim",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=7791106063&width=768&height=432&format=png",
-    gameid = 7791106063,
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/universalsilentaim.lua",
+        gamename = "universalsilentaim",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=7791106063&width=768&height=432&format=png",
+        gameid = 7791106063,
     },
-  
- aimblox = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/aimblox.lua",
-    gamename = "aimblox",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6808416928&width=768&height=432&format=png",
-    gameid = 6808416928,
+    aimblox = {
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/aimblox.lua",
+        gamename = "aimblox",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6808416928&width=768&height=432&format=png",
+        gameid = 6808416928,
     },
-  weaponary = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/weaponary.lua",
-    gamename = "weaponary",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=3297964905&width=768&height=432&format=png",
-    gameid = 3297964905,
+    weaponary = {
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/weaponary.lua",
+        gamename = "weaponary",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=3297964905&width=768&height=432&format=png",
+        gameid = 3297964905,
     },
-   waterloo = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/waterloo.lua",
-    gamename = "waterloo",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=12068120918&width=768&height=432&format=png",
-    gameid = 12068120918,
+    waterloo = {
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/waterloo.lua",
+        gamename = "waterloo",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=12068120918&width=768&height=432&format=png",
+        gameid = 12068120918,
     },
     tnf = {
-    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/tnfuimain.lua",
-    gamename = "tnf",
-    status = "working",
-    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=16766387346&width=768&height=432&format=png",
-    gameid = 16766387346,
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/tnfuimain.lua",
+        gamename = "tnf",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=16766387346&width=768&height=432&format=png",
+        gameid = 16766387346,
     },
- 
-    }
+}
+
     
     
     
