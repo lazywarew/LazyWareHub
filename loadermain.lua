@@ -43,6 +43,13 @@
     gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=12068120918&width=768&height=432&format=png",
     gameid = 12068120918,
     },
+   universalsilentaim = {
+    gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/universalsilentaim.lua",
+    gamename = "weaponary",
+    status = "working",
+    gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=7791106063&width=768&height=432&format=png",
+    gameid = 7791106063,
+    },
     tnf = {
     gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/tnfuimain.lua",
     gamename = "tnf",
