@@ -271,7 +271,8 @@ if v.Name ~=me.Name and v.Status.IsDead.Value ~= true  and integritytable.stamin
    if isskidinsafezonets == false then
    if killauradelay ~= tonumber(0) then
    task.wait(killauradelay)
-     misctable.request("damage",v,inventorytable.itemDrawn.name,1,coolstring,1)
+  misctable.request("damage",v,coolstring,inventorytable.itemDrawn.name,1)
+
        return
        end
    end
