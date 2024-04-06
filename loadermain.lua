@@ -45,7 +45,7 @@
     },
    universalsilentaim = {
     gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/universalsilentaim.lua",
-    gamename = "weaponary",
+    gamename = "universalsilentaim",
     status = "working",
     gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=7791106063&width=768&height=432&format=png",
     gameid = 7791106063,
