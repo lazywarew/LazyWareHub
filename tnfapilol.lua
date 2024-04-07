@@ -48,7 +48,7 @@ local firingtable = LTSS.firing
 local currenttask = "tree"
 
 
-local usebandageanimationid = nil
+local usebandageanimationid = 0
 
 if statstable.items["Bandage"] then 
 usebandageanimationid = statstable.items["Bandage"].animations.use
