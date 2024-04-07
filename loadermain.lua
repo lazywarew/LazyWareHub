@@ -1,4 +1,4 @@
-local games = {
+ local games = {
     hoopz = {
         gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/hoopz.lua",
         gamename = "hoopz",
