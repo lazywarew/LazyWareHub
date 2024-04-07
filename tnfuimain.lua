@@ -404,10 +404,10 @@ if autohealbeta == true then
    if autohealdelay ~= tonumber(0) then
     task.wait(autohealdelay)
    end
-		
+
+   print("ples work!!)
   tightstudioscoolapia:playbandageuseanimation(me)
   tightstudioscoolapia:usebandagelol(me)
-  return
 end 
 	
 if autoheal and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
