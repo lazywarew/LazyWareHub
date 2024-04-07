@@ -314,7 +314,7 @@ function tightstudioscoolapia:playbandageuseanimation(player)
  local animation = Instance.new("Animation")
 animation.AnimationId = "rbxassetid://" .. dances[math.random(1, #dances)]
 local bandageuseanimationtrack = player.Character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(usebandageanimationid)
-danceTrack:Play()
+bandageuseanimationtrack:Play()
 end 
 
 
