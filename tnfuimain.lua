@@ -400,17 +400,16 @@ if infstam == true then
 tightstudioscoolapia:changestaminacapacity(tonumber(100))
 end 
 
-if autohealbeta == true then 
+if autohealbeta == true and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
    if autohealdelay ~= tonumber(0) then
     task.wait(autohealdelay)
    end
 
-   print("ples work!!)
   tightstudioscoolapia:playbandageuseanimation(me)
   tightstudioscoolapia:usebandagelol(me)
 end 
 	
-if autoheal and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
+if autoheal == true  and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
 pcall(function()
 
    if autohealdelay ~= tonumber(0) then
