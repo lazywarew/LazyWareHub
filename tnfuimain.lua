@@ -399,7 +399,7 @@ while wait() do
 if infstam == true then
 tightstudioscoolapia:changestaminacapacity(tonumber(100))
 end 
-if autoheal == true and me.Status.Health.Value<100 and  me.Status.IsDead.Value==false then
+if (autoheal or autohealbeta) and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
 pcall(function()
 
    if autohealdelay ~= tonumber(0) then
@@ -408,7 +408,7 @@ pcall(function()
 
    if autohealbeta == true then 
 	tightstudioscoolapia:playbandageuseanimation(me)
-	tightstudioscoolapia:usebandagelol()
+	tightstudioscoolapia:usebandagelol(me)
 	return
     end 
 				
