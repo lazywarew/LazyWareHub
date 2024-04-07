@@ -5,7 +5,7 @@ if isstscrptloaded  then
 end
 
 getgenv().isstscrptloaded = true
-
+ 
 local httrest = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request)
 local CoreGuiService = game:GetService("CoreGui")
 local TweenService = game:GetService('TweenService')
