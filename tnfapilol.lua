@@ -313,10 +313,14 @@ end)
 end
 
 function tightstudioscoolapia:playbandageuseanimation(player)
- local usebandageanimation = Instance.new("Animation")
+local mynoobhumanoid = player.Character:FindFirstChild("Humanoid")
+ 
+local usebandageanimation = Instance.new("Animation")
 usebandageanimation.AnimationId = "rbxassetid://" ..usebandageanimationid
-local bandageuseanimationtrack = player.Character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(usebandageanimation)
+local bandageuseanimationtrack = mynoobhumanoid:LoadAnimation(usebandageanimation)
 bandageuseanimationtrack:Play()
+task.wait(1)
+bandageuseanimationtrack:Destroy()
 end 
 
 
