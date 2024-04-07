@@ -212,7 +212,9 @@ function tightstudioscoolapia:changewarmthcapacity(newvalue)
 rawset(inventorytable,"warmthBonus",tonumber(newvalue))
 end
 
-
+function tightstudioscoolapia:usebandagelol(player)
+  misctable.request("bandagePlayer",player)
+end
 
 
 function tightstudioscoolapia:changerange(newvalue)
