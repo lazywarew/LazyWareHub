@@ -266,15 +266,6 @@ end
 end
 
 
-function tightstudioscoolapia:equipbandagets()
-  misctable.request("equip","Bandage")
-end 
-
-function tightstudioscoolapia:unequipbandagets()
- print("called")
-  misctable.request("unequip","Bandage")
-end 
-
 function tightstudioscoolapia:damageplayertss(killauradistance,killauradelay,dmgafterswing,autotoxicbool)
 local me = game:GetService("Players").LocalPlayer
 pcall(function()
