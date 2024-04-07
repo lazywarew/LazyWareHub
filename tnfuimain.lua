@@ -407,6 +407,7 @@ if autohealbeta == true and me.Status.Health.Value < 100 and  me.Status.IsDead.V
 
   tightstudioscoolapia:playbandageuseanimation(me)
   tightstudioscoolapia:usebandagelol(me)
+  tightstudioscoolapia:unequipbandagets()
   tightstudioscoolapia:equipbandagets()
 end 
 	
