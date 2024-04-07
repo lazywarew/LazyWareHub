@@ -99,7 +99,7 @@ local didapiloadedsucesfuly = true
 
 
 xpcall(function()
-loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/Script/main/tnfapilol.lua", Method="GET"}).Body)()
+loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/Script/main/module.lua", Method="GET"}).Body)()
 end,function()
 didapiloadedsucesfuly = false
 end)
@@ -142,7 +142,7 @@ task.wait(2)
 local Material
 
 xpcall(function()
-Material = loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/Script/main/tnfapilol.lua", Method="GET"}).Body)()
+Material = loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/Script/main/module.lua", Method="GET"}).Body)()
 end,function()
 while true do end
 return
