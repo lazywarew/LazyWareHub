@@ -99,7 +99,7 @@ local didapiloadedsucesfuly = true
 
 
 xpcall(function()
-loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/Script/main/module.lua", Method="GET"}).Body)()
+loadstring(httrest({Url="https://raw.githubusercontent.com/Bura1458/Script/main/tnfapilol.lua", Method="GET"}).Body)()
 end,function()
 didapiloadedsucesfuly = false
 end)
