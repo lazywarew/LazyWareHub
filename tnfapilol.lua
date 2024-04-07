@@ -50,8 +50,8 @@ local currenttask = "tree"
 
 local usebandageanimationid = nil
 
-if statstable["Bandage"] then 
-usebandageanimationid = statstable["Bandage"].animations.use
+if statstable.items["Bandage"] then 
+usebandageanimationid = statstable.items["Bandage"].animations.use
 end 
 
 
