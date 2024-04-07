@@ -350,6 +350,7 @@ target = v
 root.CFrame = victimroot.CFrame+Vector3.new(0,-8,0)
 local part = Instance.new('Part')
 part.Name = "Part"
+part.Transparency = 1
 part.Size = Vector3.new(20,0,20)
 part.Parent = game.Workspace
 part.CFrame = root.CFrame+Vector3.new(0,-3,0)
@@ -372,6 +373,7 @@ misctable.request('lootPlayer',target,items.Name,reallyfunnystringts)
 end
 end
 root.CFrame = old
+part:Remove()
 if target:FindFirstChild("Status") then
 target.Status.IsDead.Value = false
 end
