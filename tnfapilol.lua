@@ -271,6 +271,7 @@ function tightstudioscoolapia:equipbandagets()
 end 
 
 function tightstudioscoolapia:unequipbandagets()
+ print("called")
   misctable.request("unequip","Bandage")
 end 
 
