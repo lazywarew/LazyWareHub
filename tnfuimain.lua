@@ -117,6 +117,7 @@ end
 local infstam = false
 local killaura = false 
 local autoheal = false
+local autohealbeta = false 
 local lootfilter = false
 local autofarmdebouncets = false
 local fastinteractionts = false
@@ -134,7 +135,6 @@ local killauradistance = tightstudioscoolsettings.killauradistance
 local dmgafterswing = tightstudioscoolsettings.dmgafterswing
 local killauradelay = tightstudioscoolsettings.killauradelay
 local totaltreelogsts = 0
-
 
 playdisconnectscreents()
 task.wait(2)
@@ -233,6 +233,14 @@ Y.Toggle({
     Text = "auto heal",
     Callback = function(Value)
        autoheal = Value
+    end,
+    Enabled = false
+})
+
+Y.Toggle({
+    Text = "auto heal v2",
+    Callback = function(Value)
+       autohealbeta = Value
     end,
     Enabled = false
 })
@@ -393,9 +401,17 @@ tightstudioscoolapia:changestaminacapacity(tonumber(100))
 end 
 if autoheal == true and me.Status.Health.Value<100 and  me.Status.IsDead.Value==false then
 pcall(function()
+
    if autohealdelay ~= tonumber(0) then
     task.wait(autohealdelay)
    end
+
+   if autohealbeta == true then 
+	tightstudioscoolapia:playbandageuseanimation(me)
+	tightstudioscoolapia:usebandagelol()
+	return
+    end 
+				
     tightstudioscoolapia:holdbandage("Bandage")
     tightstudioscoolapia:tsusebandage()
        if autohealholddelay ~= tonumber(0) then
