@@ -395,37 +395,36 @@ Y.TextField({
     Enabled = false
 })
 
-while wait() do
+while task.wait() do
 if infstam == true then
 tightstudioscoolapia:changestaminacapacity(tonumber(100))
 end 
 
 if autohealbeta == true and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
-   if autohealdelay ~= tonumber(0) then
+   if autohealdelay ~= 0 then
     task.wait(autohealdelay)
    end
 
-		
-  tightstudioscoolapia:usebandagelol(me)
   tightstudioscoolapia:playbandageuseanimation(me)
+  tightstudioscoolapia:usebandagelol(me)
 end 
 	
 if autoheal == true  and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
 pcall(function()
 
-   if autohealdelay ~= tonumber(0) then
+   if autohealdelay 0 then
     task.wait(autohealdelay)
    end
 			
     tightstudioscoolapia:holdbandage("Bandage")
     tightstudioscoolapia:tsusebandage()
-       if autohealholddelay ~= tonumber(0) then
+       if autohealholddelay 0 then
     task.wait(autohealholddelay)
 end
     tightstudioscoolapia:equipobjectts("Bandage")
     tightstudioscoolapia:holdbandage("Bandage")
     tightstudioscoolapia:tsusebandage()
-    if autohealholddelay ~= tonumber(0) then
+    if autohealholddelay 0 then
     task.wait(autohealholddelay)
 end
     equipobjectts("Bandage")
