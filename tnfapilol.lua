@@ -41,6 +41,7 @@ local inventorytable = LTSS.inventory
 local integritytable = LTSS.integrity
 local itemtable = LTSS.item
 local misctable = LTSS.miscHandler
+local statstable  = LTSS.stats
 local interactiontable = LTSS.interaction --// original name was interaction
 local operabletable = LTSS.operable
 local firingtable = LTSS.firing
