@@ -18,7 +18,7 @@ local games = {
         gamename = "stealtimefromothers",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=10191847911&width=768&height=432&format=png",
-        gameid = 10191847911, -- Corrected gameid
+        gameid = 10191847911, 
     },
     universalsilentaim = {
         gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/universalsilentaim.lua",
