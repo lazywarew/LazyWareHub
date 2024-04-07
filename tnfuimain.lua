@@ -117,7 +117,6 @@ end
 local infstam = false
 local killaura = false 
 local autoheal = false
-local autohealbeta = false 
 local lootfilter = false
 local autofarmdebouncets = false
 local fastinteractionts = false
@@ -237,13 +236,7 @@ Y.Toggle({
     Enabled = false
 })
 
-Y.Toggle({
-    Text = "auto heal v2",
-    Callback = function(Value)
-       autohealbeta = Value
-    end,
-    Enabled = false
-})
+
 
 Y.Toggle({
     Text = "fast interaction",
@@ -400,17 +393,6 @@ if infstam == true then
 tightstudioscoolapia:changestaminacapacity(tonumber(100))
 end 
 
-if autohealbeta == true and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
-   if autohealdelay ~= 0 then
-    task.wait(autohealdelay)
-   end
-
-  tightstudioscoolapia:playbandageuseanimation(me)
-  tightstudioscoolapia:usebandagelol(me)
-  tightstudioscoolapia:unequipbandagets()
-  tightstudioscoolapia:equipbandagets()
-end 
-	
 if autoheal == true  and me.Status.Health.Value < 100 and  me.Status.IsDead.Value == false then
 pcall(function()
 
