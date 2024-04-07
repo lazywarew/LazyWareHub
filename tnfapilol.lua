@@ -48,6 +48,11 @@ local firingtable = LTSS.firing
 local currenttask = "tree"
 
 
+local usebandageanimationid = nil
+
+if statstable["Bandage"] then 
+usebandageanimationid = statstable["Bandage"].animations.use
+end 
 
 
 
@@ -304,6 +309,14 @@ end
 end
 end)
 end
+
+function tightstudioscoolapia:playbandageuseanimation(player)
+ local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://" .. dances[math.random(1, #dances)]
+local bandageuseanimationtrack = player.Character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(usebandageanimationid)
+danceTrack:Play()
+end 
+
 
 function tightstudioscoolapia:holdbandage(object)
 for _,v in pairs(inventorytable.tools) do
