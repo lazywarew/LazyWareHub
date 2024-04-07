@@ -347,8 +347,14 @@ local victimroot = v.Character.HumanoidRootPart
 local mag = (root.Position-victimroot.Position).magnitude
 if mag<tonumber(silentdrydistance) and v.Status.IsDead.Value == true then
 target = v
-root.CFrame = victimroot.CFrame+Vector3.new(0,1,0)
-
+root.CFrame = victimroot.CFrame+Vector3.new(0,-8,0)
+local part = Instance.new('Part')
+part.Name = "Part"
+part.Size = Vector3.new(20,0,20)
+part.Parent = game.Workspace
+part.CFrame = root.CFrame+Vector3.new(0,-3,0)
+part.CanCollide = true
+part.Anchored = true
 
 for _,items in pairs(target.Status.Items:GetChildren()) do
 if not target or not target:FindFirstChild("Status") then
