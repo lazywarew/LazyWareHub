@@ -70,21 +70,7 @@ local tweenInfo = TweenInfo.new(
 )
  
  function tightstudioscoolapia:isplayerinsafezonets(player)
-     local isiplrnsafezonevar = false 
-    if player and  player:FindFirstChild("Status") then
-        local statusfolder = player:FindFirstChild("Status")
-        if statusfolder:FindFirstChild("Zones") then
-        local zonesfolder = statusfolder:FindFirstChild("Zones")
-        for index,szvalue in pairs(zonesfolder:GetChildren()) do
-            if szvalue.Value == true then 
-                if isiplrnsafezonevar == false then
-                    isiplrnsafezonevar = true 
-                    end
-                end
-        end
-        end
-    end
-    return isiplrnsafezonevar
+  return false
 end
 
 
