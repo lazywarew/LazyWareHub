@@ -34,6 +34,13 @@
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6808416928&width=768&height=432&format=png",
         gameid = 6808416928,
     },
+    rushpoint = {
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/rushpoint.lua",
+        gamename = "rushpoint",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=5993942214&width=768&height=432&format=png",
+        gameid = 5993942214,
+    },
     weaponary = {
         gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/weaponary.lua",
         gamename = "weaponary",
