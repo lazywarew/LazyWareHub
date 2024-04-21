@@ -1,3 +1,8 @@
+if not guiprotectionfunctionts then 
+	while true do end 
+	return
+end
+
 local tweenservice = game:GetService("TweenService")
 local tween = function(object,props,speed)
 	local info = TweenInfo.new(speed)
@@ -16,11 +21,11 @@ function library:New(Name)
 	local FeaturesContainer = Instance.new("Frame")
 	local TabsContainer = Instance.new("Frame")
 	local UIListLayout2 = Instance.new("UIListLayout")
+	local UserInputService = game:GetService("UserInputService")
 
 	ScreenGui.Name = Name
 	guiprotectionfunctionts(ScreenGui)
 
-     
 	UserInputService.InputBegan:Connect(function(input, gameProcessed)
 		if input.KeyCode == Enum.KeyCode.Quote and not gameProcessed then
 			if ScreenGui.Enabled == true then
@@ -30,7 +35,7 @@ function library:New(Name)
 			end
 		end
 	end)
-	
+
 	Frame.Parent = ScreenGui
 	Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 	Frame.Position = UDim2.new(0.237586424, 0, 0.19225806, 0)
