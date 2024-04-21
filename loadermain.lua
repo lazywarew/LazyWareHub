@@ -1,11 +1,4 @@
   local games = {
-    hoopz = {
-        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/hoopz.lua",
-        gamename = "hoopz",
-        status = "working",
-        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6229116934&width=768&height=432&format=png",
-        gameid = 6229116934,
-    },
     northwind = {
         gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/northwindbad.lua",
         gamename = "northwind",
