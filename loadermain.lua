@@ -35,7 +35,7 @@
         gameid = 5993942214,
     },
     weaponary = {
-        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/weaponary.lua",
+        gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/rushpoint.lua",
         gamename = "weaponary",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=3297964905&width=768&height=432&format=png",
