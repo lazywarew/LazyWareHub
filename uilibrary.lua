@@ -1,8 +1,3 @@
-if not guiprotectionfunctionts then 
-	while true do end 
-	return
-end
-
 local tweenservice = game:GetService("TweenService")
 local tween = function(object,props,speed)
 	local info = TweenInfo.new(speed)
