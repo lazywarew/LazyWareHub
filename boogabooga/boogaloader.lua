@@ -4,7 +4,7 @@ end
 
 import("/main/loadermain.lua")
 
-if game.Placeid == 11729688377  then
+if game.PlaceId == 11729688377  then
 import("/main/boogabooga/boogamain.lua")
 else
 import("/main/boogabooga/boogavoid.lua")
