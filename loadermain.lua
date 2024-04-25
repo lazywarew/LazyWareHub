@@ -50,7 +50,7 @@
     }, 
       boogabooga = {
         gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/boogabooga/boogaloader.lua",
-        gamename = "boogabooga",
+        gamename = "booga booga",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=11729688377&width=768&height=432&format=png",
         gameid = 11729688377,
