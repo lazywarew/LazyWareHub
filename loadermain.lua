@@ -1,4 +1,4 @@
- local games = {
+  local games = {
     ["northwind"] = {
         gamescript = "https://raw.githubusercontent.com/Bura1458/Script/main/northwindbad.lua",
         gamename = "northwind",
