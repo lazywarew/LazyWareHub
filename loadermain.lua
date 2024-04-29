@@ -67,7 +67,7 @@
     end
 
    function importmodulets(url)
-    local formattedurl =  loadstring(game:HttpGet('https://raw.githubusercontent.com/Bura1458/Script/'..url))()
+    local formattedurl =  loadstring(game:HttpGet('https://raw.githubusercontent.com/lazywarew/Script/'..url))()
   end
 
     local function getcolorfromstatusts(statustype)
