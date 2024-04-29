@@ -65,7 +65,11 @@
     gui.Parent = game:GetService("CoreGui")
     end
     end
-    
+
+   function importmodulets(url)
+    local formattedurl =  loadstring(game:HttpGet('https://raw.githubusercontent.com/Bura1458/Script/'..url))()
+  end
+
     local function getcolorfromstatusts(statustype)
     if statustype == "working" then
     return Color3.fromRGB(0, 255, 0) --// green
