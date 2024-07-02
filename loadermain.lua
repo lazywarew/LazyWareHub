@@ -41,13 +41,6 @@
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=11729688377&width=768&height=432&format=png",
         gameid = 11729688377,
     }, 
-   ["TNF"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/richardisskid.lua",
-        gamename = "TNF",
-        status = "working",
-        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=17886218648&width=768&height=432&format=png",
-        gameid = 17886218648,
-    },
 }
 
 
