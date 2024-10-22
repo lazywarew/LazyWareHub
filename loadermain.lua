@@ -1,6 +1,6 @@
   local games = {
     ["northwind"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/northwindbad.lua",
+        gamescript = "https://raw.githubusercontent.com/LazyWareHub/Script/main/northwindbad.lua",
         gamename = "northwind",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4540286603&width=768&height=432&format=png",
