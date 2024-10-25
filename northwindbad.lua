@@ -284,25 +284,28 @@ end)
 
 
 --// stupid default stats
-local defaultspeedvalts = myhum.WalkSpeed
-local defaultjumppowervalts = myhum.JumpPower
+local defaultspeedvalts = 16
+local defaultjumppowervalts = 45
 
 local defineventsfolder 
 local targetfilterfolder =  noobworkspace:FindFirstChild("TargetFilter")
-local autolootdistancets = 10
 local chatremotevar
 local interactionremotevarts 
 local lootrequestremotets
+local damageplayerremotets
+local swingmeleeremotets
 local rndmnewfuncts = Random.new()
 
+local equippedtoolidts = ""
+local equippedtoolmodelts = nil 
 
 --// kill aura stuff
-local stupidtoolthatweareholdingid = nil
-local stupidtoolthatweareholdingname = nil
-local killauradelayts = .5
-local killauradistancets = 10
+local currentkillauratargetts = nil 
 local killaurachargedistancets = 12
-local killaurats = false
+local killauradistancets = 6
+local killauravalts = false
+
+--// auto block stuff 
 local isourswordcharged = false
 local autoblockts = false
 local autoblockdistancets  = 10
@@ -317,6 +320,8 @@ local extraspeedandjumppowervalts = false
 local interfaceguisfolder = nil
 
 --// auto loot stuff
+local closestlootplayerts = nil
+local autolootdistancets = 10
 local playerlootingguits = nil
 local itemsframeloottsvar
 local itemsframeslootcrollvar 
@@ -336,7 +341,6 @@ local stupiditemthatweareholdingviewpointleft = nil
 local stupiditemthatweareholdingactualname =  nil
 
 --// silent aim stuff
-local closestlootplayerts = nil
 local closestskidtous = nil
 local silentaimval = false 
 local stupidhitpart  
@@ -395,6 +399,18 @@ if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFuncti
     local lootremoterequesttsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
     lootrequestremotets = lootremoterequesttsvar
 end
+
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local damageremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    damageplayerremotets = damageremoterequestvar
+end
+
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local swingmeleeremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    swingmeleeremotets = swingmeleeremoterequestvar
+end
+
+
 
 
  if game:GetService("ReplicatedStorage"):FindFirstChild("Interacting") then
@@ -571,6 +587,11 @@ if raycastinstances[1] and raycastinstances[2] == nil  and tostring(raycastinsta
       end 
       end 
      end
+
+    elseif method == "InvokeServer" or method == "FireServer" and not checkcaller() then
+        --// for packet spoofing
+        local args = {...} 
+        return oldnamecallts(self,...)
     end
   return oldnamecallts(self,...)
 end))
@@ -591,7 +612,7 @@ local handletypests = {
 
 
 
-local function chooserandomhandle()
+function chooserandomhandle()
     local randomhandlets = handletypests[math.random(1,#handletypests)]
     return tostring(randomhandlets)
 end
@@ -618,22 +639,8 @@ task.wait(randomdelaytoreturntsa)
  end
  
  
-local function getcurrentlyequippedtoolts()
-local currentclientdatats = sharedgetplayertable:GetPlayer() --// get our client data
 
-for index,object in pairs(currentclientdatats) do
-if typeof(object) == "Instance" and string.len(object.Name)>20  then
-stupidtoolthatweareholdingid = object
-break;
-else 
-stupidtoolthatweareholdingid = nil 
-stupiditemthatweareholdingviewpointleft = nil
-stupiditemthatweareholdingactualname = nil
-end
-end
-end
-
-local function getstupidtoolnamebyid()
+function getstupidtoolnamebyid()
 if stupidinventoryinterfaceitemmainvar:FindFirstChild(stupidtoolthatweareholdingid.Name) then
 stupiditemthatweareholdingimg = stupidinventoryinterfaceitemmainvar:FindFirstChild(stupidtoolthatweareholdingid.Name)
 if stupiditemthatweareholdingimg:FindFirstChild("LeftItemInfo") then
@@ -652,7 +659,7 @@ end
 end
 
 
-local function teleporttoplacets(placeid)
+function teleporttoplacets(placeid)
 if not tonumber(placeid) then
 placeid = tonumber(placeid)
 end
@@ -748,21 +755,64 @@ end
 
 
 
-local function sendtoxicmessagets(playername)
+function sendtoxicmessagets(playername)
    
 end
 
+ function findandlootskidts()
+    for i, v in pairs(plrservicets:GetPlayers()) do
+        if v.Name ~= me.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+            local maga = (mychar.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+            if maga <= tonumber(autolootdistancets) then
+                closestlootplayerts = v
+            end
+        end
+    end
+    if closestlootplayerts then
+    for i2, v2 in pairs(itemsframeslootcrollvar:GetChildren()) do
+        if v2:IsA("Frame") and v2:FindFirstChild("Flare") then
+            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",v2.Name)
+            task.wait()
+        end
+    end
+  end
+    closestlootplayerts = nil
+end 
 
-local function setchargedelay(Value)
+
+
+function findanddmgskidts()
+    for i, v in pairs(plrservicets:GetPlayers()) do
+        if v.Name ~= me.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+            local maga = (mychar.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+            if maga <= tonumber(killauradistancets) then
+                currentkillauratargetts = v
+            end
+            if maga <= killaurachargedistancets then 
+                swingmeleeremotets:InvokeServer(equippedtoolmodelts,"Charge")
+            end 
+        end
+    end
+
+    if currentkillauratargetts then 
+        if equippedtoolidts~="" then  
+            swingmeleeremotets:InvokeServer(equippedtoolmodelts,"BeginSwing") 
+            damageplayerremotets:InvokeServer(equippedtoolmodelts,"EndSwing",currentkillauratargetts)
+        end
+    end
+    currentkillauratargetts = nil 
+end
+
+function setchargedelay(Value)
 for i,v in pairs(swingdelay) do
-    if tonumber(v.ChargeDelay) then
+if tonumber(v.ChargeDelay) then
 
 rawset(v,"ChargeDelay",tonumber(Value))
 end
 end
 end
 
-local function setspread(Value)
+function setspread(Value)
 for i,v in pairs(spread) do
 if tonumber(v.Spread) then
 rawset(v,"Spread",tonumber(Value))
@@ -772,7 +822,7 @@ end
 
 
 
-local function setswingdelay(Value)
+function setswingdelay(Value)
 for i,v in pairs(swingdelay) do
 if tonumber(v.SwingDelay) then
 
@@ -781,7 +831,7 @@ end
 end
 end
 
-local function changerange(Value)
+function changerange(Value)
 for i,v in pairs(spread) do
 if tonumber(v.ProjectileMaxDistance) then
 rawset(v,"ProjectileMaxDistance",tonumber(Value))
@@ -790,7 +840,7 @@ end
 end
 
 
-local function isnearsafezonelolts()
+function isnearsafezonelolts()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
     local mycharacterroot = me.Character:FindFirstChild("HumanoidRootPart") 
 
@@ -806,7 +856,7 @@ local function isnearsafezonelolts()
     return false 
 end
 
-local function safeteleport(newposlol)
+function safeteleport(newposlol)
     if me  and me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then 
         local mycharacterroot = me.Character:FindFirstChild("HumanoidRootPart") 
         local funnyposlol = mycharacterroot.CFrame+Vector3.new(0,-math.random(5600,7500),0)
@@ -836,7 +886,7 @@ local function safeteleport(newposlol)
 end
 
 
-local function setstaminalol(SetToMax,Value)
+function setstaminalol(SetToMax,Value)
 local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
 if SetToMax == true then 
@@ -850,18 +900,19 @@ infstaminafuncts(myclentplayerentityaval,Value)
 end
 
 
-local function checkifdeadandrespawnts()
+function checkifdeadandrespawnts()
 local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
 if myclentplayerentityaval.Health<1 then 
     if me.Character and me.Character:FindFirstChild("HumanoidRootPart") and mychar then 
+      task.wait()
      safeteleport(mychar.HumanoidRootPart.CFrame)
     end
    end
 end 
 
 
-local function setbagspace(Value)
+function setbagspace(Value)
 for i,v in pairs(maxbagspace) do
 if tonumber(v.MaxBaseInventorySpace) then
 
@@ -1154,8 +1205,17 @@ misctab.Toggle({
   end
     extraspeedandjumppower = Value
 	end,
-  Enabled = false
+  Enabled = extraspeedandjumppower
 })
+
+misctab.Toggle({
+	Text = "Killaura",
+	Callback = function(Value)
+     killauravalts = Value
+	end,
+    Enabled = killauravalts
+})
+
 
 
  misctab.TextField({
@@ -1215,7 +1275,7 @@ misctab.Toggle({
 	end,
 	})
 
-	   
+	  
    misctab.Toggle({
    Text = "inf stamina",
    Callback = function(Value)
@@ -1378,28 +1438,15 @@ Enabled = false
 })
 
 
+
 while task.wait() do
     if autolootts == true then
         if playerlootingguits then
             if closestlootplayerts == nil then
-                for i, v in pairs(plrservicets:GetPlayers()) do
-                    if v ~= me and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-                        local maga = (mychar.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
-                        if maga <= tonumber(autolootdistancets) then
-                            closestlootplayerts = v
-                        end
-                    end
-                end
-            end
-            if closestlootplayerts then
-                for i2, v2 in pairs(itemsframeslootcrollvar:GetChildren()) do
-                    if v2:IsA("Frame") and v2:FindFirstChild("Flare") then
-                        lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",v2.Name)
-                        task.wait()
-                    end
-                end
-            end
-            closestlootplayerts = nil
+                task.spawn(function()
+                findandlootskidts()
+                end)
+            end 
         end
     end
 
@@ -1435,4 +1482,11 @@ while task.wait() do
     if autorespawnondeadlolts == true then 
         checkifdeadandrespawnts()
     end
+    if killauravalts == true then 
+        if currentkillauratargetts == nil  then 
+            if equippedtoolidts~="" then 
+            
+            end
+        end 
+    end 
 end
