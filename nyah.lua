@@ -2622,13 +2622,6 @@ table.insert(genv.connections,rs.Heartbeat:Connect(update))
 
 --[[send to game logger]]--
 	local function promptCallback(answer)
-		if answer == "No" then return end
-		local sg = localPlayer:FindFirstChildOfClass("StarterGear")
-		if sg then
-			delete(sg)
-			task.wait(checkTime + mobileOffset)
-		end
-		if (sg and sg.Parent == localPlayer) or (isTesting == false and game:GetService("GuiService"):GetErrorCode() ~= Enum.ConnectionError.OK) then return notify("Logger error", "Game could not be logged.", 10) end
 		sendGame()
 		debugPrint("game sent to server")
 	end
