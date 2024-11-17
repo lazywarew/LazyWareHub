@@ -6,7 +6,7 @@ local localPlayer = players.LocalPlayer
 local function isElevatedStudioPlugin()
     local s, r = pcall(function()
         return coreGui:GetChildren()
-    end)
+    end) 
     return s
 end
 
