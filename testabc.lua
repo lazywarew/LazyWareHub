@@ -5,7 +5,7 @@
 if rconsoleprint then
     rconsoleprint("https://eleutheri.com - #1 Whitelist Service\n\n")
 end;
-
+ 
 assert(syn or http, "Unsupport exploit (should support syn.request or http.request)");
 
 local options = ({...})[1] or { AutoDecode = true, Highlighting = true, SaveLogs = true, CLICommands = true, ShowResponse = true, BlockedURLs = {}, API = true };
