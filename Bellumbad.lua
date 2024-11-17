@@ -129,6 +129,7 @@ task.wait(0.350)
 
 --// defining some of our character stuff
 local noobworkspace = game:GetService("Workspace")
+local noobreplicatedstorage = game:GetService("ReplicatedStorage")
 local mychar = me.Character
 local myhum = mychar:FindFirstChildWhichIsA("Humanoid")
 local mousets = me:GetMouse()
@@ -292,6 +293,8 @@ local targetfilterfolder =  noobworkspace:FindFirstChild("TargetFilter")
 local chatremotevar
 local interactionremotevarts 
 local lootrequestremotets
+local resetrequestremotets
+local respawnrequestremots
 local damageplayerremotets
 local swingmeleeremotets
 local rndmnewfuncts = Random.new()
@@ -390,14 +393,24 @@ if canweusedrawinglibraryts == false then
 end
 
 
-if game:GetService("ReplicatedStorage"):FindFirstChild("DefinEvents") then 
-defineventsfolder = game:GetService("ReplicatedStorage"):FindFirstChild("DefinEvents")
+if noobreplicatedstorage:FindFirstChild("DefinEvents") then 
+defineventsfolder = noobreplicatedstorage:FindFirstChild("DefinEvents")
 end 
     
 
 if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
     local lootremoterequesttsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
     lootrequestremotets = lootremoterequesttsvar
+end
+
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local resetrequestremotetsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    resetrequestremotets = resetrequestremotetsvar
+end
+
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local respawnrequestremotstsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    respawnrequestremots = respawnrequestremotstsvar
 end
 
 if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
@@ -413,8 +426,8 @@ end
 
 
 
- if game:GetService("ReplicatedStorage"):FindFirstChild("Interacting") then
-    interactionremotevarts = game:GetService("ReplicatedStorage"):FindFirstChild("Interacting")
+ if noobreplicatedstorage:FindFirstChild("Interacting") then
+    interactionremotevarts = noobreplicatedstorage:FindFirstChild("Interacting")
  end
 
  
@@ -859,28 +872,19 @@ end
 function safeteleport(newposlol)
     if me  and me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then 
         local mycharacterroot = me.Character:FindFirstChild("HumanoidRootPart") 
-        local funnyposlol = mycharacterroot.CFrame+Vector3.new(0,-math.random(5600,7500),0)
+        local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
-        local floatingpart =  Instance.new("Part")
-        floatingpart.Name = "Part"
-        floatingpart.Parent = game.Workspace
-        floatingpart.CanCollide = true
-        floatingpart.Anchored = true 
-        floatingpart.Size = Vector3.new(250,5,250)
-        task.wait()
-        mycharacterroot.CFrame = mycharacterroot.CFrame+Vector3.new(0,-math.random(5600,7500),0)
+        resetrequestremotets:InvokeServer(noobreplicatedstorage.Interacting,"Reset")
+        task.wait(0.250)
+        for i  = 1,5 do 
+        mycharacterroot.CFrame = CFrame.new(-914, -213, -284)
+        end 
 
-       for i = 1,30 do  
-             myhum:ChangeState(Enum.HumanoidStateType.GettingUp)
-            floatingpart.CFrame = mycharacterroot.CFrame+Vector3.new(0,-5,0)
-        end
+        task.wait(4.750)
+        respawnrequestremots:InvokeServer(noobreplicatedstorage.Interacting,"Respawn")
+        repeat task.wait() until myclentplayerentityaval.Health>0
+        task.wait(0.750)
 
-         repeat task.wait() 
-        local arewenearspawn = isnearsafezonelolts()
-        until arewenearspawn == true 
-
-        floatingpart:Destroy()
-        task.wait()
         mycharacterroot.CFrame = newposlol
     end
 end
@@ -1486,8 +1490,8 @@ while task.wait() do
         if currentkillauratargetts == nil  then 
             if equippedtoolidts~="" then 
                 task.spawn(function()
-                findanddmgskidts()
-            end)
+
+                end)
             end
         end 
     end 
