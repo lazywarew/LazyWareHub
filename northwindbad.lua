@@ -1,3 +1,18 @@
+getgenv().TSSettings = {
+	key = "dogsarecute", --//  i removed key system btw so this is useless
+
+	--// UI SETTINGS
+	Style = 1,
+	SizeX = 500,
+	SizeY = 350,
+	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
+	MainFrame = Color3.fromRGB(0, 0, 0),
+}
+
+function guiprotectionfunctionts(gui)
+gui.Parent = game.CoreGui
+end
+
 if isstscrptloaded then
     return
 end
@@ -305,6 +320,10 @@ local killaurachargedistancets = 12
 local killauradistancets = 6
 local killauravalts = false
 
+local hitboxexpanderval = false 
+local hitboxexpandersizeval = 3
+local defaulthitboxexpandersizeval = mychar.HumanoidRootPart.Size
+
 --// auto block stuff 
 local isourswordcharged = false
 local autoblockts = false
@@ -525,6 +544,12 @@ local function choosehitpart(hitstate, skid)
     end
 end
 
+function CheckIfIsPlayerlolts(characternamelol)
+    if plrservicets:FindFirstChild(characternamelol) then 
+        return true 
+    end
+    return false 
+end
 
 mymousets.Move:Connect(function()
  if silentaimval == true then
@@ -543,6 +568,21 @@ oldindexts = hookmetamethod(game, "__index", newcclosure(function(...)
        elseif idx == "JumpPower" then
            return defaultjumppowervalts
        end
+   end
+
+   if not checkcaller() and self and idx == "Size" then
+     if hitboxexpanderval == true and  typeof(self) == "Instance" and self.Name == "HumanoidRootPart" and self~=mychar.HumanoidRootPart   then 
+        local isplayerlolts
+
+        task.spawn(function()
+            isplayerlolts  = CheckIfIsPlayerlolts(self.Name)
+        end)
+
+        if isplayerlolts == true then 
+        return Vector3.new(hitboxexpandersizeval.X,hitboxexpandersizeval,hitboxexpandersizeval.Z)
+        end 
+     end
+     return defaulthitboxexpandersizeval
    end
    
    return oldindexts(...)
@@ -912,6 +952,30 @@ if myclentplayerentityaval.Health<1 then
 end 
 
 
+function updateplayerhitboxests()
+    for i,v in pairs(plrservicets:GetPlayers()) do 
+        if v.Character and v.Name~=me.Name then 
+            if v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then 
+                v.Character.HumanoidRootPart.Transparency  = 0.450
+                v.Character.HumanoidRootPart.Size = Vector3.new(hitboxexpandersizeval,hitboxexpandersizeval,hitboxexpandersizeval)
+            end
+        end
+    end 
+end 
+
+function disableplayerhitboxests()
+    for i,v in pairs(plrservicets:GetPlayers()) do 
+        if v.Character and v.Name~=me.Name then 
+            if v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then 
+                v.Character.HumanoidRootPart.Size = defaulthitboxexpandersizeval
+                v.Character.HumanoidRootPart.Transparency  = 1
+            end
+        end
+    end 
+end 
+
+
+
 function setbagspace(Value)
 for i,v in pairs(maxbagspace) do
 if tonumber(v.MaxBaseInventorySpace) then
@@ -1216,16 +1280,37 @@ misctab.Toggle({
     Enabled = killauravalts
 })
 
+misctab.Toggle({
+	Text = "Hitbox Expander",
+	Callback = function(Value)
+      if Value == false then 
+        disableplayerhitboxests()
+      end 
+
+     hitboxexpanderval = Value
+	end,
+    Enabled = hitboxexpanderval
+})
+
+misctab.Slider({
+	Text = "Hitbox Expander Size",
+	Callback = function(Value)
+	hitboxexpandersizeval = tonumber(Value)
+	end,
+	Min = 3,
+	Max = 65,
+	Def = 3
+})
 
 
  misctab.TextField({
-    Text = "Username to goto",
+    Text = "Username to target",
     Callback = function(Value)
     if tostring(Value) then
      noobusernametogotots  = tostring(Value)
     end
     end,
-    })
+})
 
  misctab.Button({
         Text = 'Goto Player',
@@ -1489,4 +1574,10 @@ while task.wait() do
             end
         end 
     end 
+
+    if hitboxexpanderval == true then 
+        if me.Character and me.Character:FindFirstChild("HumanoidRootPart") then 
+            updateplayerhitboxests()
+        end
+    end
 end
