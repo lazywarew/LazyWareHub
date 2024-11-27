@@ -1,10 +1,17 @@
-  local games = {
+local games = {
     ["northwind"] = {
         gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/northwindbad.lua",
         gamename = "northwind",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4540286603&width=768&height=432&format=png",
         gameid = 4540286603,
+    },
+	["BellumImperii"] = {
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/Bellumbad.lua",
+        gamename = "BellumImperii",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=134819267834356&width=768&height=432&format=png",
+        gameid = 134819267834356,
     },
       ["universal silent aim"] = {
         gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/universalsilentaim.lua",
