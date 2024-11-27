@@ -1,3 +1,5 @@
+--// Storken loves you all, also dont forget to join lazyware!! https://discord.gg/zRyghsNtsk
+
 if isstscrptloaded then
     return
 end
