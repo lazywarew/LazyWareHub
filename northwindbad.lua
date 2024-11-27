@@ -30,7 +30,6 @@ if not guiprotectionfunctionts then
     return 
 end
 
-print("Storken loves you <3")
 
 
 local tweenInfo = TweenInfo.new(
