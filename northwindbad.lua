@@ -1,18 +1,3 @@
-getgenv().TSSettings = {
-	key = "dogsarecute", --//  i removed key system btw so this is useless
-
-	--// UI SETTINGS
-	Style = 1,
-	SizeX = 500,
-	SizeY = 350,
-	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
-	MainFrame = Color3.fromRGB(0, 0, 0),
-}
-
-function guiprotectionfunctionts(gui)
-gui.Parent = game.CoreGui
-end
-
 if isstscrptloaded then
     return
 end
@@ -28,7 +13,6 @@ local httrest = http_request or request or (syn and syn.request) or (fluxus and 
 local CoreGuiService = game:GetService("CoreGui")
 local TweenService = game:GetService('TweenService')
 local tslaba='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/' 
-local TweenService = game:GetService('TweenService')
 local CoreGuiService = game:GetService("CoreGui")
 
 
@@ -44,6 +28,7 @@ if not guiprotectionfunctionts then
     return 
 end
 
+print("Storken loves you <3")
 
 
 local tweenInfo = TweenInfo.new(
@@ -304,11 +289,21 @@ local defaultjumppowervalts = 45
 
 local defineventsfolder 
 local targetfilterfolder =  noobworkspace:FindFirstChild("TargetFilter")
-local chatremotevar
+
+--// remote crap lol
 local interactionremotevarts 
 local lootrequestremotets
-local damageplayerremotets
-local swingmeleeremotets
+local dragrequestremotets 
+local dragendrequestremotets
+local resetrequestremotets
+local respawnrequestremots
+local killaurachargeremotets  
+local killaurabeginswingremotets  
+local killauraendswingremotets
+local killaurasetdirectionremotets
+local sendchatmsgremotets 
+
+
 local rndmnewfuncts = Random.new()
 
 local equippedtoolidts = ""
@@ -415,20 +410,16 @@ end
     
 
 if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local lootremoterequesttsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    lootrequestremotets = lootremoterequesttsvar
-end
+    lootrequestremotets = defineventsfolder.InstanceRequestFunction
+    dragrequestremotets = defineventsfolder.InstanceRequestFunction
+    dragendrequestremotets = defineventsfolder.InstanceRequestFunction
+    killaurachargeremotets = defineventsfolder.InstanceRequestFunction
 
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local damageremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    damageplayerremotets = damageremoterequestvar
+    killaurabeginswingremotets = defineventsfolder.InstanceRequestFunction
+    killauraendswingremotets = defineventsfolder.InstanceRequestFunction
+    killaurasetdirectionremotets = defineventsfolder.InstanceRequestFunction
+    sendchatmsgremotets = defineventsfolder.InstanceRequestFunction
 end
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local swingmeleeremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    swingmeleeremotets = swingmeleeremoterequestvar
-end
-
 
 
 
