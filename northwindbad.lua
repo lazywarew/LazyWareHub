@@ -1,6 +1,6 @@
---// Storken loves you all, also dont forget to join lazyware!! https://discord.gg/zRyghsNtsk
+-- Storken1 loves northwind, dont forget to join https://discord.gg/XbEM8bKFqd❤️
 
-if isstscrptloaded then
+isstscrptloaded then
     return
 end
 
@@ -120,16 +120,18 @@ return
 end)
 
 iswhitelisted = true
-changestatus("loading api")
 
 
+changestatus("waiting for character")
 
 repeat task.wait() until me.Character and me.Character:FindFirstChild("HumanoidRootPart")
 
+changestatus("loading api")
 task.wait(0.350)
 
 --// defining some of our character stuff
 local noobworkspace = game:GetService("Workspace")
+local noobreplicatedstorage = game:GetService("ReplicatedStorage")
 local mychar = me.Character
 local myhum = mychar:FindFirstChildWhichIsA("Humanoid")
 local mousets = me:GetMouse()
@@ -138,10 +140,13 @@ local stupidhttpservice = game:GetService("HttpService")
 
 
 --// important stuff
-local infstaminafuncts
+local infstaminalol = {}
+local wrapperstuffcraplol
 local maxbagspace = {}
 local swingdelay = {}
 local spread = {}
+local chargedelaybow = {}
+
 local sharedgetplayertable  = nil
 
 --// esp and script stuff
@@ -285,8 +290,7 @@ end)
 
 
 --// stupid default stats
-local defaultspeedvalts = 16
-local defaultjumppowervalts = 45
+
 
 local defineventsfolder 
 local targetfilterfolder =  noobworkspace:FindFirstChild("TargetFilter")
@@ -303,19 +307,25 @@ local killaurabeginswingremotets
 local killauraendswingremotets
 local killaurasetdirectionremotets
 local sendchatmsgremotets 
-
+local startaimremotets 
+local startchargeremotets 
+local endfireremotets
 
 local rndmnewfuncts = Random.new()
 
-local equippedtoolidts = ""
-local equippedtoolmodelts = nil 
 
 --// kill aura stuff
-local currentkillauratargetts = nil 
-local killaurachargedistancets = 12
-local killauradistancets = 6
+local currentkillauratargetts = nil
+local killaurameleechargedlolts = false 
+local killaurameleefullychargedlolts = false 
+local killauradistancets = 13
 local killauravalts = false
 
+
+--// auto toxic related stuff
+local autotoxicvalts = false 
+
+--// hitbox expander stuff
 local hitboxexpanderval = false 
 local hitboxexpandersizeval = 3
 local defaulthitboxexpandersizeval = mychar.HumanoidRootPart.Size
@@ -326,8 +336,7 @@ local autoblockts = false
 local autoblockdistancets  = 10
 
 --// extra speed related stuff
-local extraspeedvalts = defaultspeedvalts
-local extrajumppowervalts = defaultjumppowervalts
+local extraspeedvalts = 0.22
 local extraspeedandjumppowervalts = false
 
 
@@ -337,24 +346,22 @@ local interfaceguisfolder = nil
 --// auto loot stuff
 local closestlootplayerts = nil
 local autolootdistancets = 10
-local playerlootingguits = nil
-local itemsframeloottsvar
-local itemsframeslootcrollvar 
 local autolootts = false
+local autolootfilterts = false 
 
---// inventory stuff
-local stupidinventoryinterfacevar = nil
-local stupidinventoryinterfacevarmain = nil
-local stupidinventoryinterfaceitemsvar = nil
-local stupidinventoryinterfaceitemmainvar = nil
+local blacklistedautolootitemsts = {
+    ["Metal arrow"] = {},
+    ["Stone arrow"] = {},
+    ["Wood arrow"] = {},
+    ["Bandage"] = {},
+    ["Knife"] = {},
+    ["Worm"] = {}
+}
 
---// this is part of inventory but we use this to get item names
-local stupiditemthatweareholdingimg = nil
-local stupiditemthatweareholdingimgleftinfo = nil
-local stupiditemthatweareholdingimglefticon = nil
-local stupiditemthatweareholdingviewpointleft = nil
-local stupiditemthatweareholdingactualname =  nil
-
+--// auto drag stuff
+local closestplayertodragts = nil 
+local autodragdistancets = 10
+ 
 --// silent aim stuff
 local closestskidtous = nil
 local silentaimval = false 
@@ -371,7 +378,7 @@ local noobusernametogotots = ""
 
 
 --// inf stamina 
-local infstaminalolts = false 
+local infstaminavalts = false 
 
 --// auto respawn stuff
 local autorespawnondeadlolts = false 
@@ -405,8 +412,8 @@ if canweusedrawinglibraryts == false then
 end
 
 
-if game:GetService("ReplicatedStorage"):FindFirstChild("DefinEvents") then 
-defineventsfolder = game:GetService("ReplicatedStorage"):FindFirstChild("DefinEvents")
+if noobreplicatedstorage:FindFirstChild("DefinEvents") then 
+defineventsfolder = noobreplicatedstorage:FindFirstChild("DefinEvents")
 end 
     
 
@@ -415,53 +422,56 @@ if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFuncti
     dragrequestremotets = defineventsfolder.InstanceRequestFunction
     dragendrequestremotets = defineventsfolder.InstanceRequestFunction
     killaurachargeremotets = defineventsfolder.InstanceRequestFunction
-
     killaurabeginswingremotets = defineventsfolder.InstanceRequestFunction
     killauraendswingremotets = defineventsfolder.InstanceRequestFunction
     killaurasetdirectionremotets = defineventsfolder.InstanceRequestFunction
+    damageplayerremotets = defineventsfolder.InstanceRequestFunction
+    swingmeleeremotets = defineventsfolder.InstanceRequestFunction
     sendchatmsgremotets = defineventsfolder.InstanceRequestFunction
+    startaimremotets = defineventsfolder.InstanceRequestFunction
+    startchargeremotets  = defineventsfolder.InstanceRequestFunction
+    endfireremotets = defineventsfolder.InstanceRequestFunction
+    resetrequestremotets = defineventsfolder.InstanceRequestFunction
+    respawnrequestremots = defineventsfolder.InstanceRequestFunction
+
 end
 
 
 
- if game:GetService("ReplicatedStorage"):FindFirstChild("Interacting") then
-    interactionremotevarts = game:GetService("ReplicatedStorage"):FindFirstChild("Interacting")
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local resetrequestremotetsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    resetrequestremotets = resetrequestremotetsvar
+end
+
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local respawnrequestremotstsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    respawnrequestremots = respawnrequestremotstsvar
+end
+
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local damageremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    damageplayerremotets = damageremoterequestvar
+end
+
+if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
+    local swingmeleeremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
+    swingmeleeremotets = swingmeleeremoterequestvar
+end
+
+
+
+
+ if noobreplicatedstorage:FindFirstChild("Interacting") then
+    interactionremotevarts = noobreplicatedstorage:FindFirstChild("Interacting")
  end
 
  
-if me.PlayerGui:FindFirstChild("InterfaceGuis") then
-     interfaceguisfolder = me.PlayerGui:FindFirstChild("InterfaceGuis")
-    if interfaceguisfolder:FindFirstChild("PlayerLooting") then
-        local interfacelootgui = interfaceguisfolder:FindFirstChild("PlayerLooting")
-        playerlootingguits = interfacelootgui
-        end
-end
-
-if playerlootingguits and playerlootingguits.Main:FindFirstChild("Items") then
-    local itemsframeloot = playerlootingguits.Main:FindFirstChild("Items")
-    local itemsframelootscroll =  itemsframeloot:FindFirstChild("ScrollingContent")
-    itemsframeloottsvar =  itemsframeloot
-    itemsframeslootcrollvar = itemsframelootscroll
-    end
-
-if interfaceguisfolder and interfaceguisfolder:FindFirstChild("Inventory")  then
-stupidinventoryinterfacevar = interfaceguisfolder:FindFirstChild("Inventory")
-if stupidinventoryinterfacevar and stupidinventoryinterfacevar:FindFirstChild("Main") then
-stupidinventoryinterfacevarmain = stupidinventoryinterfacevar:FindFirstChild("Main")
-if stupidinventoryinterfacevarmain:FindFirstChild("Items") then
-stupidinventoryinterfaceitemmainvar = stupidinventoryinterfacevarmain:FindFirstChild("Items")
-if stupidinventoryinterfaceitemmainvar:FindFirstChild("ScrollingContent") then
-stupidinventoryinterfaceitemmainvar = stupidinventoryinterfaceitemmainvar:FindFirstChild("ScrollingContent")
-end
-end
-end
-end
-
-
-
 for i,v in pairs(getgc(true)) do
-if typeof(v) == "function" and getinfo(v).name == "SetStamina" then
-infstaminafuncts = v
+if typeof(v) == "table" and rawget(v,"SetStamina") and typeof(v.SetStamina) == "function" then
+   table.insert(infstaminalol,v)
+end
+if typeof(v) == "table" and rawget(v,"Wrap") and typeof(v.Wrap) == "function" then
+    wrapperstuffcraplol = v
 end
 if type(v) == "table" and rawget(v,"MaxBaseInventorySpace") then
 table.insert(maxbagspace,v)
@@ -543,6 +553,7 @@ function CheckIfIsPlayerlolts(characternamelol)
     return false 
 end
 
+
 mymousets.Move:Connect(function()
  if silentaimval == true then
  local newposts = getmousepositionts()
@@ -554,14 +565,6 @@ end)
 local oldindexts
 oldindexts = hookmetamethod(game, "__index", newcclosure(function(...)
    local self, idx = ...
-     if not checkcaller() and self == myhum and (idx == "WalkSpeed" or idx == "JumpPower") then
-       if idx == "WalkSpeed" then
-           return defaultspeedvalts
-       elseif idx == "JumpPower" then
-           return defaultjumppowervalts
-       end
-   end
-
    if not checkcaller() and self and idx == "Size" then
      if hitboxexpanderval == true and  typeof(self) == "Instance" and self.Name == "HumanoidRootPart" and self~=mychar.HumanoidRootPart   then 
         local isplayerlolts
@@ -579,6 +582,8 @@ oldindexts = hookmetamethod(game, "__index", newcclosure(function(...)
    
    return oldindexts(...)
 end))
+
+
 
 task.wait(1.250)
 
@@ -668,28 +673,17 @@ local function randomcooldelayts(value)
 local funnymultiplierts = rndmnewfuncts:NextNumber(0.2, 0.6)
 local randomdelaytoreturntsa = rndmnewfuncts:NextNumber(0, value)+funnymultiplierts
 task.wait(randomdelaytoreturntsa)
- end
- 
+end
  
 
-function getstupidtoolnamebyid()
-if stupidinventoryinterfaceitemmainvar:FindFirstChild(stupidtoolthatweareholdingid.Name) then
-stupiditemthatweareholdingimg = stupidinventoryinterfaceitemmainvar:FindFirstChild(stupidtoolthatweareholdingid.Name)
-if stupiditemthatweareholdingimg:FindFirstChild("LeftItemInfo") then
-stupiditemthatweareholdingimgleftinfo = stupiditemthatweareholdingimg:FindFirstChild("LeftItemInfo") 
-if stupiditemthatweareholdingimgleftinfo:FindFirstChild("ItemIcon") then
-stupiditemthatweareholdingimglefticon = stupiditemthatweareholdingimgleftinfo:FindFirstChild("ItemIcon")
-if stupiditemthatweareholdingimglefticon:FindFirstChild("ViewportGui") then
-stupiditemthatweareholdingviewpointleft = stupiditemthatweareholdingimglefticon:FindFirstChild("ViewportGui")
-if stupiditemthatweareholdingviewpointleft:FindFirstChildWhichIsA("Model") then
-stupiditemthatweareholdingactualname = stupiditemthatweareholdingviewpointleft:FindFirstChildWhichIsA("Model")
-end
-end
-end
-end
-end
-end
+function getitemdatafrominventorybynamets()
+    local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
+    local EquippedToolItemlolts = myclentplayerentityaval:GetSelectedToolItem()
+
+    return EquippedToolItemlolts
+end 
+ 
 
 function teleporttoplacets(placeid)
 if not tonumber(placeid) then
@@ -787,11 +781,37 @@ end
 
 
 
+
+
 function sendtoxicmessagets(playername)
-   
+    local autotoxicwordsts = {
+        [1] = {msg = "Tell Tyberius to stop devving"},
+        [2] = {msg = "OMG did someone just kill you?"},
+        [3] = {msg = "That was pretty easy, you should play Aimlabs."},
+        [4] = {msg = "Thank Ryez for this"},
+        [5] = {msg = "No anticheat???"}, 
+        [6] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀"},
+        [7] = {msg = "Wow this is a mess 🤣"},
+        [9] = {msg = "I don't think the devs know that they can automate bans."},
+        [11] = {msg = "130k robux well spent huh Ryez?"},
+        [12] = {msg = "Play Northwind"},
+        [13] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
+        [14] = {msg = "Lazyware - UVsD8V5J42"}
+    }    
+
+    local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
+    local randomtoxicmsgdata = autotoxicwordsts[randomtoxicmsgindex]
+
+    if randomtoxicmsgdata == nil then 
+        return 
+    end 
+
+    sendchatmsgremotets:InvokeServer(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
 
  function findandlootskidts()
+    local didwelootedanythinglolts = false 
+
     for i, v in pairs(plrservicets:GetPlayers()) do
         if v.Name ~= me.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
             local maga = (mychar.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
@@ -800,40 +820,149 @@ end
             end
         end
     end
+
     if closestlootplayerts then
-    for i2, v2 in pairs(itemsframeslootcrollvar:GetChildren()) do
-        if v2:IsA("Frame") and v2:FindFirstChild("Flare") then
-            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",v2.Name)
-            task.wait()
+        local wrappedplayerprofile = wrapperstuffcraplol:Wrap(closestlootplayerts)
+
+        
+        if  wrappedplayerprofile then 
+        if wrappedplayerprofile.Health<1 then 
+        for i,v in pairs(wrappedplayerprofile.InventoryAbstractItems) do 
+            if autolootts == false then
+                closestlootplayerts = nil 
+                break 
+            end 
+
+            local itemtolootidlolts = v.Id or i
+
+            if autolootfilterts == true then 
+            if not blacklistedautolootitemsts[v.Name] then 
+            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",itemtolootidlolts)
+            didwelootedanythinglolts = true 
+            end 
+        elseif autolootfilterts == false then 
+            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",itemtolootidlolts)
+            didwelootedanythinglolts = true 
+          end
+        end 
+
+        if autotoxicvalts == true then
+            if didwelootedanythinglolts == true then  
+            sendtoxicmessagets(closestlootplayerts.Name)
+            end 
         end
-    end
-  end
+
+      end 
+    end 
     closestlootplayerts = nil
+  end
 end 
 
 
 
-function findanddmgskidts()
+function findandteleportclosestskidundermapts()
     for i, v in pairs(plrservicets:GetPlayers()) do
         if v.Name ~= me.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+            if v.Name == noobusernametogotots then 
             local maga = (mychar.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
-            if maga <= tonumber(killauradistancets) then
-                currentkillauratargetts = v
-            end
-            if maga <= killaurachargedistancets then 
-                swingmeleeremotets:InvokeServer(equippedtoolmodelts,"Charge")
+            closestplayertodragts = v
+        end
+      end 
+    end
+
+    if closestplayertodragts then
+        local myoriginalposlol = mychar.HumanoidRootPart.CFrame
+        local dragstarttimestamplol = tick()
+
+        safeteleport(true,myoriginalposlol)
+        task.wait()
+        mychar.HumanoidRootPart.CFrame = closestplayertodragts.Character.HumanoidRootPart.CFrame+Vector3.new(0,2.850,0)
+        
+        task.wait(0.465)
+
+        repeat 
+        local droppositionlol =  closestplayertodragts.Character.HumanoidRootPart.Position+Vector3.new(0,-15.850,0)
+        local distancebetweenskidtodropandoriginaldistance = (closestplayertodragts.Character.HumanoidRootPart.Position-myoriginalposlol.Position).Magnitude
+
+        mychar.HumanoidRootPart.CFrame = closestplayertodragts.Character.HumanoidRootPart.CFrame+Vector3.new(0,2.850,0)
+        task.wait()
+        dragrequestremotets:InvokeServer(closestplayertodragts, "Drag")
+        mychar.HumanoidRootPart.CFrame = droppositionlol
+        task.wait()
+        dragendrequestremotets:InvokeServer(closestplayertodragts, "Drop")
+        task.wait()
+        until distancebetweenskidtodropandoriginaldistance<=75
+        
+    
+       safeteleport(true,myoriginalposlol)
+    end
+    closestplayertodragts = nil
+end
+
+
+
+
+
+
+
+function findanddmgskidts()
+    local equippedtoolitemdatalol = getitemdatafrominventorybynamets()
+ 
+    if equippedtoolitemdatalol == nil then 
+        return 
+    end 
+
+    local equippedtoolmodellolts 
+    local equippedtoolidlolts
+    local equippedtoolnamelolts 
+
+    equippedtoolmodellolts = equippedtoolitemdatalol["1"]
+    equippedtoolidlolts = equippedtoolitemdatalol["2"]
+    equippedtoolnamelolts = equippedtoolitemdatalol["3"]
+
+    for i, v in pairs(plrservicets:GetPlayers()) do
+        if v.Name~=me.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+            local maga = (mychar.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+
+            if killaurameleechargedlolts == false then 
+                killaurameleechargedlolts = true 
+
+                local randomdirectionlolnums = math.random(1, 2)
+                local chosenrandomdirectionlolts 
+
+                if randomdirectionlolnums == 1 then 
+                    chosenrandomdirectionlolts = "Right" 
+                elseif randomdirectionlolnums == 2 then 
+                    chosenrandomdirectionlolts = "Left"
+                end 
+
+                killaurasetdirectionremotets:InvokeServer(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
+                task.wait(0.165)
+                killaurachargeremotets:InvokeServer(equippedtoolmodellolts, "Charge")
+                task.wait()
+                killaurameleefullychargedlolts = true 
             end 
+
+            if maga <= tonumber(killauradistancets) then
+                local wrappedplayerprofile = wrapperstuffcraplol:Wrap(v)
+                if wrappedplayerprofile.Health > 0 then 
+                    currentkillauratargetts = v
+                end 
+            end
         end
     end
 
     if currentkillauratargetts then 
-        if equippedtoolidts~="" then  
-            swingmeleeremotets:InvokeServer(equippedtoolmodelts,"BeginSwing") 
-            damageplayerremotets:InvokeServer(equippedtoolmodelts,"EndSwing",currentkillauratargetts)
-        end
+        if killaurameleefullychargedlolts == true then 
+        killauraendswingremotets:InvokeServer(equippedtoolmodellolts, "BeginSwing")
+        killauraendswingremotets:InvokeServer(equippedtoolmodellolts, "EndSwing", currentkillauratargetts)
+        killaurameleechargedlolts = false 
+        killaurameleefullychargedlolts = false 
+        end 
+        currentkillauratargetts = nil 
     end
-    currentkillauratargetts = nil 
 end
+
 
 function setchargedelay(Value)
 for i,v in pairs(swingdelay) do
@@ -888,48 +1017,38 @@ function isnearsafezonelolts()
     return false 
 end
 
-function safeteleport(newposlol)
+function safeteleport(autotptosafezone,newposlol)
     if me  and me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then 
         local mycharacterroot = me.Character:FindFirstChild("HumanoidRootPart") 
-        local funnyposlol = mycharacterroot.CFrame+Vector3.new(0,-math.random(5600,7500),0)
+        local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
-        local floatingpart =  Instance.new("Part")
-        floatingpart.Name = "Part"
-        floatingpart.Parent = game.Workspace
-        floatingpart.CanCollide = true
-        floatingpart.Anchored = true 
-        floatingpart.Size = Vector3.new(250,5,250)
-        task.wait()
-        mycharacterroot.CFrame = mycharacterroot.CFrame+Vector3.new(0,-math.random(5600,7500),0)
+        resetrequestremotets:InvokeServer(noobreplicatedstorage.Interacting,"Reset")
 
-       for i = 1,30 do  
-             myhum:ChangeState(Enum.HumanoidStateType.GettingUp)
-            floatingpart.CFrame = mycharacterroot.CFrame+Vector3.new(0,-5,0)
-        end
+        if autotptosafezone == true then 
+            task.wait(0.120)
+            for i = 1,5 do 
+            TweenService:Create(mycharacterroot, TweenInfo.new(5.850), {CFrame = CFrame.new(-281, -213, -267)}):Play()
+            end 
+        end 
 
-         repeat task.wait() 
-        local arewenearspawn = isnearsafezonelolts()
-        until arewenearspawn == true 
+        task.wait(6.750)
+        respawnrequestremots:InvokeServer(noobreplicatedstorage.Interacting,"Respawn")
+        repeat task.wait() until myclentplayerentityaval.Health>0
+        task.wait(0.350)
 
-        floatingpart:Destroy()
-        task.wait()
+        for i = 1,5 do 
         mycharacterroot.CFrame = newposlol
+        end 
     end
 end
 
 
-function setstaminalol(SetToMax,Value)
-local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
-if SetToMax == true then 
-    Value = myclentplayerentityaval.MaxStamina
+function setwalkspeedlolts()
+    if myhum.MoveDirection.Magnitude > 0  then
+        mychar:TranslateBy(myhum.MoveDirection * extraspeedvalts)
+    end
 end 
-
-if not tonumber(Value) then 
-Value = tonumber(Value)
-end 
-infstaminafuncts(myclentplayerentityaval,Value)
-end
 
 
 function checkifdeadandrespawnts()
@@ -938,11 +1057,10 @@ local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 if myclentplayerentityaval.Health<1 then 
     if me.Character and me.Character:FindFirstChild("HumanoidRootPart") and mychar then 
       task.wait()
-     safeteleport(mychar.HumanoidRootPart.CFrame)
+     safeteleport(true,mychar.HumanoidRootPart.CFrame)
     end
    end
 end 
-
 
 function updateplayerhitboxests()
     for i,v in pairs(plrservicets:GetPlayers()) do 
@@ -950,6 +1068,7 @@ function updateplayerhitboxests()
             if v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then 
                 v.Character.HumanoidRootPart.Transparency  = 0.450
                 v.Character.HumanoidRootPart.Size = Vector3.new(hitboxexpandersizeval,hitboxexpandersizeval,hitboxexpandersizeval)
+                v.Character.HumanoidRootPart.CanCollide = false 
             end
         end
     end 
@@ -961,12 +1080,11 @@ function disableplayerhitboxests()
             if v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then 
                 v.Character.HumanoidRootPart.Size = defaulthitboxexpandersizeval
                 v.Character.HumanoidRootPart.Transparency  = 1
+                v.Character.HumanoidRootPart.CanCollide = true 
             end
         end
     end 
 end 
-
-
 
 function setbagspace(Value)
 for i,v in pairs(maxbagspace) do
@@ -1056,12 +1174,14 @@ end)
 end
 
 
+
+
 playdisconnectscreents()
 task.wait(2)
 
 
 local MainTab = Material.Load({
-    Title = "Northwind - [discord.gg/UVsD8V5J42]",
+    Title = "Bellum imperii - [discord.gg/UVsD8V5J42]",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
@@ -1231,46 +1351,43 @@ silentaimtab.Slider({
 })
 
 
-misctab.Slider({
-	Text = "speed",
-	Callback = function(Value)
-	extraspeedvalts = tonumber(Value)
-	end,
-	Min = defaultspeedvalts,
-	Max = 30,
-	Def = defaultspeedvalts
-})
 
-misctab.Slider({
-	Text = "jump power",
+misctab.Toggle({
+	Text = "Extra speed",
 	Callback = function(Value)
-	extrajumppowervalts = tonumber(Value)
+        extraspeedandjumppowervalts = Value
 	end,
-	Min = defaultjumppowervalts,
-	Max = 150,
-	Def = defaultjumppowervalts
+  Enabled = extraspeedandjumppowervalts 
 })
 
 misctab.Toggle({
-	Text = "speed and jumppower",
-	Callback = function(Value)
-    if extraspeedandjumppower == true then
-    extraspeedandjumppower = false
-    mychar.Humanoid.WalkSpeed = defaultspeedvalts
-    mychar.Humanoid.JumpPower = defaultjumppowervalts
-  end
-    extraspeedandjumppower = Value
-	end,
-  Enabled = extraspeedandjumppower
-})
-
-misctab.Toggle({
-	Text = "Killaura",
+	Text = "KillAura",
 	Callback = function(Value)
      killauravalts = Value
 	end,
     Enabled = killauravalts
 })
+
+
+misctab.Toggle({
+	Text = "AutoToxic",
+	Callback = function(Value)
+     autotoxicvalts = Value
+	end,
+    Enabled = autotoxicvalts
+})
+
+misctab.TextField({
+    Text = "Killaura distance",
+    Callback = function(Value)
+    if tonumber(Value) then
+     killauradistancets  = tonumber(Value)
+    end
+    end,
+})
+
+
+
 
 misctab.Toggle({
 	Text = "Hitbox Expander",
@@ -1310,7 +1427,7 @@ misctab.Slider({
         if plrservicets:FindFirstChild(noobusernametogotots) then 
           local plrtogoto = plrservicets:FindFirstChild(noobusernametogotots)
           if plrtogoto.Character and plrtogoto.Character:FindFirstChild("HumanoidRootPart") then 
-            safeteleport(plrtogoto.Character.HumanoidRootPart.CFrame)
+            safeteleport(true,plrtogoto.Character.HumanoidRootPart.CFrame)
           end
          end 
         end,
@@ -1323,7 +1440,26 @@ misctab.Slider({
      }
  })
     
- misctab.Button({
+
+
+misctab.Button({
+    Text = 'kick player',
+    Callback = function()
+        pcall(function()
+            findandteleportclosestskidundermapts()
+        end)
+    end,
+    Menu = {
+        Information = function(self)
+        MainTab.Banner({
+        Text = 'Should kick player'
+        })
+    end
+ }
+})
+
+
+misctab.Button({
     Text = 'inf yield admin',
     Callback = function()
         pcall(function()
@@ -1338,8 +1474,7 @@ misctab.Slider({
     end
  }
 })
-
-
+    
 
     
 	
@@ -1356,9 +1491,9 @@ misctab.Slider({
    misctab.Toggle({
    Text = "inf stamina",
    Callback = function(Value)
-   infstaminalolts = Value
+    infstaminavalts = Value
    end,
-   Enabled = infstaminalolts
+   Enabled = infstaminavalts
    })
 
    misctab.Toggle({
@@ -1376,6 +1511,16 @@ misctab.Slider({
 	end,
 	Enabled = autolootts
 })
+
+misctab.Toggle({
+	Text = "auto loot filter",
+	Callback = function(Value)
+	   autolootfilterts = Value
+	end,
+	Enabled = autolootfilterts
+})
+
+
 
 	misctab.TextField({
 	Text = "auto loot distance",
@@ -1515,29 +1660,43 @@ Enabled = false
 })
 
 
+for i,v in pairs(infstaminalol) do 
+local oldsetstaminalol = v.SetStamina
+
+
+v.SetStamina = function(self, ...)
+        local args = {...}
+        if infstaminavalts == true then
+            if self.Name == me.Name then
+            local localplayerentitymaxstaminats = self:GetMaxStamina()
+
+            if localplayerentitymaxstaminats then
+                if self.Stamina <= localplayerentitymaxstaminats - 5 then
+                    return oldsetstaminalol(self, ...)
+                end
+            end
+
+            args[1] = localplayerentitymaxstaminats or 150
+            return oldsetstaminalol(self, table.unpack(args))
+        end
+    end
+
+    return oldsetstaminalol(self, ...)
+  end
+end 
 
 while task.wait() do
     if autolootts == true then
-        if playerlootingguits then
             if closestlootplayerts == nil then
                 task.spawn(function()
                 findandlootskidts()
                 end)
             end 
-        end
     end
 
-    if infstaminalolts == true then 
-        setstaminalol(true,150)
+     if extraspeedandjumppowervalts == true and me.Character and myhum then
+        setwalkspeedlolts()
     end
-
-    pcall(function()
-     if extraspeedandjumppower == true and me.Character and me.Character:FindFirstChild("Humanoid") and myhum then
-        myhum.WalkSpeed = extraspeedvalts
-        myhum.JumpPower = extrajumppowervalts
-        end
-    end)
-
     if silentaimval == true then 
 
         if me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then
@@ -1561,10 +1720,10 @@ while task.wait() do
     end
     if killauravalts == true then 
         if currentkillauratargetts == nil  then 
-            if equippedtoolidts~="" then 
-            
-            end
-        end 
+        task.spawn(function()
+            findanddmgskidts()
+        end)
+      end
     end 
 
     if hitboxexpanderval == true then 
