@@ -336,7 +336,7 @@ local autoblockts = false
 local autoblockdistancets  = 10
 
 --// extra speed related stuff
-local extraspeedvalts = 0.22
+local extraspeedvalts = 0.19
 local extraspeedandjumppowervalts = false
 
 
