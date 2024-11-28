@@ -1,6 +1,6 @@
--- Storken1 loves northwind, dont forget to join https://discord.gg/XbEM8bKFqd❤️
+--// Storken1 loves northwind, dont forget to join https://discord.gg/XbEM8bKFqd❤️
 
-isstscrptloaded then
+if isstscrptloaded then
     return
 end
 
@@ -120,9 +120,9 @@ return
 end)
 
 iswhitelisted = true
-
-
 changestatus("waiting for character")
+
+
 
 repeat task.wait() until me.Character and me.Character:FindFirstChild("HumanoidRootPart")
 
@@ -355,7 +355,8 @@ local blacklistedautolootitemsts = {
     ["Wood arrow"] = {},
     ["Bandage"] = {},
     ["Knife"] = {},
-    ["Worm"] = {}
+    ["Worm"] = {},
+    ["Flintlock ball"] = {}
 }
 
 --// auto drag stuff
@@ -785,19 +786,25 @@ end
 
 function sendtoxicmessagets(playername)
     local autotoxicwordsts = {
-        [1] = {msg = "Tell Tyberius to stop devving"},
-        [2] = {msg = "OMG did someone just kill you?"},
-        [3] = {msg = "That was pretty easy, you should play Aimlabs."},
-        [4] = {msg = "Thank Ryez for this"},
-        [5] = {msg = "No anticheat???"}, 
-        [6] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀"},
-        [7] = {msg = "Wow this is a mess 🤣"},
-        [9] = {msg = "I don't think the devs know that they can automate bans."},
-        [11] = {msg = "130k robux well spent huh Ryez?"},
-        [12] = {msg = "Play Northwind"},
-        [13] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
-        [14] = {msg = "Lazyware - UVsD8V5J42"}
-    }    
+        [1] = {msg = "Thanks for the loot "..v.Name.." <3 (dm storken to get your loot back <3)"},
+        [2] = {msg = "Tell Tyberius to stop devving"},
+        [3] = {msg = "Omg did someone just kill you? And now your getting looted aswell????? 🤣"},
+        [4] = {msg = "Did you die that fast? You should probably play aimlabs for a little bit."},
+        [5] = {msg = "If you have any spare pounds donate them to Storken please"},
+        [6] = {msg = "No anticheat???"},
+        [7] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀"},
+        [8] = {msg = "Wow thats alot of items "..v.Name.." <3 Thank you"},
+        [9] = {msg = "Almost 2 months still no anticheat?"},
+        [10] = {msg = "I think Peanut loves manual banning."},
+        [11] = {msg = "You guys should tell ryez to keep his promises :)"},
+        [12] = {msg = "Banning people isn't very nice of you Ranger 🥲"},
+        [13] = {msg = "Tell Envymaestro to get more active and remove Ranger please🥰"},
+        [14] = {msg = "Spread love not hate🥰, Your loot is going to the poor, so uuh me :)"},
+        [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut."},
+        [16] = {msg = "Lazyware > everything else"},
+        [17] = {msg = "Captinwheeler deserted."},
+        [18] = {msg = "lazyware - UVsD8V5J42"},
+    }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
     local randomtoxicmsgdata = autotoxicwordsts[randomtoxicmsgindex]
@@ -1018,27 +1025,31 @@ function isnearsafezonelolts()
 end
 
 function safeteleport(autotptosafezone,newposlol)
-    if me  and me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then 
+    if me  and me.Character and me.Character:FindFirstChild("HumanoidRootPart") and myhum then 
         local mycharacterroot = me.Character:FindFirstChild("HumanoidRootPart") 
-        local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
+        local funnyposlol = mycharacterroot.CFrame+Vector3.new(0,-math.random(5600,7500),0)
 
-        resetrequestremotets:InvokeServer(noobreplicatedstorage.Interacting,"Reset")
+        local floatingpart =  Instance.new("Part")
+        floatingpart.Name = "Part"
+        floatingpart.Parent = game.Workspace
+        floatingpart.CanCollide = true
+        floatingpart.Anchored = true 
+        floatingpart.Size = Vector3.new(250,5,250)
+        task.wait()
+        mycharacterroot.CFrame = mycharacterroot.CFrame+Vector3.new(0,-math.random(5600,7500),0)
 
-        if autotptosafezone == true then 
-            task.wait(0.120)
-            for i = 1,5 do 
-            TweenService:Create(mycharacterroot, TweenInfo.new(5.850), {CFrame = CFrame.new(-281, -213, -267)}):Play()
-            end 
-        end 
+       for i = 1,30 do  
+             myhum:ChangeState(Enum.HumanoidStateType.GettingUp)
+            floatingpart.CFrame = mycharacterroot.CFrame+Vector3.new(0,-5,0)
+        end
 
-        task.wait(6.750)
-        respawnrequestremots:InvokeServer(noobreplicatedstorage.Interacting,"Respawn")
-        repeat task.wait() until myclentplayerentityaval.Health>0
-        task.wait(0.350)
+         repeat task.wait() 
+        local arewenearspawn = isnearsafezonelolts()
+        until arewenearspawn == true 
 
-        for i = 1,5 do 
+        floatingpart:Destroy()
+        task.wait()
         mycharacterroot.CFrame = newposlol
-        end 
     end
 end
 
@@ -1181,7 +1192,7 @@ task.wait(2)
 
 
 local MainTab = Material.Load({
-    Title = "Bellum imperii - [discord.gg/UVsD8V5J42]",
+    Title = "Northwind  - [discord.gg/UVsD8V5J42]",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
