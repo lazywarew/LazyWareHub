@@ -55,14 +55,14 @@ task.wait(1)
 mainframe2.Name = "mainframe"
 mainframe2.Parent = loadinggui
 mainframe2.AnchorPoint = Vector2.new(0.5, 0.5)
-mainframe2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainframe2.BackgroundColor3 = Color3.fromHSV(tick() % 1, 1, 1)
 mainframe2.Position = UDim2.new(0.5, 0, 0.5, 0)
 mainframe2.Size = UDim2.new(0, 282, 0, 144)
 
 outline.Name = "outline"
 outline.Parent = mainframe2
 outline.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-outline.BorderColor3 = Color3.fromRGB(85, 85, 255)
+outline.BorderColor3 = Color3.fromHSV(tick() % 1, 1, 1)
 outline.Position = UDim2.new(0, 0, 0.205173597, 0)
 outline.Size = UDim2.new(0, 282, 0, 0)
 
@@ -74,7 +74,7 @@ statuslabel.BackgroundTransparency = 1.000
 statuslabel.Size = UDim2.new(0, 282, 0, 27)
 statuslabel.Font = Enum.Font.GothamBlack
 statuslabel.Text = ""
-statuslabel.TextColor3 = Color3.fromRGB(85, 85, 255)
+statuslabel.TextColor3 = Color3.fromHSV(tick() % 1, 1, 1)
 statuslabel.TextScaled = true
 statuslabel.TextSize = 14.000
 statuslabel.TextStrokeTransparency = 0.000
