@@ -1,4 +1,4 @@
---// SKIBIDI BOP BOP BOP BOP Storken1 says hello uwu https://discord.gg/XbEM8bKFqd
+--// Storken loves you discord.gg/xaFyk6vBBb
 
 if isstscrptloaded then
     return
@@ -344,6 +344,7 @@ local autolootts = false
 local autolootfilterts = false 
 
 local blacklistedautolootitemsts = {
+    ["Metal arrow"] = {},
     ["Stone arrow"] = {},
     ["Wood arrow"] = {},
     ["Bandage"] = {},
@@ -760,7 +761,7 @@ function sendtoxicmessagets(playername)
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut."},
         [16] = {msg = "Lazyware > everything else"},
         [17] = {msg = "Captinwheeler deserted."},
-        [18] = {msg = "lazyware - XbEM8bKFqd"},
+        [18] = {msg = "lazyware - xaFyk6vBBb"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
@@ -773,7 +774,7 @@ function sendtoxicmessagets(playername)
     invokeserverlolts(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
 
- function findandlootskidts()
+function findandlootskidts()
     local didwelootedanythinglolts = false 
 
     for i, v in pairs(plrservicets:GetPlayers()) do
@@ -793,7 +794,6 @@ end
         if wrappedplayerprofile.Health<1 then 
         for i,v in pairs(wrappedplayerprofile.InventoryAbstractItems) do 
             if autolootts == false then
-                closestlootplayerts = nil 
                 break 
             end 
 
@@ -801,7 +801,7 @@ end
 
             if autolootfilterts == true then 
             if not blacklistedautolootitemsts[v.Name] then 
-            invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
+                invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
             didwelootedanythinglolts = true 
             end 
         elseif autolootfilterts == false then 
@@ -815,10 +815,9 @@ end
             sendtoxicmessagets(closestlootplayerts.Name)
             end 
         end
-
       end 
+      closestlootplayerts = nil
     end 
-    closestlootplayerts = nil
   end
 end 
 
@@ -862,7 +861,6 @@ function findandteleportclosestskidundermapts()
     end
     closestplayertodragts = nil
 end
-
 
 
 
@@ -926,6 +924,10 @@ function findanddmgskidts()
         currentkillauratargetts = nil 
     end
 end
+
+
+
+
 
 function purchaseitemlolts(stupidnpctobuystufffrom,itemname,itemamount)
     invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","ShopShown",stupidnpctobuystufffrom)
