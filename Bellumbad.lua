@@ -1,4 +1,4 @@
---// Storken1 loves you guys, i really do! https://discord.gg/zRyghsNtsk
+--// Storken1 says hello :) discord.gg/xaFyk6vBBb
 
 if isstscrptloaded then
     return
@@ -120,12 +120,13 @@ return
 end)
 
 iswhitelisted = true
-changestatus("loading api")
 
 
+changestatus("waiting for character")
 
 repeat task.wait() until me.Character and me.Character:FindFirstChild("HumanoidRootPart")
 
+changestatus("loading api")
 task.wait(0.350)
 
 --// defining some of our character stuff
@@ -335,7 +336,7 @@ local autoblockts = false
 local autoblockdistancets  = 10
 
 --// extra speed related stuff
-local extraspeedvalts = 0.22
+local extraspeedvalts = 0.18
 local extraspeedandjumppowervalts = false
 
 
@@ -417,22 +418,7 @@ end
     
 
 if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    lootrequestremotets = defineventsfolder.InstanceRequestFunction
-    dragrequestremotets = defineventsfolder.InstanceRequestFunction
-    dragendrequestremotets = defineventsfolder.InstanceRequestFunction
-    killaurachargeremotets = defineventsfolder.InstanceRequestFunction
-    killaurabeginswingremotets = defineventsfolder.InstanceRequestFunction
-    killauraendswingremotets = defineventsfolder.InstanceRequestFunction
-    killaurasetdirectionremotets = defineventsfolder.InstanceRequestFunction
-    damageplayerremotets = defineventsfolder.InstanceRequestFunction
-    swingmeleeremotets = defineventsfolder.InstanceRequestFunction
-    sendchatmsgremotets = defineventsfolder.InstanceRequestFunction
-    startaimremotets = defineventsfolder.InstanceRequestFunction
-    startchargeremotets  = defineventsfolder.InstanceRequestFunction
-    endfireremotets = defineventsfolder.InstanceRequestFunction
-    resetrequestremotets = defineventsfolder.InstanceRequestFunction
-    respawnrequestremots = defineventsfolder.InstanceRequestFunction
-
+    networkmanagerremotefunc = defineventsfolder.InstanceRequestFunction
 end
 
 
@@ -646,6 +632,10 @@ local handletypests = {
 "Left";
 }
 
+function invokeserverlolts(...)
+    local packetstosendtoserverts = { ... }
+    networkmanagerremotefunc:InvokeServer(unpack(packetstosendtoserverts))
+end 
 
 
 function chooserandomhandle()
@@ -805,7 +795,7 @@ function sendtoxicmessagets(playername)
         return 
     end 
 
-    sendchatmsgremotets:InvokeServer(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
+    invokeserverlolts(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
 
  function findandlootskidts()
@@ -836,11 +826,11 @@ end
 
             if autolootfilterts == true then 
             if not blacklistedautolootitemsts[v.Name] then 
-            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",itemtolootidlolts)
+                invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
             didwelootedanythinglolts = true 
             end 
-        else 
-            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",itemtolootidlolts)
+        elseif autolootfilterts == false then 
+            invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
             didwelootedanythinglolts = true 
           end
         end 
@@ -885,10 +875,10 @@ function findandteleportclosestskidundermapts()
 
         mychar.HumanoidRootPart.CFrame = closestplayertodragts.Character.HumanoidRootPart.CFrame+Vector3.new(0,2.850,0)
         task.wait()
-        dragrequestremotets:InvokeServer(closestplayertodragts, "Drag")
+        invokeserverlolts(closestplayertodragts, "Drag")
         mychar.HumanoidRootPart.CFrame = droppositionlol
         task.wait()
-        dragendrequestremotets:InvokeServer(closestplayertodragts, "Drop")
+        invokeserverlolts(closestplayertodragts, "Drop")
         task.wait()
         until distancebetweenskidtodropandoriginaldistance<=75
         
@@ -905,7 +895,7 @@ end
 
 
 function findanddmgskidts()
-    local equippedtoolitemdatalol = getitemdatafrominventorybynamets()
+    local equippedtoolitemdatalol = getequippeditemdatafrominventoryts()
  
     if equippedtoolitemdatalol == nil then 
         return 
@@ -935,9 +925,9 @@ function findanddmgskidts()
                     chosenrandomdirectionlolts = "Left"
                 end 
 
-                killaurasetdirectionremotets:InvokeServer(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
+                invokeserverlolts(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
                 task.wait(0.165)
-                killaurachargeremotets:InvokeServer(equippedtoolmodellolts, "Charge")
+                invokeserverlolts(equippedtoolmodellolts, "Charge")
                 task.wait()
                 killaurameleefullychargedlolts = true 
             end 
@@ -953,8 +943,8 @@ function findanddmgskidts()
 
     if currentkillauratargetts then 
         if killaurameleefullychargedlolts == true then 
-        killauraendswingremotets:InvokeServer(equippedtoolmodellolts, "BeginSwing")
-        killauraendswingremotets:InvokeServer(equippedtoolmodellolts, "EndSwing", currentkillauratargetts)
+        invokeserverlolts(equippedtoolmodellolts, "BeginSwing")
+        invokeserverlolts(equippedtoolmodellolts, "EndSwing", currentkillauratargetts)
         killaurameleechargedlolts = false 
         killaurameleefullychargedlolts = false 
         end 
@@ -1021,7 +1011,7 @@ function safeteleport(autotptosafezone,newposlol)
         local mycharacterroot = me.Character:FindFirstChild("HumanoidRootPart") 
         local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
-        resetrequestremotets:InvokeServer(noobreplicatedstorage.Interacting,"Reset")
+        invokeserverlolts(noobreplicatedstorage.Interacting,"Reset")
 
         if autotptosafezone == true then 
             task.wait(0.120)
@@ -1031,7 +1021,7 @@ function safeteleport(autotptosafezone,newposlol)
         end 
 
         task.wait(6.750)
-        respawnrequestremots:InvokeServer(noobreplicatedstorage.Interacting,"Respawn")
+        invokeserverlolts(noobreplicatedstorage.Interacting,"Respawn")
         repeat task.wait() until myclentplayerentityaval.Health>0
         task.wait(0.350)
 
@@ -1180,7 +1170,7 @@ task.wait(2)
 
 
 local MainTab = Material.Load({
-    Title = "Bellum imperii - [discord.gg/UVsD8V5J42]",
+    Title = "Bellum imperii - [discord.gg/CD7NN3eMwM]",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
