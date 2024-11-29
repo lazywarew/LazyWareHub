@@ -795,7 +795,7 @@ function sendtoxicmessagets(playername)
         [11] = {msg = "130k robux well spent huh Ryez?"},
         [12] = {msg = "Play Northwind"},
         [13] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
-        [14] = {msg = "Lazyware - UVsD8V5J42"}
+        [14] = {msg = "Lazyware - xaFyk6vBBb"}
     }    
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
