@@ -350,12 +350,13 @@ local autolootts = false
 local autolootfilterts = false 
 
 local blacklistedautolootitemsts = {
-    ["Metal arrow"] = {},
     ["Stone arrow"] = {},
     ["Wood arrow"] = {},
     ["Bandage"] = {},
     ["Knife"] = {},
     ["Worm"] = {}
+    ["Sesame seeds"] = {}
+    ["Torch"] = {}
 }
 
 --// auto drag stuff
