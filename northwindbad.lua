@@ -1,4 +1,4 @@
---// Storken1 loves northwind, dont forget to join https://discord.gg/XbEM8bKFqd❤️
+--// Storken1 says hello :) discord.gg/xaFyk6vBBb
 
 if isstscrptloaded then
     return
@@ -296,20 +296,7 @@ local defineventsfolder
 local targetfilterfolder =  noobworkspace:FindFirstChild("TargetFilter")
 
 --// remote crap lol
-local interactionremotevarts 
-local lootrequestremotets
-local dragrequestremotets 
-local dragendrequestremotets
-local resetrequestremotets
-local respawnrequestremots
-local killaurachargeremotets  
-local killaurabeginswingremotets  
-local killauraendswingremotets
-local killaurasetdirectionremotets
-local sendchatmsgremotets 
-local startaimremotets 
-local startchargeremotets 
-local endfireremotets
+local networkmanagerremotefunc = nil 
 
 local rndmnewfuncts = Random.new()
 
@@ -320,6 +307,13 @@ local killaurameleechargedlolts = false
 local killaurameleefullychargedlolts = false 
 local killauradistancets = 13
 local killauravalts = false
+
+--// autofarm related stuff
+
+--// ore autofarm stuff
+local oreautofarmvalts = false 
+local oretoautofarmvalts = ""
+local currentoreautofarmstagelolts = 0
 
 
 --// auto toxic related stuff
@@ -336,7 +330,7 @@ local autoblockts = false
 local autoblockdistancets  = 10
 
 --// extra speed related stuff
-local extraspeedvalts = 0.19
+local extraspeedvalts = 0.22
 local extraspeedandjumppowervalts = false
 
 
@@ -419,54 +413,15 @@ end
     
 
 if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    lootrequestremotets = defineventsfolder.InstanceRequestFunction
-    dragrequestremotets = defineventsfolder.InstanceRequestFunction
-    dragendrequestremotets = defineventsfolder.InstanceRequestFunction
-    killaurachargeremotets = defineventsfolder.InstanceRequestFunction
-    killaurabeginswingremotets = defineventsfolder.InstanceRequestFunction
-    killauraendswingremotets = defineventsfolder.InstanceRequestFunction
-    killaurasetdirectionremotets = defineventsfolder.InstanceRequestFunction
-    damageplayerremotets = defineventsfolder.InstanceRequestFunction
-    swingmeleeremotets = defineventsfolder.InstanceRequestFunction
-    sendchatmsgremotets = defineventsfolder.InstanceRequestFunction
-    startaimremotets = defineventsfolder.InstanceRequestFunction
-    startchargeremotets  = defineventsfolder.InstanceRequestFunction
-    endfireremotets = defineventsfolder.InstanceRequestFunction
-    resetrequestremotets = defineventsfolder.InstanceRequestFunction
-    respawnrequestremots = defineventsfolder.InstanceRequestFunction
-
+    networkmanagerremotefunc = defineventsfolder.InstanceRequestFunction
 end
-
-
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local resetrequestremotetsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    resetrequestremotets = resetrequestremotetsvar
-end
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local respawnrequestremotstsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    respawnrequestremots = respawnrequestremotstsvar
-end
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local damageremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    damageplayerremotets = damageremoterequestvar
-end
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local swingmeleeremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    swingmeleeremotets = swingmeleeremoterequestvar
-end
-
-
-
 
  if noobreplicatedstorage:FindFirstChild("Interacting") then
     interactionremotevarts = noobreplicatedstorage:FindFirstChild("Interacting")
  end
 
  
+
 for i,v in pairs(getgc(true)) do
 if typeof(v) == "table" and rawget(v,"SetStamina") and typeof(v.SetStamina) == "function" then
    table.insert(infstaminalol,v)
@@ -640,7 +595,10 @@ task.wait(1.350)
 
 
 
-
+function invokeserverlolts(...)
+    local packetstosendtoserverts = { ... }
+    networkmanagerremotefunc:InvokeServer(unpack(packetstosendtoserverts))
+end 
 
 
 local handletypests = {
@@ -677,7 +635,7 @@ task.wait(randomdelaytoreturntsa)
 end
  
 
-function getitemdatafrominventorybynamets()
+function getequippeditemdatafrominventoryts()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
     local EquippedToolItemlolts = myclentplayerentityaval:GetSelectedToolItem()
@@ -803,7 +761,7 @@ function sendtoxicmessagets(playername)
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut."},
         [16] = {msg = "Lazyware > everything else"},
         [17] = {msg = "Captinwheeler deserted."},
-        [18] = {msg = "lazyware - xaFyk6vBBb"},
+        [18] = {msg = "Lazyware - xaFyk6vBBb"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
@@ -813,7 +771,7 @@ function sendtoxicmessagets(playername)
         return 
     end 
 
-    sendchatmsgremotets:InvokeServer(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
+    invokeserverlolts(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
 
  function findandlootskidts()
@@ -844,11 +802,11 @@ end
 
             if autolootfilterts == true then 
             if not blacklistedautolootitemsts[v.Name] then 
-            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",itemtolootidlolts)
+            invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
             didwelootedanythinglolts = true 
             end 
         elseif autolootfilterts == false then 
-            lootrequestremotets:InvokeServer(closestlootplayerts,"LootItem",itemtolootidlolts)
+            invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
             didwelootedanythinglolts = true 
           end
         end 
@@ -893,10 +851,10 @@ function findandteleportclosestskidundermapts()
 
         mychar.HumanoidRootPart.CFrame = closestplayertodragts.Character.HumanoidRootPart.CFrame+Vector3.new(0,2.850,0)
         task.wait()
-        dragrequestremotets:InvokeServer(closestplayertodragts, "Drag")
+        invokeserverlolts(closestplayertodragts, "Drag")
         mychar.HumanoidRootPart.CFrame = droppositionlol
         task.wait()
-        dragendrequestremotets:InvokeServer(closestplayertodragts, "Drop")
+        invokeserverlolts(closestplayertodragts, "Drop")
         task.wait()
         until distancebetweenskidtodropandoriginaldistance<=75
         
@@ -913,7 +871,7 @@ end
 
 
 function findanddmgskidts()
-    local equippedtoolitemdatalol = getitemdatafrominventorybynamets()
+    local equippedtoolitemdatalol = getequippeditemdatafrominventoryts()
  
     if equippedtoolitemdatalol == nil then 
         return 
@@ -943,9 +901,9 @@ function findanddmgskidts()
                     chosenrandomdirectionlolts = "Left"
                 end 
 
-                killaurasetdirectionremotets:InvokeServer(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
+                invokeserverlolts(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
                 task.wait(0.165)
-                killaurachargeremotets:InvokeServer(equippedtoolmodellolts, "Charge")
+                invokeserverlolts(equippedtoolmodellolts, "Charge")
                 task.wait()
                 killaurameleefullychargedlolts = true 
             end 
@@ -961,14 +919,139 @@ function findanddmgskidts()
 
     if currentkillauratargetts then 
         if killaurameleefullychargedlolts == true then 
-        killauraendswingremotets:InvokeServer(equippedtoolmodellolts, "BeginSwing")
-        killauraendswingremotets:InvokeServer(equippedtoolmodellolts, "EndSwing", currentkillauratargetts)
+        invokeserverlolts(equippedtoolmodellolts, "BeginSwing")
+        invokeserverlolts(equippedtoolmodellolts, "EndSwing", currentkillauratargetts)
         killaurameleechargedlolts = false 
         killaurameleefullychargedlolts = false 
         end 
         currentkillauratargetts = nil 
     end
 end
+
+function purchaseitemlolts(stupidnpctobuystufffrom,itemname,itemamount)
+    invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","ShopShown",stupidnpctobuystufffrom)
+    task.wait(0.250)
+    invokeserverlolts(stupidnpctobuystufffrom,"SellItemToPlayer",itemname,itemamount,stupidnpctobuystufffrom)
+    task.wait()
+    invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","Default")
+end 
+
+function equipitemlolts(toolid)
+    invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","EquipmentShown")
+    task.wait(0.150)
+    invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","Default")
+    task.wait()
+    invokeserverlolts(noobreplicatedstorage.Interacting,"EquipItem",toolid)
+end 
+
+function holsteritemlolts(toolid)
+    invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","ToolsShown")
+    task.wait(0.150)
+    invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","Default")
+    task.wait()
+    invokeserverlolts(me,"SetOption","LastSelectedToolItemType","Tool")
+    invokeserverlolts(noobreplicatedstorage.Interacting,"SelectToolItem",toolid)
+end 
+
+
+function findplayerpickaxelolts()
+    local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
+
+    for i,v in pairs(myclentplayerentityaval.InventoryAbstractItems) do 
+       if v.Name == "Pickaxe" then 
+        return v 
+      end
+   end
+     return nil 
+end 
+
+function findclosestitemnearuslolts(itempath,itemname,maxiumumitemdistance,ignoreinvisibleparts)
+        --workspace.StaticProps.Resources
+
+    for i,v in pairs(itempath:GetChildren()) do 
+        if v.PrimaryPart then 
+            if v.Name == itemname then 
+            local distancebetweenmeandpart = (me.Character.HumanoidRootPart.Position-v.PrimaryPart.Position).Magnitude 
+            if distancebetweenmeandpart<=maxiumumitemdistance then
+                if ignoreinvisibleparts == true and v.PrimaryPart.Transparency == 1 then 
+                     
+                end 
+                
+                return v 
+            end
+         end
+      end
+    end
+    return nil
+end 
+
+
+
+function autofarmoreslolts()
+    if game.PlaceId~=5465507265 then 
+        oreautofarmvalts = false 
+        return  --// not in rupert island
+    end 
+
+    local dowehavepickaxeequippedts = false 
+    local equippedtoolmodellolts 
+    local equippedtoolidlolts
+    local equippedtoolnamelolts 
+
+    local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
+    local equippedtoolitemdatalol = getequippeditemdatafrominventoryts()
+ 
+    if equippedtoolitemdatalol  then 
+        dowehavepickaxeequippedts = true   
+    end 
+
+    if dowehavepickaxeequippedts == true then 
+    equippedtoolmodellolts = equippedtoolitemdatalol["1"]
+    equippedtoolidlolts = equippedtoolitemdatalol["2"]
+    equippedtoolnamelolts = equippedtoolitemdatalol["3"]
+    end 
+
+     if dowehavepickaxeequippedts == true then 
+            task.wait(0.120)
+            safeteleport(false,CFrame.new(4006, 50, 990)) --// teleport to western  cave 
+
+            task.wait(2.450)
+
+
+            task.spawn(function()
+                while task.wait() do 
+                    if oreautofarmvalts == false then 
+                        break 
+                    end 
+
+
+                    local itemtominelol = findclosestitemnearuslolts(noobworkspace.StaticProps.Resources,oretoautofarmvalts,550,true)
+
+
+                    if itemtominelol then 
+                        safeteleport(false,itemtominelol.PrimaryPart.CFrame)
+                        task.wait(2.450)
+
+                        invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","Default")
+                        me.Character.HumanoidRootPart.CFrame = itemtominelol.PrimaryPart.CFrame+Vector3.new(0,5.450,2.450) 
+                        holsteritemlolts(equippedtoolmodellolts.Name)
+
+                        repeat task.wait() 
+
+                        invokeserverlolts(equippedtoolmodellolts,"UseTool",itemtominelol)
+
+
+                        until  itemtominelol.PrimaryPart.Transparency==1 or oreautofarmvalts == false 
+                        
+                        if oreautofarmvalts == false then 
+                            break 
+                        end 
+
+                   end  
+             end 
+         end)
+    end 
+end 
 
 
 function setchargedelay(Value)
@@ -1192,7 +1275,7 @@ task.wait(2)
 
 
 local MainTab = Material.Load({
-    Title = "Northwind  - [discord.gg/UVsD8V5J42]",
+    Title = "Northwind  - [discord.gg/CD7NN3eMwM]",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
@@ -1204,6 +1287,10 @@ local MainTab = Material.Load({
 
 local misctab = MainTab.New({
     Title = "misc"
+})
+
+local autofarmtab = MainTab.New({
+    Title = "autofarm"
 })
 
 local esptab = MainTab.New({
@@ -1220,6 +1307,8 @@ local weaponmodstab = MainTab.New({
 local silentaimtab = MainTab.New({
     Title = "silent aim"
 })
+
+
 
 
 
@@ -1322,7 +1411,7 @@ silentaimtab.Dropdown({
         "head",
         "torso",
     }
-})
+  })
 
 
 
@@ -1378,6 +1467,8 @@ misctab.Toggle({
 	end,
     Enabled = killauravalts
 })
+
+
 
 
 misctab.Toggle({
@@ -1543,6 +1634,54 @@ misctab.Toggle({
 	})
 
 	
+    autofarmtab.Toggle({
+        Text = "Mine ore autofarm",
+        Callback = function(Value)
+        if Value == true then 
+          oreautofarmvalts = Value 
+
+           if Value == true then 
+             --// autofarmoreslolts()
+           end 
+          end 
+        end,
+        Enabled = oreautofarmvalts 
+    })
+
+    autofarmtab.Dropdown({
+        Text = "Ore to autofarm",
+        Callback = function(Value)
+            oretoautofarmvalts = Value
+        end,
+        Options = {
+            "Lead deposit",
+            "Vanadite deposit",
+            "Wulfenite deposit",
+            "Lead deposit",
+            "Iron deposit",
+            "Gold deposit",
+            "Azurite deposit",
+            "Rutile deposit",
+            "Silver deposit",
+            "Sulfur deposit",
+            "Coal deposit",
+        }
+    })
+
+    autofarmtab.Button({
+        Text = 'goto saint paul npc',
+        Callback = function()
+            safeteleport(false,CFrame.new(3166, 95, 558))
+        end,
+        Menu = {
+            Information = function(self)
+            MainTab.Banner({
+            Text = 'Tps you to saint paul npc'
+            })
+        end
+     }
+    })
+    
 
    weaponmodstab.TextField({
 	Text = "change melee swing delay",
