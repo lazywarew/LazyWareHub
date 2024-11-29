@@ -354,8 +354,8 @@ local blacklistedautolootitemsts = {
     ["Wood arrow"] = {},
     ["Bandage"] = {},
     ["Knife"] = {},
-    ["Worm"] = {}
-    ["Sesame seeds"] = {}
+    ["Worm"] = {},
+    ["Sesame seeds"] = {},
     ["Torch"] = {}
 }
 
