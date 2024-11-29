@@ -354,8 +354,8 @@ local blacklistedautolootitemsts = {
     ["Wood arrow"] = {},
     ["Bandage"] = {},
     ["Knife"] = {},
-    ["Worm"] = {},
-    ["Sesame seeds"] = {},
+    ["Worm"] = {}
+    ["Sesame seeds"] = {}
     ["Torch"] = {}
 }
 
@@ -666,14 +666,6 @@ task.wait(randomdelaytoreturntsa)
 end
  
 
-function getequippeditemdatafrominventoryts()
-    local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
-
-    local EquippedToolItemlolts = myclentplayerentityaval:GetSelectedToolItem()
-
-    return EquippedToolItemlolts
-end 
-
 function getitemdatafrominventorybynamets()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
@@ -793,7 +785,6 @@ function sendtoxicmessagets(playername)
         [9] = {msg = "I don't think the devs know that they can automate bans."},
         [11] = {msg = "130k robux well spent huh Ryez?"},
         [12] = {msg = "Play Northwind"},
-        [12] = {msg = "130k robux and no anticheat??? 🤣🤣"},
         [13] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
         [14] = {msg = "Lazyware - xaFyk6vBBb"}
     }    
@@ -828,6 +819,7 @@ end
         if wrappedplayerprofile.Health<1 then 
         for i,v in pairs(wrappedplayerprofile.InventoryAbstractItems) do 
             if autolootts == false then
+                closestlootplayerts = nil 
                 break 
             end 
 
@@ -849,9 +841,10 @@ end
             sendtoxicmessagets(closestlootplayerts.Name)
             end 
         end
+
       end 
-      closestlootplayerts = nil
     end 
+    closestlootplayerts = nil
   end
 end 
 
