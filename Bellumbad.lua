@@ -153,6 +153,7 @@ local sharedgetplayertable  = nil
 local canweusedrawinglibraryts = false 
 local RunService = game:GetService("RunService")
 local TracerColor = Color3.fromRGB(255,255,255)
+local TracerTextColor = Color3.fromRGB(255,255,255)
 local TracerLines = {}
 
 
@@ -169,22 +170,42 @@ local function Get2DPosition(PartPosition)
 	return ViewportPoint, Visible
 end
 
-local function DrawNewLine(TracerPart,TracerPartType)
+local function DrawNewLine(TracerPart,TracerPartType,TracerText)
+    for tracerindex,tracerdata in pairs(TracerLines) do
+        if tracerdata.TracerPart == TracerPart then 
+            tracerdata.TracerLine.Visible = false 
+            tracerdata.TracerLine:Remove()
+            table.remove(TracerLines,tracerindex)
+        end
+    end 
     local TracerLine = Drawing.new("Line")
-	TracerLine.Visible = true
-	TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
+    TracerLine.Visible = true
+    TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
 
-	local To, Visible = Get2DPosition(TracerPart.Position)
-	TracerLine.To = To
-	TracerLine.Color = TracerColor
-	TracerLine.Thickness = 1
-	TracerLine.Transparency = 1
-	TracerLine.ZIndex = 1
+    local TracerLineText = Drawing.new("Text")
+    TracerLineText.Visible = true
+    TracerLineText.Center = true
+    TracerLineText.Outline = true
+    TracerLineText.Font = 2
+    TracerLineText.Size = 15
+    
+    local To, Visible = Get2DPosition(TracerPart.Position)
+    TracerLine.To = To
+    TracerLine.Color = TracerColor
+    TracerLine.Thickness = 1
+    TracerLine.Transparency = 1
+    TracerLine.ZIndex = 1
+
+    TracerLineText.Text = TracerText
+    TracerLineText.Position = Vector2.new(To.X,To.Y)
+    TracerLineText.Color = TracerTextColor
 
     table.insert(TracerLines,{
     ["TracerPart"] = TracerPart,
     ["TracerPartType"] = TracerPartType,
     ["TracerLine"] = TracerLine,
+    ["TracerLineText"] = TracerLineText,
+    ["TracerLineTextText"] = TracerText
     })
 end
 
@@ -194,23 +215,37 @@ local function UpdateTracerLines()
         if  not tracerdata.TracerPart:IsDescendantOf(workspace) then 
             tracerdata.TracerLine.Visible = false 
             tracerdata.TracerLine:Remove()
+            tracerdata.TracerLineText.Visible = false 
+            tracerdata.TracerLineText:Remove()
             table.remove(TracerLines,tracerindex)
         end
 
         local TracerLine = tracerdata.TracerLine
-        TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
-    
+        local TracerLineText = tracerdata.TracerLineText
+        local TracerLineTextText =  tracerdata.TracerLineTextText
+        local TracerLinePart = tracerdata.TracerPart
+        local DistanceBetweenUsAndTarget = math.floor((me.Character.HumanoidRootPart.Position-TracerLinePart.Position).Magnitude)
+
+
         if tracerdata.TracerPartType == "Player" and tracerdata.TracerPart  then 
     
              local To, Visible = Get2DPosition(tracerdata.TracerPart.Position)
 
+
                 if Visible == true and  playerespval == true then
 
+                    TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
                     TracerLine.Color = Color3.fromRGB(75, 95, 240)
                     TracerLine.To = To
                     TracerLine.Visible = true
+
+                    TracerLineText.Color = Color3.fromRGB(75, 95, 240)
+                    TracerLineText.Position = Vector2.new(To.X,To.Y-65)
+                    TracerLineText.Text = TracerLineTextText.." ["..tostring(DistanceBetweenUsAndTarget).."]"
+                    TracerLineText.Visible = true
                 else
                     TracerLine.Visible = false
+                    TracerLineText.Visible = false 
                 end
          end     
 
@@ -222,11 +257,19 @@ local function UpdateTracerLines()
 
                if Visible == true and  animalespval == true then
 
-                   TracerLine.Color = Color3.fromRGB(0, 255, 132)
+                   TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
+                   TracerLine.Color = TracerLinePart.Parent.Torso.Color
                    TracerLine.To = To
                    TracerLine.Visible = true
+
+                   TracerLineText.Color = TracerLinePart.Parent.Torso.Color
+                   TracerLineText.Position = Vector2.new(To.X,To.Y-65)
+                   TracerLineText.Text = TracerLineTextText.." ["..tostring(DistanceBetweenUsAndTarget).."]"
+                   TracerLineText.Visible = true
+
                else
                    TracerLine.Visible = false
+                   TracerLineText.Visible = false 
                end
         end     
 
@@ -238,11 +281,19 @@ local function UpdateTracerLines()
 
                if Visible == true and  playerremainespval == true then
 
+                 TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
                    TracerLine.Color = Color3.fromRGB(255, 120, 70)
                    TracerLine.To = To
                    TracerLine.Visible = true
+
+                   
+                   TracerLineText.Color = Color3.fromRGB(255, 120, 70)
+                   TracerLineText.Position = Vector2.new(To.X,To.Y-65)
+                   TracerLineText.Text = TracerLineTextText.." ["..tostring(DistanceBetweenUsAndTarget).."]"
+                   TracerLineText.Visible = true
                else
                    TracerLine.Visible = false
+                   TracerLineText.Visible = false 
                end
         end     
 
@@ -254,11 +305,18 @@ local function UpdateTracerLines()
 
                if treasurechestespval == true then
 
+                   TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
                    TracerLine.Color = Color3.fromRGB(255, 215, 110)
                    TracerLine.To = To
                    TracerLine.Visible = true
+
+                   TracerLineText.Color = Color3.fromRGB(255, 215, 110)
+                   TracerLineText.Position = Vector2.new(To.X,To.Y-65)
+                   TracerLineText.Text = TracerLineTextText.." ["..tostring(DistanceBetweenUsAndTarget).."]"
+                   TracerLineText.Visible = true
                else
                    TracerLine.Visible = false
+                   TracerLineText.Visible = false 
                end
         end     
 
@@ -271,11 +329,19 @@ local function UpdateTracerLines()
 
                if Visible == true and  playerremainespval == true then
 
+                   TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
                    TracerLine.Color = Color3.fromRGB(85, 30, 255)
                    TracerLine.To = To
                    TracerLine.Visible = true
+
+                   TracerLineText.Color = Color3.fromRGB(85, 30, 255)
+                   TracerLineText.Position = Vector2.new(To.X,To.Y-65)
+                   TracerLineText.Text = TracerLineTextText.."[ "..tostring(DistanceBetweenUsAndTarget).."]"
+                   TracerLineText.Visible = true
+
                else
                    TracerLine.Visible = false
+                   TracerLineText.Visible = false 
                end
         end     
 
@@ -354,8 +420,8 @@ local blacklistedautolootitemsts = {
     ["Wood arrow"] = {},
     ["Bandage"] = {},
     ["Knife"] = {},
-    ["Worm"] = {}
-    ["Sesame seeds"] = {}
+    ["Worm"] = {},
+    ["Sesame seeds"] = {},
     ["Torch"] = {}
 }
 
@@ -424,25 +490,6 @@ end
 
 
 
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local resetrequestremotetsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    resetrequestremotets = resetrequestremotetsvar
-end
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local respawnrequestremotstsvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    respawnrequestremots = respawnrequestremotstsvar
-end
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local damageremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    damageplayerremotets = damageremoterequestvar
-end
-
-if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFunction") then
-    local swingmeleeremoterequestvar = defineventsfolder:FindFirstChild("InstanceRequestFunction") 
-    swingmeleeremotets = swingmeleeremoterequestvar
-end
 
 
 
@@ -666,6 +713,14 @@ task.wait(randomdelaytoreturntsa)
 end
  
 
+function getequippeditemdatafrominventoryts()
+    local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
+
+    local EquippedToolItemlolts = myclentplayerentityaval:GetSelectedToolItem()
+
+    return EquippedToolItemlolts
+end 
+
 function getitemdatafrominventorybynamets()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
@@ -819,7 +874,6 @@ end
         if wrappedplayerprofile.Health<1 then 
         for i,v in pairs(wrappedplayerprofile.InventoryAbstractItems) do 
             if autolootts == false then
-                closestlootplayerts = nil 
                 break 
             end 
 
@@ -841,10 +895,9 @@ end
             sendtoxicmessagets(closestlootplayerts.Name)
             end 
         end
-
       end 
+      closestlootplayerts = nil
     end 
-    closestlootplayerts = nil
   end
 end 
 
@@ -1091,10 +1144,16 @@ plrservicets.PlayerAdded:Connect(function(player)
     pcall(function()
         player.CharacterAdded:Connect(function(playerchar)
             task.wait(1)
+            if playerespval == true then 
             if playerchar.Name ~= me.Name and playerchar and playerchar:FindFirstChild("HumanoidRootPart") then 
                 local HumanoidRootPart = playerchar:FindFirstChild("HumanoidRootPart")
-                DrawNewLine(HumanoidRootPart, "Player")
+                local PlayerEntityData = wrapperstuffcraplol:Wrap(player)
+                if PlayerEntityData.FirstName then 
+                local TracerText = PlayerEntityData.FirstName.." "..PlayerEntityData.LastName
+                DrawNewLine(HumanoidRootPart, "Player",TracerText)
+                end 
             end
+          end 
         end)
     end)
 end)
@@ -1114,7 +1173,7 @@ me.CharacterAdded:Connect(function(newchar)
      task.wait(5)
      if string.match(obj.Name,"Player remains") then
         
-    DrawNewLine(obj.PrimaryPart, "Playerremains")
+    DrawNewLine(obj.PrimaryPart, "Playerremains","Player Remains")
     end
     end
     end)
@@ -1124,7 +1183,7 @@ me.CharacterAdded:Connect(function(newchar)
         targetfilterfolder.TreasureHuntMarkers.ChildAdded:Connect(function(obj)
             if treasurechestespval == true then
                 task.wait(5)
-                DrawNewLine(obj,"Treasurechest")
+                DrawNewLine(obj,"Treasurechest","Treasure Chest")
             end 
         end)
     end 
@@ -1132,34 +1191,26 @@ me.CharacterAdded:Connect(function(newchar)
 
 
 
-if game:GetService("Workspace"):FindFirstChild("Props")  then
-game:GetService("Workspace").Props.PlayerHouses.ChildAdded:Connect(function(item) do
+if noobworkspace:FindFirstChild("Props")  then
+noobworkspace.Props.PlayerHouses.ChildAdded:Connect(function(child) do
 task.wait(5)
-pcall(function()
 if chestesp == true then
-for i,v in pairs(item:GetDescendants()) do
-if item:IsA("Model") and item.Name == "Wooden chest" then
-DrawNewLine(item.PrimaryPart, "Housechest")
+if child:IsA("Model") and child.Name == "Wooden chest" then
+DrawNewLine(child.PrimaryPart, "Housechest","House Chest")
 end
 end
-end
-end)
 end
 end)
 end
 
-if game:GetService("Workspace"):FindFirstChild("NPCs") then
-game:GetService("Workspace").NPCs.Animals.ChildAdded:Connect(function(animal)
-pcall(function()
+if noobworkspace:FindFirstChild("NPCs") then
+noobworkspace.NPCs.Animals.ChildAdded:Connect(function(child)
 if animalespval == true then
 task.wait(5)
-local text = string.gsub(animal.Name, "%d", "")
-local text2 = string.split(text,"_")[1]
-if animal.Character.PrimaryPart then
-DrawNewLine(animal.Character.PrimaryPart,"Animal")
+if child.Character.PrimaryPart then
+DrawNewLine(child.Character.PrimaryPart,"Animal",child.Name)
 end
 end
-end)
 end)
 end
 
@@ -1570,7 +1621,14 @@ if playerespval == true then
 for i,v in pairs(plrservicets:GetPlayers()) do 
 if v.Name ~= me.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then 
 local HumanoidRootPart = v.Character:FindFirstChild("HumanoidRootPart")
-DrawNewLine(HumanoidRootPart, "Player")
+local PlayerEntityData = wrapperstuffcraplol:Wrap(v)
+if PlayerEntityData then 
+if PlayerEntityData.FirstName then 
+
+local TracerText = PlayerEntityData.FirstName.." "..PlayerEntityData.LastName
+DrawNewLine(HumanoidRootPart, "Player",TracerText)
+end 
+end 
 end
 end
 end
@@ -1584,11 +1642,11 @@ Callback = function(Value)
 playerremainespval = Value
 
 if  playerremainespval == true then
-if game:GetService("Workspace"):FindFirstChild("Carriables") then
-for _,item in pairs(game:GetService("Workspace").Carriables:GetChildren()) do
-if item:IsA("Model") then
-if string.match(item.Name,"Player remains") then
-DrawNewLine(item.PrimaryPart, "Playerremains")
+if noobworkspace:FindFirstChild("Carriables") then
+for i,v in pairs(noobworkspace.Carriables:GetChildren()) do
+if v:IsA("Model") then
+if string.match(v.Name,"Player remains") then
+DrawNewLine(v.PrimaryPart, "Playerremains","Player Remains")
 end
 end
 end
@@ -1605,8 +1663,8 @@ Callback = function(Value)
 treasurechestespval = Value
 if  treasurechestespval == true then
 if targetfilterfolder:FindFirstChild("TreasureHuntMarkers") then
-for _,treasurechest in pairs(targetfilterfolder.TreasureHuntMarkers:GetChildren()) do
-DrawNewLine(treasurechest,"Treasurechest")
+for i,v in pairs(targetfilterfolder.TreasureHuntMarkers:GetChildren()) do
+DrawNewLine(v,"Treasurechest","Treasure Chest")
 end
 end
 end
@@ -1620,9 +1678,9 @@ Callback = function(Value)
 if chestesp == false then
 chestesp = true
 if game:GetService("Workspace"):FindFirstChild("Props") then
-for _,item in pairs(game:GetService("Workspace").Props.PlayerHouses:GetDescendants()) do
-if item:IsA("Model") and item.Name == "Wooden chest" then
-DrawNewLine(item.PrimaryPart, "Housechest")
+for i,v in pairs(game:GetService("Workspace").Props.PlayerHouses:GetDescendants()) do
+if v:IsA("Model") and v.Name == "Wooden chest" then
+DrawNewLine(v.PrimaryPart, "Housechest","House Chest")
 end
 end
 end
@@ -1637,10 +1695,10 @@ Callback = function(Value)
 animalespval = Value 
 if  animalespval == true then
 animalespval = true
-if game:GetService("Workspace"):FindFirstChild("NPCs") then
-for i,v in pairs(game:GetService("Workspace").NPCs.Animals:GetChildren()) do
+if noobworkspace:FindFirstChild("NPCs") then
+for i,v in pairs(noobworkspace.NPCs.Animals:GetChildren()) do
 if v.Character.PrimaryPart  then
-DrawNewLine(v.Character.PrimaryPart,"Animal")
+DrawNewLine(v.Character.PrimaryPart,"Animal",v.Name)
 end
 end
 end
