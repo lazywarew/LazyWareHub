@@ -1,5 +1,3 @@
---// those who know 💀
-
 if isstscrptloaded then
     return
 end
@@ -611,6 +609,8 @@ task.wait(1.250)
 local oldnamecallts
 oldnamecallts = hookmetamethod(game, "__namecall", newcclosure(function(self,...)
    local method = getnamecallmethod();
+
+
     if  method == "Raycast" and silentaimval == true  and not checkcaller()    then
 
 
@@ -620,7 +620,6 @@ oldnamecallts = hookmetamethod(game, "__namecall", newcclosure(function(self,...
     end 
 
 
-   local args = {...}
 
    if args[3] == nil  then 
    return oldnamecallts(self,...)
@@ -696,7 +695,7 @@ end
 local function randomcooldelayts(value)
 local funnymultiplierts = rndmnewfuncts:NextNumber(0.2, 0.6)
 local randomdelaytoreturntsa = rndmnewfuncts:NextNumber(0, value)+funnymultiplierts
-task.wait(randomdelaytoreturntsa)
+return randomdelaytoreturntsa
 end
  
 
@@ -826,7 +825,7 @@ function sendtoxicmessagets(playername)
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut."},
         [16] = {msg = "Lazyware > everything else"},
         [17] = {msg = "Captinwheeler deserted."},
-        [18] = {msg = "lazyware - xaFyk6vBBb"},
+        [18] = {msg = "lazyware - 5XT54D98Jc"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
@@ -1100,21 +1099,24 @@ function autofarmoreslolts()
                     end 
 
                     if itemtominelol then 
-                        safeteleport(false,itemtominelol.PrimaryPart.CFrame+Vector3.new(0,0,3.650))
-                        task.wait(1.450) --// i love northwind renderring system !
+                        safeteleport(false,itemtominelol.PrimaryPart.CFrame+Vector3.new(0,5.450,0))
+                        task.wait(2.450) --// i love northwind renderring system !
 
                         holsteritemlolts(equippedtoolmodellolts.Name)
 
+                        task.wait(0.450)
+                        me.Character.Humanoid:ChangeState(Enum.HumanoidStateType.None)
                         invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","Default")
 
-
                         repeat task.wait() 
+                        invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","Default")
+
                         invokeserverlolts(equippedtoolmodellolts,"BeginActionDelay","UseTool")
-                        task.wait(0.465)
+                        task.wait(0.750)
                         invokeserverlolts(equippedtoolmodellolts,"UseTool",itemtominelol)
                         invokeserverlolts(equippedtoolmodellolts,"EndActionDelay","UseTool")
 
-
+                        
                         until  itemtominelol.PrimaryPart.Transparency==1 or oreautofarmvalts == false 
                         if oreautofarmvalts == false then 
                             break 
