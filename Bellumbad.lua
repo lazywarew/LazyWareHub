@@ -1070,14 +1070,18 @@ function safeteleport(autotptosafezone,newposlol)
         if autotptosafezone == true then 
             task.wait(0.120)
             for i = 1,5 do 
-            TweenService:Create(mycharacterroot, TweenInfo.new(5.850), {CFrame = CFrame.new(-281, -213, -267)}):Play()
+            TweenService:Create(mycharacterroot, TweenInfo.new(9.850), {CFrame = CFrame.new(-281, -213, -267)}):Play()
             end 
         end 
 
-        task.wait(6.750)
+        task.wait(9.950)
         invokeserverlolts(noobreplicatedstorage.Interacting,"Respawn")
         repeat task.wait() until myclentplayerentityaval.Health>0
-        task.wait(0.350)
+        task.wait()
+
+        --// time the teleport perfectly
+
+        task.wait(0.465)
 
         for i = 1,5 do 
         mycharacterroot.CFrame = newposlol
