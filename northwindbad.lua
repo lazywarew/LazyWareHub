@@ -1,3 +1,5 @@
+--// those who know 💀
+
 if isstscrptloaded then
     return
 end
@@ -807,14 +809,14 @@ end
 
 function sendtoxicmessagets(playername)
     local autotoxicwordsts = {
-        [1] = {msg = "Thanks for the loot "..v.Name.." <3 (dm storken to get your loot back <3)"},
+        [1] = {msg = "Thanks for the loot "..playername.." <3 (dm storken to get your loot back <3)"},
         [2] = {msg = "Tell Tyberius to stop devving"},
         [3] = {msg = "Omg did someone just kill you? And now your getting looted aswell????? 🤣"},
         [4] = {msg = "Did you die that fast? You should probably play aimlabs for a little bit."},
         [5] = {msg = "If you have any spare pounds donate them to Storken please"},
         [6] = {msg = "No anticheat???"},
         [7] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀"},
-        [8] = {msg = "Wow thats alot of items "..v.Name.." <3 Thank you"},
+        [8] = {msg = "Wow thats alot of items "..playername.." <3 Thank you"},
         [9] = {msg = "Almost 2 months still no anticheat?"},
         [10] = {msg = "I think Peanut loves manual banning."},
         [11] = {msg = "You guys should tell ryez to keep his promises :)"},
@@ -824,7 +826,7 @@ function sendtoxicmessagets(playername)
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut."},
         [16] = {msg = "Lazyware > everything else"},
         [17] = {msg = "Captinwheeler deserted."},
-        [18] = {msg = "lazyware - UVsD8V5J42"},
+        [18] = {msg = "lazyware - xaFyk6vBBb"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
