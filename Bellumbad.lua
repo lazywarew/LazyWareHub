@@ -1068,7 +1068,6 @@ function safeteleport(autotptosafezone,newposlol)
         invokeserverlolts(noobreplicatedstorage.Interacting,"Reset")
 
         if autotptosafezone == true then 
-            task.wait(0.120)
             for i = 1,5 do 
             TweenService:Create(mycharacterroot, TweenInfo.new(9.850), {CFrame = CFrame.new(-281, -213, -267)}):Play()
             end 
@@ -1080,8 +1079,6 @@ function safeteleport(autotptosafezone,newposlol)
         task.wait()
 
         --// time the teleport perfectly
-
-        task.wait(0.465)
 
         for i = 1,5 do 
         mycharacterroot.CFrame = newposlol
@@ -1711,31 +1708,18 @@ end,
 Enabled = false
 })
 
+function setstaminalolts()
+    local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
+    local myclientplayerentitymaxstaminats = myclentplayerentityaval:GetMaxStamina()
 
-for i,v in pairs(infstaminalol) do 
-local oldsetstaminalol = v.SetStamina
-
-
-v.SetStamina = function(self, ...)
-        local args = {...}
-        if infstaminavalts == true then
-            if self.Name == me.Name then
-            local localplayerentitymaxstaminats = self:GetMaxStamina()
-
-            if localplayerentitymaxstaminats then
-                if self.Stamina <= localplayerentitymaxstaminats - 5 then
-                    return oldsetstaminalol(self, ...)
-                end
-            end
-
-            args[1] = localplayerentitymaxstaminats or 150
-            return oldsetstaminalol(self, table.unpack(args))
-        end
-    end
-
-    return oldsetstaminalol(self, ...)
-  end
+    if myclentplayerentityaval.Stamina <= myclientplayerentitymaxstaminats - 5 then
+    myclentplayerentityaval.Stamina = myclientplayerentitymaxstaminats
+    end 
 end 
+
+
+
+
 
 while task.wait() do
     if autolootts == true then
@@ -1783,4 +1767,7 @@ while task.wait() do
             updateplayerhitboxests()
         end
     end
+    if infstaminavalts == true then 
+        setstaminalolts()
+    end 
 end
