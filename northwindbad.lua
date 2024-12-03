@@ -149,6 +149,7 @@ local sharedgetplayertable  = nil
 
 --// esp and script stuff
 local canweusedrawinglibraryts = false 
+local canweusefilesystemlibraryts = false 
 local RunService = game:GetService("RunService")
 local TracerColor = Color3.fromRGB(255,255,255)
 local TracerTextColor = Color3.fromRGB(255,255,255)
@@ -374,8 +375,14 @@ local killauravalts = false
 --// autofarm related stuff
 
 --// ore autofarm stuff
+local orepickaxetypeslolts = {
+    ["Pickaxe"] = {SwingDelaylol=0.565},
+    ["Superior pickaxe"] = {SwingDelaylol=0.565}
+}
+
 local oreautofarmvalts = false 
 local oretoautofarmvalts = ""
+local backuporestoautofarmts = {} --// if oretoautofarm not found the ores in this list get farmed 
 local currentoreautofarmstagelolts = 0
 
 
@@ -463,12 +470,27 @@ placeid = 5465507265 --// rupert
 if Drawing and Drawing.new then 
     canweusedrawinglibraryts = true
 end
-    
+
+if makefolder and readfile and writefile and isfile then 
+    canweusefilesystemlibraryts = true 
+end 
+
 if canweusedrawinglibraryts == false then 
      me:Kick("drawing library not supported sorry")
     return
 end
 
+if canweusefilesystemlibraryts == false then 
+    me:Kick("filesystem library not supported sorry")
+   return
+end
+
+
+if isfolder("LazyWare") and isfolder("LazyWare/Northwind") then
+    local myconfigfilets = readfile("LazyWare/Northwind/Config.json")
+    local jsondecodedconfigts = stupidhttpservice:JSONDecode(myconfigfilets)
+    backuporestoautofarmts = jsondecodedconfigts.backuporestofarm
+end 
 
 if noobreplicatedstorage:FindFirstChild("DefinEvents") then 
 defineventsfolder = noobreplicatedstorage:FindFirstChild("DefinEvents")
@@ -1023,32 +1045,37 @@ function findplayerpickaxelolts()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
 
     for i,v in pairs(myclentplayerentityaval.InventoryAbstractItems) do 
-       if v.Name == "Pickaxe" then 
+        if orepickaxetypeslolts[v.Name] then
         return v 
       end
    end
      return nil 
 end 
 
-function findclosestitemnearuslolts(itempath,itemname,maxiumumitemdistance,ignoreinvisibleparts)
-        --workspace.StaticProps.Resources
+function findclosestitemnearuslolts(itempath, itemname, maximumitemdistance, ignoreinvisibleparts)
+    local closestitem = nil
+    local closestdistance = maximumitemdistance
 
-    for i,v in pairs(itempath:GetChildren()) do 
-        if v.PrimaryPart then 
-            if v.Name == itemname then 
-            local distancebetweenmeandpart = (me.Character.HumanoidRootPart.Position-v.PrimaryPart.Position).Magnitude 
-            if distancebetweenmeandpart<=maxiumumitemdistance then
-                if ignoreinvisibleparts == true and v.PrimaryPart.Transparency == 1 then 
-                     
-                end 
-                
-                return v 
+    for i, v in pairs(itempath:GetChildren()) do
+        if v.PrimaryPart then
+            if v.Name == itemname then
+                local distancebetweenmeandpart = (me.Character.HumanoidRootPart.Position - v.PrimaryPart.Position).Magnitude
+
+                if distancebetweenmeandpart <= closestdistance then
+                    if ignoreinvisibleparts and v.PrimaryPart.Transparency == 1 then
+                        
+                    end
+
+                    closestitem = v
+                    closestdistance = distancebetweenmeandpart
+                end
             end
-         end
-      end
+        end
     end
-    return nil
-end 
+
+    return closestitem
+end
+
 
 
 
@@ -1065,21 +1092,25 @@ function autofarmoreslolts()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
     local equippedtoolitemdatalol = getequippeditemdatafrominventoryts()
  
-    if equippedtoolitemdatalol  then 
-        dowehavepickaxeequippedts = true   
-    end 
-
-    if dowehavepickaxeequippedts == true then 
-    equippedtoolmodellolts = equippedtoolitemdatalol["1"]
-    equippedtoolidlolts = equippedtoolitemdatalol["3"]
-    equippedtoolnamelolts = equippedtoolitemdatalol["2"]
-    end 
-
-
-    if equippedtoolnamelolts~="Pickaxe" then 
+    if not equippedtoolitemdatalol  then 
         return 
     end 
 
+
+    equippedtoolmodellolts = equippedtoolitemdatalol["1"]
+    equippedtoolidlolts = equippedtoolitemdatalol["3"]
+    equippedtoolnamelolts = equippedtoolitemdatalol["2"]
+
+
+    if not orepickaxetypeslolts[equippedtoolnamelolts] then
+        return
+    end
+
+    local ourpickaxedataloltsa = orepickaxetypeslolts[equippedtoolnamelolts]
+
+
+    dowehavepickaxeequippedts = true 
+    
      if dowehavepickaxeequippedts == true then 
             safeteleport(false,CFrame.new(4006, 50, 990)) --// teleport to western  cave 
 
@@ -1092,11 +1123,33 @@ function autofarmoreslolts()
                         break 
                     end 
 
-                    local itemtominelol = findclosestitemnearuslolts(noobworkspace.StaticProps.Resources,oretoautofarmvalts,650,true)
+                    local itemtominelol = nil 
+
+                    itemtominelol = findclosestitemnearuslolts(noobworkspace.StaticProps.Resources,oretoautofarmvalts,650,true)
 
                     if itemtominelol == nil then 
                        itemtominelol = findclosestitemnearuslolts(noobworkspace.TargetFilter.Resources,oretoautofarmvalts,650,true)
                     end 
+
+                    --// check for backup autofarm ores 
+                    if itemtominelol == nil then 
+                        for i,v in pairs(backuporestoautofarmts) do 
+                            itemtominelol = findclosestitemnearuslolts(noobworkspace.StaticProps.Resources,v.Name,650,true)
+                            if itemtominelol then 
+                                break 
+                            end 
+                        end 
+                    end 
+
+                    if itemtominelol == nil then 
+                        for i,v in pairs(backuporestoautofarmts) do 
+                            itemtominelol = findclosestitemnearuslolts(noobworkspace.TargetFilter.Resources,v.Name,650,true)
+                            if itemtominelol then 
+                                break 
+                            end 
+                        end 
+                    end 
+
 
                     if itemtominelol then 
                         safeteleport(false,itemtominelol.PrimaryPart.CFrame+Vector3.new(0,5.450,0))
@@ -1112,7 +1165,7 @@ function autofarmoreslolts()
                         invokeserverlolts(noobreplicatedstorage.Interacting,"UpdateStance","Default")
 
                         invokeserverlolts(equippedtoolmodellolts,"BeginActionDelay","UseTool")
-                        task.wait(0.750)
+                        task.wait(ourpickaxedataloltsa.SwingDelaylol)
                         invokeserverlolts(equippedtoolmodellolts,"UseTool",itemtominelol)
                         invokeserverlolts(equippedtoolmodellolts,"EndActionDelay","UseTool")
 
