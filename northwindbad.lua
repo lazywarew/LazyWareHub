@@ -1,3 +1,5 @@
+--// hi lol
+
 if isstscrptloaded then
     return
 end
@@ -847,7 +849,7 @@ function sendtoxicmessagets(playername)
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut."},
         [16] = {msg = "Lazyware > everything else"},
         [17] = {msg = "Captinwheeler deserted."},
-        [18] = {msg = "lazyware - 5XT54D98Jc"},
+        [18] = {msg = "lazyware - UVsD8V5J42"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
