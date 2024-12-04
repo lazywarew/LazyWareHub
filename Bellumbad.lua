@@ -1,4 +1,20 @@
+getgenv().TSSettings = {
+	key = "dogsarecute", --//  i removed key system btw so this is useless
+
+	--// UI SETTINGS
+	Style = 1,
+	SizeX = 500,
+	SizeY = 350,
+	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
+	MainFrame = Color3.fromRGB(0, 0, 0),
+}
+
+function guiprotectionfunctionts(gui)
+gui.Parent = game.CoreGui
+end
+
 --// Storken1 says hello :) discord.gg/xaFyk6vBBb
+--// burabura says hello :) discord.gg/xaFyk6vBBb
 
 if isstscrptloaded then
     return
@@ -1081,7 +1097,7 @@ function safeteleport(autotptosafezone,newposlol)
         --// time the teleport perfectly
 
         for i = 1,5 do 
-        mycharacterroot.CFrame = newposlol
+       --// mycharacterroot.CFrame = newposlol
         end 
     end
 end
