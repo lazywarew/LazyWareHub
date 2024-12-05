@@ -1,21 +1,3 @@
-getgenv().TSSettings = {
-	key = "dogsarecute", --//  i removed key system btw so this is useless
-
-	--// UI SETTINGS
-	Style = 1,
-	SizeX = 500,
-	SizeY = 350,
-	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
-	MainFrame = Color3.fromRGB(0, 0, 0),
-}
-
-function guiprotectionfunctionts(gui)
-gui.Parent = game.CoreGui
-end
-
---// Storken1 says hello :) discord.gg/xaFyk6vBBb
---// burabura says hello :) discord.gg/xaFyk6vBBb
-
 if isstscrptloaded then
     return
 end
@@ -857,7 +839,7 @@ function sendtoxicmessagets(playername)
         [11] = {msg = "130k robux well spent huh Ryez?"},
         [12] = {msg = "Play Northwind"},
         [13] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
-        [14] = {msg = "Lazyware - xaFyk6vBBb"}
+        [14] = {msg = "Lazyware - WcYaXvj5GB"}
     }    
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
@@ -1239,7 +1221,7 @@ task.wait(2)
 
 
 local MainTab = Material.Load({
-    Title = "Bellum imperii - [discord.gg/CD7NN3eMwM]",
+    Title = "Bellum imperii - [discord.gg/WcYaXvj5GB]",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
