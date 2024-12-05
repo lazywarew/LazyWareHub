@@ -1,4 +1,17 @@
---// hi lol
+getgenv().TSSettings = {
+	key = "dogsarecute", --//  i removed key system btw so this is useless
+
+	--// UI SETTINGS
+	Style = 1,
+	SizeX = 500,
+	SizeY = 350,
+	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
+	MainFrame = Color3.fromRGB(0, 0, 0),
+}
+
+function guiprotectionfunctionts(gui)
+gui.Parent = game.CoreGui
+end
 
 if isstscrptloaded then
     return
@@ -849,7 +862,7 @@ function sendtoxicmessagets(playername)
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut."},
         [16] = {msg = "Lazyware > everything else"},
         [17] = {msg = "Captinwheeler deserted."},
-        [18] = {msg = "lazyware - UVsD8V5J42"},
+        [18] = {msg = "lazyware - WcYaXvj5GB"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
@@ -1403,7 +1416,7 @@ task.wait(2)
 
 
 local MainTab = Material.Load({
-    Title = "Northwind  - [discord.gg/CD7NN3eMwM]",
+    Title = "Northwind  - [discord.gg/WcYaXvj5GB]",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
