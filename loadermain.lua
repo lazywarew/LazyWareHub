@@ -1,4 +1,18 @@
-local games = {
+local playerservicets = game:GetService("Players")
+local localplayerlolts = playerservicets.LocalPlayer
+
+local selectedgamescriptdatats = nil 
+
+local queueteleportts = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+
+localplayerlolts.OnTeleport:Connect(function(State)
+	if queueteleportts and selectedgamescriptdatats then
+	queueteleportts("loadstring(game:HttpGet(\"" .. selectedgamescriptdatats.gamescript .. "\"))()")
+	end
+end)
+
+
+local gamests = {
     ["Northwind"] = {
         gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/northwindbad.lua",
         gamename = "Northwind",
@@ -380,7 +394,7 @@ local games = {
     
     updatescrollingframe()
     
-    for _,v in pairs(games) do 
+    for i,v in pairs(gamests) do 
     local newgame = Bloxburg:Clone()
     newgame.Parent = ButtonFrame
     newgame.Name = v.gamename
@@ -396,6 +410,7 @@ local games = {
     
     local gameinfots = games[newgame.Name]
     loadstring(game:HttpGet(gameinfots.gamescript))()
+    SelectedGameScriptUrl = gameinfots
     end
     end)
     end
