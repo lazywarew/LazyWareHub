@@ -1710,9 +1710,7 @@ function setstaminalolts()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
     local myclientplayerentitymaxstaminats = myclentplayerentityaval:GetMaxStamina()
 
-    if myclentplayerentityaval.Stamina >= myclientplayerentitymaxstaminats - 5 then
     myclentplayerentityaval.Stamina = myclientplayerentitymaxstaminats
-    end 
 end 
 
 
