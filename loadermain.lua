@@ -1,5 +1,5 @@
 local playerservicets = game:GetService("Players")
-local localplayerlolts = playerservicets.LocalPlayer
+local localplayerlolts = playerservicets.LocalPlayer 
 
 local selectedgamescriptdatats = nil 
 
