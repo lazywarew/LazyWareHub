@@ -1,5 +1,4 @@
 
-
 if isstscrptloaded then 
     return 
 end 
@@ -118,6 +117,8 @@ task.wait(1)
 
 changestatus("checking whitelist")
 
+
+
 task.wait(1)
 iswhitelisted = true
 changestatus("loading api")
@@ -154,14 +155,12 @@ local function promptdiscordinvite()
     end
 
 --// silent aim related stuff
---// silent aim related stuff
+local sharedgunengineframework = nil 
 local silentaimval = false 
 local silentaimhitpartts  = "head"
 local mystupidteamts  = nil 
 local previoustarget = nil
 local closestskidtous = nil 
-local silentaimchosenhitpart = nil 
-local silentaimcmycharacterroot = nil 
 
 local silentaimhitparts = {"head","torso"}
 local defaultfovsize = 165
@@ -180,7 +179,7 @@ local function sendtoxicmessage(playername)
         [3] = {msg = "lazyware on top <3"},
     }
  
-    local chosentoxicmessage = toxicwords[math.random(1,#toxicwords)]
+    local chosentoxicmessage = autotoxicwordsts[math.random(1,#autotoxicwordsts)]
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
     local randomtoxicmsgdata = autotoxicwordsts[randomtoxicmsgindex]
@@ -196,6 +195,8 @@ local RunService = game:GetService("RunService")
 local TracerColor = Color3.fromRGB(255,255,255)
 local TracerLines = {}
  
+
+
 
 local function isPlayerOnSameTeam(playername)
     local myplayerteam =  me:GetAttribute("Team")
@@ -363,6 +364,23 @@ if canweusedebuglibraryts == false then
 end
 
 
+local funnyraycastfuncindexloltsa = 0
+
+for i,v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"Raycast") and typeof(v.Raycast) == "function" then
+        funnyraycastfuncindexloltsa = funnyraycastfuncindexloltsa+1
+
+        if funnyraycastfuncindexloltsa == 1 then 
+        sharedgunengineframework = v
+        end 
+end
+end
+
+if sharedgunengineframework == nil then 
+    me:Kick("unable to load sharedgunengineframework")
+    return 
+end
+
 task.wait(2)
     
 
@@ -441,47 +459,31 @@ local function getclosestplrtocirclets(radius)
 
 
 
- 
-  local oldnamecallts
-    
- oldnamecallts = hookmetamethod(game, "__namecall", newcclosure(function(self,...)
- local method = getnamecallmethod();
- if silentaimval == true and method == "Raycast"  and not checkcaller()   then
- 
- local callingscriptlol = getcallingscript(self).Name
- if tostring(callingscriptlol)=="ControlModule" then 
- return oldnamecallts(self,...)
- end 
- 
- local args = {...}
- 
-if args[3] == nil or args[2] == nil then 
-    return oldnamecallts(self, ...)
- end 
- 
- local raycastparms = args[3]
- local raycastinstances = raycastparms["FilterDescendantsInstances"]
- 
- if raycastinstances[1]  then
- local stupidraypos = args[1]
- 
+ local oldraycastts = sharedgunengineframework.Raycast
+ sharedgunengineframework.Raycast = function(...)
+     if silentaimval == true then
+         local closestskidtous  = nil 
+            
+         if fovcirclets.Visible == true and fovcirclets.Radius>0 then 
+             closestskidtous = getclosestplrtocirclets(fovcirclets.Radius) 
+         else
+             closestskidtous = getclosestplrtocirclets(defaultfovsize) 
+         end
 
- if closestskidtous then
- if silentaimchosenhitpart and silentaimcmycharacterroot then
- local distancebetweenmeandclosestskid = (silentaimcmycharacterroot.Position-silentaimchosenhitpart.Position).Magnitude
- local newstupiddirection =  (silentaimchosenhitpart.Position-stupidraypos).Unit*(silentaimchosenhitpart.Position-stupidraypos).Magnitude
- previoustarget = closestskidtous
- args[2] = newstupiddirection
- return oldnamecallts(self,unpack(args))
- end
- end
- end
- return oldnamecallts(self,...)
- end
- return oldnamecallts(self,...)
- end))
- 
 
+         if closestskidtous and closestskidtous.Character and me.Character and me.Character.PrimaryPart then
+             previoustarget = closestskidtous
+             local silentaimchosenhitpart = choosehitpart(silentaimhitpartts,closestskidtous.Character)
+             local fakeRaycastParams = RaycastParams.new()
+             fakeRaycastParams.FilterType = Enum.RaycastFilterType.Whitelist
+             fakeRaycastParams.FilterDescendantsInstances = {silentaimchosenhitpart}
+             local fakeRaycast = noobworkspace:Raycast(me.Character.PrimaryPart.Position, (silentaimchosenhitpart.Position - me.Character.PrimaryPart.Position), fakeRaycastParams)
+             return fakeRaycast
+         end
+     end
+     return oldraycastts(...)
+ end
+ 
 
  
 task.wait(1)
@@ -498,6 +500,13 @@ local misctab = maintab:Tab('Misc')
 local silentaimtab = maintab:Tab('Silent aim')
 local espTab = maintab:Tab('Esp')
 local discordservertab = maintab:Tab('Discord server')
+
+
+misctab:Button('inf yield admin', function() 
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end)
+end)
 
 
 espTab:Toggle('Player esp',function(bool) 
@@ -574,24 +583,3 @@ end)
 misctab:Show('Misc')
 
 
-while task.wait() do 
- if silentaimval == true then 
-
-        if me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then
-      
-        local myroot = me.Character:FindFirstChild("HumanoidRootPart")
-        local myhumanoid = me.Character:FindFirstChild("Humanoid")
-
-        if fovcirclets.Visible == true and fovcirclets.Radius>0 then 
-           closestskidtous = getclosestplrtocirclets(fovcirclets.Radius) 
-       else
-           closestskidtous = getclosestplrtocirclets(defaultfovsize) 
-       end
-
-       if closestskidtous then 
-        silentaimcmycharacterroot = myroot
-       silentaimchosenhitpart = choosehitpart(silentaimhitpartts,closestskidtous.Character)
-       end
-    end
-    end
-end
