@@ -1,5 +1,4 @@
 
-
 if isstscrptloaded then
     return
 end
@@ -408,6 +407,7 @@ local extraspeedandjumppowervalts = false
 
 --// interface stuff
 local interfaceguisfolder = nil
+local playerlootingguits = nil
 
 --// auto loot stuff
 local closestlootplayerts = nil
@@ -506,6 +506,14 @@ end
  if noobreplicatedstorage:FindFirstChild("Interacting") then
     interactionremotevarts = noobreplicatedstorage:FindFirstChild("Interacting")
  end
+
+ if me.PlayerGui:FindFirstChild("InterfaceGuis") then
+    interfaceguisfolder = me.PlayerGui:FindFirstChild("InterfaceGuis")
+    if interfaceguisfolder:FindFirstChild("PlayerLooting") then
+        playerlootingguits = interfaceguisfolder.PlayerLooting
+    end
+ end 
+
 
  
 
@@ -858,7 +866,15 @@ function sendtoxicmessagets(playername)
     invokeserverlolts(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
 
-function findandlootskidts()
+function canitembelootedts(itemid)
+    --// ik theres function named "canbelooted" or something but i wanted to make this because its better
+    if playerlootingguits.Main.Items.ScrollingContent:FindFirstChild(itemid) then 
+        return true 
+    end
+    return false 
+end 
+
+ function findandlootskidts()
     local didwelootedanythinglolts = false 
 
     for i, v in pairs(plrservicets:GetPlayers()) do
@@ -881,16 +897,29 @@ function findandlootskidts()
                 break 
             end 
 
+            local distancebetweenmeandclosestlootplayertsa =  (mychar.HumanoidRootPart.Position - closestlootplayerts.Character.HumanoidRootPart.Position).Magnitude
+
+            if distancebetweenmeandclosestlootplayertsa>=autolootdistancets then 
+                break 
+            end 
+
             local itemtolootidlolts = v.Id or i
 
-            if autolootfilterts == true then 
+        if autolootfilterts == true then 
             if not blacklistedautolootitemsts[v.Name] then 
-                invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
-            didwelootedanythinglolts = true 
-            end 
-        elseif autolootfilterts == false then 
+            local canitembelootedstatelolts = canitembelootedts(itemtolootidlolts)
+            if canitembelootedstatelolts == true then 
             invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
             didwelootedanythinglolts = true 
+            end 
+        end 
+
+        elseif autolootfilterts == false then 
+            local canitembelootedstatelolts = canitembelootedts(itemtolootidlolts)
+            if canitembelootedstatelolts == true then 
+            invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
+            didwelootedanythinglolts = true 
+            end 
           end
         end 
 
@@ -904,8 +933,6 @@ function findandlootskidts()
     end 
   end
 end 
-
-
 
 function findandteleportclosestskidundermapts()
     for i, v in pairs(plrservicets:GetPlayers()) do
