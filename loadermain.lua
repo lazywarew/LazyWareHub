@@ -1,16 +1,6 @@
 local playerservicets = game:GetService("Players")
 local localplayerlolts = playerservicets.LocalPlayer 
 
-local selectedgamescriptdatats = nil 
-
-local queueteleportts = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
-
-localplayerlolts.OnTeleport:Connect(function(State)
-	if queueteleportts and selectedgamescriptdatats then
-	queueteleportts("loadstring(game:HttpGet(\"" .. selectedgamescriptdatats.gamescript .. "\"))()")
-	end
-end)
-
 
 local gamests = {
     ["Northwind"] = {
@@ -406,7 +396,6 @@ local gamests = {
     if gamests[newgame.Name] then    
     local gameinfots = gamests[newgame.Name]
     loadstring(game:HttpGet(gameinfots.gamescript))()
-    selectedgamescriptdatats = gameinfots
     thing:Remove()
     end
     end)
