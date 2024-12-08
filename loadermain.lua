@@ -392,8 +392,6 @@ local gamests = {
     end 
     
     
-    updatescrollingframe()
-    
     for i,v in pairs(gamests) do 
     local newgame = Bloxburg:Clone()
     newgame.Parent = ButtonFrame
@@ -414,3 +412,6 @@ local gamests = {
     end
     end)
     end
+
+    updatescrollingframe()
+
