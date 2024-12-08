@@ -1,4 +1,5 @@
 
+
 if isstscrptloaded then
     return
 end
@@ -853,10 +854,6 @@ function sendtoxicmessagets(playername)
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
     local randomtoxicmsgdata = autotoxicwordsts[randomtoxicmsgindex]
-
-    if randomtoxicmsgdata == nil then 
-        return 
-    end 
 
     invokeserverlolts(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
