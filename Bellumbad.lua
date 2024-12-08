@@ -1,3 +1,4 @@
+
 if isstscrptloaded then
     return
 end
@@ -835,19 +836,15 @@ function sendtoxicmessagets(playername)
         [5] = {msg = "No anticheat???"}, 
         [6] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀"},
         [7] = {msg = "Wow this is a mess 🤣"},
-        [9] = {msg = "I don't think the devs know that they can automate bans."},
-        [11] = {msg = "130k robux well spent huh Ryez?"},
-        [12] = {msg = "Play Northwind"},
-        [13] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
-        [18] = {msg = "lazyware - WcYaXvj5GB"},
+        [8] = {msg = "I don't think the devs know that they can automate bans."},
+        [9] = {msg = "130k robux well spent huh Ryez?"},
+        [10] = {msg = "Play Northwind"},
+        [11] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
+        [12] = {msg = "lazyware - WcYaXvj5GB"},
     }    
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
     local randomtoxicmsgdata = autotoxicwordsts[randomtoxicmsgindex]
-
-    if randomtoxicmsgdata == nil then 
-        return 
-    end 
 
     invokeserverlolts(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
