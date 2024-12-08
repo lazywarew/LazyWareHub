@@ -1,4 +1,6 @@
 
+
+
 if isstscrptloaded then
     return
 end
@@ -232,7 +234,6 @@ local function UpdateTracerLines()
 
 
                 if Visible == true and  playerespval == true then
-
                     TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
                     TracerLine.Color = Color3.fromRGB(75, 95, 240)
                     TracerLine.To = To
@@ -411,6 +412,7 @@ local interfaceguisfolder = nil
 --// auto loot stuff
 local closestlootplayerts = nil
 local autolootdistancets = 10
+local playerlootingguits = nil
 local autolootts = false
 local autolootfilterts = false 
 
@@ -488,14 +490,16 @@ if defineventsfolder and defineventsfolder:FindFirstChild("InstanceRequestFuncti
 end
 
 
-
-
-
-
-
  if noobreplicatedstorage:FindFirstChild("Interacting") then
     interactionremotevarts = noobreplicatedstorage:FindFirstChild("Interacting")
  end
+
+ if me.PlayerGui:FindFirstChild("InterfaceGuis") then
+    interfaceguisfolder = me.PlayerGui:FindFirstChild("InterfaceGuis")
+    if interfaceguisfolder:FindFirstChild("PlayerLooting") then
+        playerlootingguits = interfaceguisfolder.PlayerLooting
+    end
+ end 
 
  
 for i,v in pairs(getgc(true)) do
@@ -849,6 +853,14 @@ function sendtoxicmessagets(playername)
     invokeserverlolts(noobreplicatedstorage.Interacting,"SendChat",randomtoxicmsgdata.msg,false)
 end
 
+function canitembelootedts(itemid)
+    --// ik theres function named "canbelooted" or something but i wanted to make this because its better
+    if playerlootingguits.Main.Items.ScrollingContent:FindFirstChild(itemid) then 
+        return true 
+    end
+    return false 
+end 
+
  function findandlootskidts()
     local didwelootedanythinglolts = false 
 
@@ -872,16 +884,29 @@ end
                 break 
             end 
 
+            local distancebetweenmeandclosestlootplayertsa =  (mychar.HumanoidRootPart.Position - closestlootplayerts.Character.HumanoidRootPart.Position).Magnitude
+
+            if distancebetweenmeandclosestlootplayertsa>=autolootdistancets then 
+                break 
+            end 
+
             local itemtolootidlolts = v.Id or i
 
-            if autolootfilterts == true then 
+        if autolootfilterts == true then 
             if not blacklistedautolootitemsts[v.Name] then 
-                invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
-            didwelootedanythinglolts = true 
-            end 
-        elseif autolootfilterts == false then 
+            local canitembelootedstatelolts = canitembelootedts(itemtolootidlolts)
+            if canitembelootedstatelolts == true then 
             invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
             didwelootedanythinglolts = true 
+            end 
+        end 
+
+        elseif autolootfilterts == false then 
+            local canitembelootedstatelolts = canitembelootedts(itemtolootidlolts)
+            if canitembelootedstatelolts == true then 
+            invokeserverlolts(closestlootplayerts,"LootItem",itemtolootidlolts)
+            didwelootedanythinglolts = true 
+            end 
           end
         end 
 
