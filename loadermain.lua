@@ -393,10 +393,10 @@ local gamests = {
     updatescrollingframe()
     
     newgame.Activated:Connect(function()
-    if gamests[newgame.Name] then    
+    if gamests[newgame.Name] then  
+    thing:Remove()
     local gameinfots = gamests[newgame.Name]
     loadstring(game:HttpGet(gameinfots.gamescript))()
-    thing:Remove()
     end
     end)
     end
