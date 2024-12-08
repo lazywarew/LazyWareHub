@@ -410,7 +410,7 @@ local gamests = {
     
     local gameinfots = games[newgame.Name]
     loadstring(game:HttpGet(gameinfots.gamescript))()
-    SelectedGameScriptUrl = gameinfots
+    selectedgamescriptdatats = gameinfots
     end
     end)
     end
