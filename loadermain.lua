@@ -403,12 +403,11 @@ local gamests = {
     updatescrollingframe()
     
     newgame.Activated:Connect(function()
-    if games[newgame.Name] then
-    thing:Remove()
-    
+    if games[newgame.Name] then    
     local gameinfots = games[newgame.Name]
     loadstring(game:HttpGet(gameinfots.gamescript))()
     selectedgamescriptdatats = gameinfots
+    thing:Remove()
     end
     end)
     end
