@@ -169,17 +169,19 @@ local autotoxicval = false
 local defaultchatsystemevents = noobreplicatedstorage:FindFirstChild("DefaultChatSystemChatEvents")
 local chatremote = defaultchatsystemevents:FindFirstChild("SayMessageRequest")
 
-local function sendtoxicmessage()
-    local toxicwords = {
-        "lazyware on top " .. utf8.char(0x0001F451), --// crown
-        "jeeper creeper sends hes regards " .. utf8.char(0x00002620), --// double skull
-        "L " .. previoustarget.Name .. " " .. utf8.char(0x0001F971), --// yawn
-        "too ez " .. " " .. utf8.char(0x0001F971), --// yawn
-        "get rekt " .. previoustarget.Name .. " " .. utf8.char(0x0001F971) --// yawn
+local function sendtoxicmessage(playername)
+    local autotoxicwordsts = {
+        [1] = {msg = "lazyware - WcYaXvj5GB"},
+        [2] = {msg = "jeeper creeper sends hes regards "..playername},
+        [3] = {msg = "lazyware on top <3"},
     }
-
+ 
     local chosentoxicmessage = toxicwords[math.random(1,#toxicwords)]
-    chatremote:FireServer(chosentoxicmessage,"All")
+
+    local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
+    local randomtoxicmsgdata = autotoxicwordsts[randomtoxicmsgindex]
+    
+    chatremote:FireServer(randomtoxicmsgdata.msg,"All")
 end
 
 
@@ -332,7 +334,7 @@ me:GetAttributeChangedSignal("KillStreak"):Connect(function()
     if autotoxicval == true and previoustarget then
         task.wait() 
         if ournewkillstreakts > tonumber(0)  then
-            sendtoxicmessage()
+            sendtoxicmessage(previoustarget.Name)
         end
     end 
 end)
@@ -462,7 +464,7 @@ local function getclosestplrtocirclets(radius)
 
 
          if closestskidtous and closestskidtous.Character and me.Character and me.Character.PrimaryPart then
-             previoustarget = closestskidtous.character
+             previoustarget = closestskidtous
              local silentaimchosenhitpart = choosehitpart(silentaimhitpartts,closestskidtous.Character)
              local fakeRaycastParams = RaycastParams.new()
              fakeRaycastParams.FilterType = Enum.RaycastFilterType.Whitelist
