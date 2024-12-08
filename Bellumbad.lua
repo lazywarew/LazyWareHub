@@ -408,11 +408,11 @@ local extraspeedandjumppowervalts = false
 
 --// interface stuff
 local interfaceguisfolder = nil
+local playerlootingguits = nil
 
 --// auto loot stuff
 local closestlootplayerts = nil
 local autolootdistancets = 10
-local playerlootingguits = nil
 local autolootts = false
 local autolootfilterts = false 
 
