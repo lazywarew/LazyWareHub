@@ -66,6 +66,18 @@ local gamests = {
     local formattedurl =  loadstring(game:HttpGet('https://raw.githubusercontent.com/lazywarew/Script/'..url))()
   end
 
+ function guiprotectionfunctionts(gui)
+    if get_hidden_gui or gethui then
+        local hiddenui = get_hidden_gui or gethui
+        gui.Parent = hiddenui()
+    elseif (syn and syn.protect_gui) then
+        syn.protect_gui(gui)
+        gui.Parent = game:GetService("CoreGui")
+    else
+        gui.Parent = game:GetService("CoreGui")
+    end
+end
+
     local function getcolorfromstatusts(statustype)
     if statustype == "working" then
     return Color3.fromRGB(0, 255, 0) --// green
