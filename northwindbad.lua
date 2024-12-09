@@ -1,5 +1,3 @@
-
-
 if isstscrptloaded then
     return
 end
@@ -26,8 +24,8 @@ return
 end
 
 if not guiprotectionfunctionts then 
-me:Kick("guiprotectionfunctionts is nil")
-return 
+    me:Kick("missing loader dependancies")
+    return 
 end
 
 
@@ -402,7 +400,7 @@ local autoblockts = false
 local autoblockdistancets  = 10
 
 --// extra speed related stuff
-local extraspeedvalts = 0.22
+local extraspeedvalts = 0.18
 local extraspeedandjumppowervalts = false
 
 
