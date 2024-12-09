@@ -77,6 +77,8 @@ local gamests = {
     end
     end
 
+    getgenv().guiprotectionfunctionts  = guiprotectionfunctionts
+
    function importmodulets(url)
     local formattedurl =  loadstring(game:HttpGet('https://raw.githubusercontent.com/lazywarew/Script/'..url))()
   end
