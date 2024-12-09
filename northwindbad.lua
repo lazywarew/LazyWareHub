@@ -640,10 +640,9 @@ task.wait(1.250)
 local oldnamecallts
 oldnamecallts = hookmetamethod(game, "__namecall", newcclosure(function(self,...)
    local method = getnamecallmethod();
-
+   local args = {...}
 
     if  method == "Raycast" and silentaimval == true  and not checkcaller()    then
-
 
     local callingscriptlol = getcallingscript(self)
     if tostring(callingscriptlol.Name)=="ControlModule" then 
