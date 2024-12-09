@@ -38,6 +38,11 @@ me:Kick("http function not supported")
 return 
 end
 
+if not guiprotectionfunctionts then 
+me:Kick("Missing guiprotectionfunctionts")
+return 
+end
+
 
 
 local tweenInfo = TweenInfo.new(
