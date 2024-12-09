@@ -5,19 +5,6 @@ end
 getgenv().isstscrptloaded = true
 
 
-function guiprotectionfunctionts(gui)
-    if get_hidden_gui or gethui then
-        local hiddenui = get_hidden_gui or gethui
-        gui.Parent = hiddenui()
-    elseif (syn and syn.protect_gui) then
-        syn.protect_gui(gui)
-        gui.Parent = game:GetService("CoreGui")
-    else
-        gui.Parent = game:GetService("CoreGui")
-    end
-end
-
-
 local plrservicets = game:GetService("Players")
 local me = plrservicets.LocalPlayer
 local mymousets = me:GetMouse()
