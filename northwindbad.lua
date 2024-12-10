@@ -429,6 +429,7 @@ local closestplayertodragts = nil
 local autodragdistancets = 10
  
 --// silent aim stuff
+local projectilerayhandlerlolts = nil 
 local closestskidtous = nil
 local silentaimval = false 
 local stupidhitpart  
@@ -535,7 +536,11 @@ end
 if type(v) == "table" and rawget(v,"GetPlayer") then
 sharedgetplayertable = v
 end
+if typeof(v) == "table" and rawget(v,"RayCastProjectile") then 
+    projectilerayhandlerlolts = v
+end 
 end
+
 task.wait(3)
 
 
@@ -626,9 +631,10 @@ oldindexts = hookmetamethod(game, "__index", newcclosure(function(...)
         if isplayerlolts == true then 
         return Vector3.new(hitboxexpandersizeval.X,hitboxexpandersizeval,hitboxexpandersizeval.Z)
         end 
+        return oldindexts(...)
      end
-     return defaulthitboxexpandersizeval
-   end
+     return oldindexts(...)
+    end
    
    return oldindexts(...)
 end))
@@ -637,51 +643,46 @@ end))
 
 task.wait(1.250)
 
+local OldProjectileRayCastts = projectilerayhandlerlolts.RayCastProjectile
+
+projectilerayhandlerlolts.RayCastProjectile = function(self,...)
+    local args = {...}
+    if silentaimval == true then
+        local closestskidtous  = nil 
+           
+        if fovcirclets.Visible == true and fovcirclets.Radius>0 then 
+            closestskidtous = getclosestplrtocirclets(fovcirclets.Radius) 
+        else
+            closestskidtous = getclosestplrtocirclets(defaultfovsize) 
+        end
+
+
+        if closestskidtous and closestskidtous.Character and me.Character and me.Character.PrimaryPart then
+            local stupidhitpart = choosehitpart(silentaimhitpartts,closestskidtous.Character)
+            if stupidhitpart then 
+                --//args[3] = bullet range,args[4] = bullet drop
+                local stupidraypos = args[1]
+                local newstupiddirection =  (stupidhitpart.Position-stupidraypos).Unit*(stupidhitpart.Position-stupidraypos).Magnitude
+                args[2] = newstupiddirection
+                return OldProjectileRayCastts(self,unpack(args))
+            end
+            return OldProjectileRayCastts(self,...)
+        end
+
+        return OldProjectileRayCastts(self,...)
+    end
+    return OldProjectileRayCastts(self,...)
+end
+
+--[[]
 local oldnamecallts
 oldnamecallts = hookmetamethod(game, "__namecall", newcclosure(function(self,...)
    local method = getnamecallmethod();
    local args = {...}
 
-    if  method == "Raycast" and silentaimval == true  and not checkcaller()    then
-
-    local callingscriptlol = getcallingscript(self)
-    if tostring(callingscriptlol.Name)=="ControlModule" then 
-    return oldnamecallts(self,...)
-    end 
-
-
-
-   if args[3] == nil  then 
-   return oldnamecallts(self,...)
-   end 
-
-   local raycastparms = args[3]
-   local raycastinstances = raycastparms["FilterDescendantsInstances"]
-
-if raycastinstances[1] and raycastinstances[2] == nil  and tostring(raycastinstances[1].Name) == "TargetFilter" and raycastinstances[4] == nil then
-    
-      if closestskidtous   then
-      if silentaimchosenhitpartts then
-      stupidhitpart = silentaimchosenhitpartts
-     local stupidraypos = args[1]
-     local newstupiddirection =  (stupidhitpart.Position-stupidraypos).Unit*(stupidhitpart.Position-stupidraypos).Magnitude
-      args[2] = newstupiddirection
-      
-        if stupidhitpart then
-         stupidhitpart = nil
-        end
-       return oldnamecallts(self,unpack(args))
-      end 
-      end 
-     end
-
-    elseif method == "InvokeServer" or method == "FireServer" and not checkcaller() then
-        --// for packet spoofing
-        local args = {...} 
-        return oldnamecallts(self,...)
-    end
-  return oldnamecallts(self,...)
+     return oldnamecallts(self,...)
 end))
+--]]
 
 task.wait(1.350)
 
@@ -2004,24 +2005,6 @@ while task.wait() do
 
      if extraspeedandjumppowervalts == true and me.Character and myhum then
         setwalkspeedlolts()
-    end
-    if silentaimval == true then 
-
-        if me.Character and me.Character:FindFirstChild("HumanoidRootPart") and me.Character:FindFirstChild("Humanoid") then
-      
-        local myroot = me.Character:FindFirstChild("HumanoidRootPart")
-        local myhumanoid = me.Character:FindFirstChild("Humanoid")
-
-        if fovcirclets.Visible == true and fovcirclets.Radius>0 then 
-           closestskidtous = getclosestplrtocirclets(fovcirclets.Radius) 
-       else
-           closestskidtous = getclosestplrtocirclets(defaultfovsize) 
-       end
-
-       if closestskidtous then 
-        silentaimchosenhitpartts = choosehitpart(silentaimhitpartts,closestskidtous.Character)
-       end
-    end
     end
     if autorespawnondeadlolts == true then 
         checkifdeadandrespawnts()
