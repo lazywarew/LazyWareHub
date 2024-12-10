@@ -857,6 +857,7 @@ function sendtoxicmessagets(playername)
         [16] = {msg = "Lazyware > everything else"},
         [17] = {msg = "Captinwheeler deserted."},
         [18] = {msg = "lazyware - WcYaXvj5GB"},
+        [19] = {msg = "Ryez angry? 😂🤣😂"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
