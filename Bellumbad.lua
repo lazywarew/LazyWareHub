@@ -842,7 +842,8 @@ function sendtoxicmessagets(playername)
         [10] = {msg = "Play Northwind"},
         [11] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
         [12] = {msg = "lazyware - WcYaXvj5GB"},
-    }    
+        [13] = {msg = "Ryez angry? 😂🤣😂"},
+    }   
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
     local randomtoxicmsgdata = autotoxicwordsts[randomtoxicmsgindex]
