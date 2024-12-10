@@ -629,7 +629,7 @@ oldindexts = hookmetamethod(game, "__index", newcclosure(function(...)
         end)
 
         if isplayerlolts == true then 
-        return Vector3.new(hitboxexpandersizeval.X,hitboxexpandersizeval,hitboxexpandersizeval.Z)
+        return Vector3.new(defaulthitboxexpandersizeval.X,defaulthitboxexpandersizeval.Y,defaulthitboxexpandersizeval.Z)
         end 
         return oldindexts(...)
      end
