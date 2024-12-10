@@ -3,20 +3,6 @@ local localplayerlolts = playerservicets.LocalPlayer
 
 
 local gamests = {
-    ["Northwind"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/northwindbad.lua",
-        gamename = "Northwind",
-        status = "working",
-        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4540286603&width=768&height=432&format=png",
-        gameid = 4540286603,
-    },
-	["Bellum Imperii"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/Bellumbad.lua",
-        gamename = "Bellum Imperii",
-        status = "working",
-        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=134819267834356&width=768&height=432&format=png",
-        gameid = 134819267834356,
-    },
       ["universal silent aim"] = {
         gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/universalsilentaim.lua",
         gamename = "universal silent aim",
