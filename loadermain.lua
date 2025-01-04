@@ -3,43 +3,57 @@ local localplayerlolts = playerservicets.LocalPlayer
 
 
 local gamests = {
+	["Northwind"] = {
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/northwindbad.lua",
+        gamename = "Northwind",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4540286603&width=768&height=432&format=png",
+        gameid = 4540286603,
+    },
+	["Bellum imperii"] = {
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/bellumbad.lua",
+        gamename = "Bellum imperii",
+        status = "working",
+        gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=134819267834356&width=768&height=432&format=png",
+        gameid = 134819267834356,
+    },
       ["universal silent aim"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/universalsilentaim.lua",
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/universalsilentaim.lua",
         gamename = "universal silent aim",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=7791106063&width=768&height=432&format=png",
         gameid = 7791106063,
     },
     ["aimblox"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/aimblox.lua",
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/aimblox.lua",
         gamename = "aimblox",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=6808416928&width=768&height=432&format=png",
         gameid = 6808416928,
     },
     ["rushpoint"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/rushpoint.lua",
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/rushpoint.lua",
         gamename = "rushpoint",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=5993942214&width=768&height=432&format=png",
         gameid = 5993942214,
     },
     ["weaponary"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/weaponary.lua",
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/weaponary.lua",
         gamename = "weaponary",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=3297964905&width=768&height=432&format=png",
         gameid = 3297964905,
     },
       ["booga booga"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/boogabooga/boogaloader.lua",
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/boogabooga/boogaloader.lua",
         gamename = "booga booga",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=11729688377&width=768&height=432&format=png",
         gameid = 11729688377,
     }, 
     ["CombatWarriors"] = {
-        gamescript = "https://raw.githubusercontent.com/lazywarew/Script/main/combatwarriors.lua",
+        gamescript = "https://raw.githubusercontent.com/lazywarew/LazyWareHub/main/combatwarriors.lua",
         gamename = "CombatWarriors",
         status = "working",
         gameimg = "https://www.roblox.com/asset-thumbnail/image?assetId=4282985734&width=768&height=432&format=png",
@@ -48,8 +62,8 @@ local gamests = {
 }
 
 
-   function importmodulets(url)
-    local formattedurl =  loadstring(game:HttpGet('https://raw.githubusercontent.com/lazywarew/Script/'..url))()
+  function importmodulets(url)
+    local formattedurl =  loadstring(game:HttpGet('https://raw.githubusercontent.com/lazywarew/LazyWareHub/'..url))()
   end
 
  function guiprotectionfunctionts(gui)
@@ -385,4 +399,3 @@ end
     end
 
     updatescrollingframe()
-
