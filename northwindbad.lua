@@ -1,5 +1,4 @@
 
-
 if isstscrptloaded then
     return
 end
@@ -380,6 +379,7 @@ local killauravalts = false
 local orepickaxetypeslolts = {
     ["Pickaxe"] = {SwingDelaylol=0.565},
     ["Superior pickaxe"] = {SwingDelaylol=0.565}
+    ["Apprentice pickaxe"] = {SwingDelaylol=0.565}
 }
 
 local oreautofarmvalts = false 
