@@ -1587,7 +1587,7 @@ silentaimtab.Slider({
 	end,
 	Min = 0,
 	Max = 765,
-	Def = fovcirclets.Radius
+	Def = fovcirclets.Radius or 165
 })
 
 silentaimtab.Slider({
@@ -1599,7 +1599,7 @@ silentaimtab.Slider({
 	end,
 	Min = 1,
 	Max = 50,
-	Def = fovcirclets.Thickness
+	Def = fovcirclets.Thickness or 1
 })
 
 
