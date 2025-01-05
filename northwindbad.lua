@@ -378,7 +378,7 @@ local killauravalts = false
 --// ore autofarm stuff
 local orepickaxetypeslolts = {
     ["Pickaxe"] = {SwingDelaylol=0.565},
-    ["Superior pickaxe"] = {SwingDelaylol=0.565}
+    ["Superior pickaxe"] = {SwingDelaylol=0.565},
     ["Apprentice pickaxe"] = {SwingDelaylol=0.565}
 }
 
