@@ -1,3 +1,19 @@
+getgenv().TSSettings = {
+	key = "dogsarecute", --//  i removed key system btw so this is useless
+
+	--// UI SETTINGS
+	Style = 1,
+	SizeX = 500,
+	SizeY = 350,
+	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
+	MainFrame = Color3.fromRGB(0, 0, 0),
+}
+
+function guiprotectionfunctionts(gui)
+gui.Parent = game.CoreGui
+end
+
+
 if isstscrptloaded then
     return
 end
@@ -1394,7 +1410,7 @@ silentaimtab.Slider({
 	end,
 	Min = 0,
 	Max = 765,
-	Def = fovcirclets.Radius
+	Def = fovcirclets.Radius or 165
 })
 
 silentaimtab.Slider({
@@ -1406,7 +1422,7 @@ silentaimtab.Slider({
 	end,
 	Min = 1,
 	Max = 50,
-	Def = fovcirclets.Thickness
+	Def = fovcirclets.Thickness or 1
 })
 
 
