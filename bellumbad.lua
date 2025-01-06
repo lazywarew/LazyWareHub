@@ -832,17 +832,17 @@ end
 
 function sendtoxicmessagets(playername)
     local autotoxicwordsts = {
-        [1] = {msg = "Tell Tyberius to stop devving"},
-        [2] = {msg = "OMG did someone just kill you?"},
-        [3] = {msg = "That was pretty easy, you should play Aimlabs."},
-        [4] = {msg = "Thank Ryez for this"},
-        [5] = {msg = "No anticheat???"}, 
-        [6] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀"},
+        [1] = {msg = "Tell Tyberius to stop devving - 5XT54D98Jc"},
+        [2] = {msg = "OMG did someone just kill you? - 5XT54D98Jc"},
+        [3] = {msg = "That was pretty easy, you should play Aimlabs. - 5XT54D98Jc"},
+        [4] = {msg = "Thank Ryez for this - 5XT54D98Jc"},
+        [5] = {msg = "No anticheat??? - 5XT54D98Jc"}, 
+        [6] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀 - 5XT54D98Jc"},
         [7] = {msg = "Wow this is a mess 🤣"},
-        [8] = {msg = "I don't think the devs know that they can automate bans."},
-        [9] = {msg = "130k robux well spent huh Ryez?"},
-        [10] = {msg = "Play Northwind"},
-        [11] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3"},
+        [8] = {msg = "I don't think the devs know that they can automate bans. - 5XT54D98Jc"},
+        [9] = {msg = "130k robux well spent huh Ryez? - 5XT54D98Jc"},
+        [10] = {msg = "Play Northwind - 5XT54D98Jc"},
+        [11] = {msg = "Thanks for the loot " .. playername .. " (dm storken1 to get your loot back) <3 - 5XT54D98Jc"},
         [12] = {msg = "lazyware - WcYaXvj5GB"},
     }    
 
