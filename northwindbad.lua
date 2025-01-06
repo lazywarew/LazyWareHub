@@ -1,4 +1,5 @@
 
+
 if isstscrptloaded then
     return
 end
@@ -142,11 +143,9 @@ local stupidhttpservice = game:GetService("HttpService")
 local infstaminalol = {}
 local wrapperstuffcraplol
 local maxbagspace = {}
-local swingdelay = {}
-local spread = {}
-local chargedelaybow = {}
 
 local sharedgetplayertable  = nil
+local sharedweapondatalolts = nil 
 
 --// esp and script stuff
 local canweusedrawinglibraryts = false 
@@ -370,7 +369,7 @@ local rndmnewfuncts = Random.new()
 local currentkillauratargetts = nil
 local killaurameleechargedlolts = false 
 local killaurameleefullychargedlolts = false 
-local killauradistancets = 13
+local killauradistancets = 12
 local killauravalts = false
 
 --// autofarm related stuff
@@ -423,7 +422,9 @@ local blacklistedautolootitemsts = {
     ["Bandage"] = {},
     ["Knife"] = {},
     ["Worm"] = {},
-    ["Flintlock ball"] = {}
+    ["Lead ball"] = {},
+    ["Bedroll"] = {},
+    ["Tent"] = {}
 }
 
 --// auto drag stuff
@@ -529,18 +530,15 @@ end
 if type(v) == "table" and rawget(v,"MaxBaseInventorySpace") then
 table.insert(maxbagspace,v)
 end
-if type(v) == "table" and rawget(v,"SwingDelay") then
-table.insert(swingdelay,v)
-end
-if type(v) == "table" and rawget(v,"Spread") then
-table.insert(spread,v)
-end
 if type(v) == "table" and rawget(v,"GetPlayer") then
 sharedgetplayertable = v
 end
 if typeof(v) == "table" and rawget(v,"RayCastProjectile") then 
     projectilerayhandlerlolts = v
 end 
+if typeof(v) == "table" and rawget(v,"Cutlass") and rawget(v,"Boarding axe") and rawget(v,"Knife") and typeof(v["Cutlass"]) == "table"  and typeof(v["Boarding axe"]) == "table" then 
+    sharedweapondatalolts = v
+end
 end
 
 task.wait(3)
@@ -694,7 +692,9 @@ task.wait(1.350)
 
 function invokeserverlolts(...)
     local packetstosendtoserverts = { ... }
+    task.spawn(function()
     networkmanagerremotefunc:InvokeServer(unpack(packetstosendtoserverts))
+    end)
 end 
 
 
@@ -731,6 +731,24 @@ local randomdelaytoreturntsa = rndmnewfuncts:NextNumber(0, value)+funnymultiplie
 return randomdelaytoreturntsa
 end
  
+
+function getitemdatalolts(itemname) 
+    if  sharedweapondatalolts == nil then 
+        return nil 
+    end 
+
+    if not sharedweapondatalolts[itemname] then 
+        return nil
+    end 
+
+    local itemdatafound = sharedweapondatalolts[itemname]
+
+    if not itemdatafound["Constants"] then 
+        return nil 
+    end 
+
+    return itemdatafound["Constants"]
+end 
 
 function getequippeditemdatafrominventoryts()
     local myclentplayerentityaval = sharedgetplayertable:GetPlayer()
@@ -991,32 +1009,24 @@ function findanddmgskidts()
     local equippedtoolnamelolts 
 
     equippedtoolmodellolts = equippedtoolitemdatalol["1"]
-    equippedtoolidlolts = equippedtoolitemdatalol["2"]
-    equippedtoolnamelolts = equippedtoolitemdatalol["3"]
+    equippedtoolidlolts = equippedtoolitemdatalol["3"]
+    equippedtoolnamelolts = equippedtoolitemdatalol["2"]
+
+
+    local equippeditemdatalolts = getitemdatalolts(equippedtoolnamelolts)
+    
+    if equippeditemdatalolts == nil then 
+        return 
+    end 
+
+    if not equippeditemdatalolts["ChargeDelay"] then 
+        return 
+    end 
 
     for i, v in pairs(plrservicets:GetPlayers()) do
         if v.Name~=me.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
             local maga = (mychar.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
-
-            if killaurameleechargedlolts == false then 
-                killaurameleechargedlolts = true 
-
-                local randomdirectionlolnums = math.random(1, 2)
-                local chosenrandomdirectionlolts 
-
-                if randomdirectionlolnums == 1 then 
-                    chosenrandomdirectionlolts = "Right" 
-                elseif randomdirectionlolnums == 2 then 
-                    chosenrandomdirectionlolts = "Left"
-                end 
-
-                invokeserverlolts(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
-                task.wait(0.165)
-                invokeserverlolts(equippedtoolmodellolts, "Charge")
-                task.wait()
-                killaurameleefullychargedlolts = true 
-            end 
-
+            
             if maga <= tonumber(killauradistancets) then
                 local wrappedplayerprofile = wrapperstuffcraplol:Wrap(v)
                 if wrappedplayerprofile.Health > 0 then 
@@ -1027,8 +1037,29 @@ function findanddmgskidts()
     end
 
     if currentkillauratargetts then 
+
+        if killaurameleechargedlolts == false then 
+            killaurameleechargedlolts = true 
+    
+            local randomdirectionlolnums = math.random(1, 2)
+            local chosenrandomdirectionlolts 
+    
+            if randomdirectionlolnums == 1 then 
+                chosenrandomdirectionlolts = "Right" 
+            elseif randomdirectionlolnums == 2 then 
+                chosenrandomdirectionlolts = "Left"
+            end 
+    
+            invokeserverlolts(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
+            invokeserverlolts(equippedtoolmodellolts, "Charge")
+            task.wait(equippeditemdatalolts.ChargeDelay*0.7)
+            killaurameleefullychargedlolts = true 
+        end 
+
+        
         if killaurameleefullychargedlolts == true then 
         invokeserverlolts(equippedtoolmodellolts, "BeginSwing")
+        task.wait(equippeditemdatalolts.SwingDelay*0.7)
         invokeserverlolts(equippedtoolmodellolts, "EndSwing", currentkillauratargetts)
         killaurameleechargedlolts = false 
         killaurameleefullychargedlolts = false 
@@ -1209,39 +1240,36 @@ end
 
 
 function setchargedelay(Value)
-for i,v in pairs(swingdelay) do
-if tonumber(v.ChargeDelay) then
+for i,v in pairs(sharedweapondatalolts) do
+if v.Constants and v.Constants["ChargeDelay"] then 
+rawset(v.Constants,"ChargeDelay",tonumber(Value))
+end
+end 
+end
 
-rawset(v,"ChargeDelay",tonumber(Value))
+
+function setswingdelay(Value)
+for i,v in pairs(sharedweapondatalolts) do
+if v.Constants and v.Constants["SwingDelay"] then 
+rawset(v.Constants,"SwingDelay",tonumber(Value))
 end
 end
 end
 
 function setspread(Value)
-for i,v in pairs(spread) do
-if tonumber(v.Spread) then
-rawset(v,"Spread",tonumber(Value))
-end
-end
-end
-
-
-
-function setswingdelay(Value)
-for i,v in pairs(swingdelay) do
-if tonumber(v.SwingDelay) then
-
-rawset(v,"SwingDelay",tonumber(Value))
+for i,v in pairs(sharedweapondatalolts) do
+if v.Constants and v.Constants["Spread"] then 
+rawset(v.Constants,"Spread",tonumber(Value))
 end
 end
 end
 
 function changerange(Value)
-for i,v in pairs(spread) do
-if tonumber(v.ProjectileMaxDistance) then
-rawset(v,"ProjectileMaxDistance",tonumber(Value))
+for i,v in pairs(sharedweapondatalolts) do
+if v.Constants and v.Constants["ProjectileMaxDistance"] then 
+rawset(v.Constants,"ProjectileMaxDistance",tonumber(Value))
 end
-end    
+end
 end
 
 
@@ -2012,7 +2040,7 @@ while task.wait() do
         checkifdeadandrespawnts()
     end
     if killauravalts == true then 
-        if currentkillauratargetts == nil  then 
+        if currentkillauratargetts == nil and killaurameleechargedlolts == false  then 
         task.spawn(function()
             findanddmgskidts()
         end)
