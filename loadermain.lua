@@ -1,3 +1,7 @@
+if isstscrptloaded  then 
+   return
+end
+
 local playerservicets = game:GetService("Players")
 local localplayerlolts = playerservicets.LocalPlayer 
 
