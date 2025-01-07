@@ -1067,14 +1067,14 @@ function findanddmgskidts()
     
             invokeserverlolts(equippedtoolmodellolts, "SetDirection", chosenrandomdirectionlolts)
             invokeserverlolts(equippedtoolmodellolts, "Charge")
-            task.wait(equippeditemdatalolts.ChargeDelay*0.7)
+            task.wait(equippeditemdatalolts.ChargeDelay*0.6)
             killaurameleefullychargedlolts = true 
         end 
 
         
         if killaurameleefullychargedlolts == true then 
         invokeserverlolts(equippedtoolmodellolts, "BeginSwing")
-        task.wait(equippeditemdatalolts.SwingDelay*0.7)
+        task.wait(equippeditemdatalolts.SwingDelay*0.6)
         invokeserverlolts(equippedtoolmodellolts, "EndSwing", currentkillauratargetts)
         killaurameleechargedlolts = false 
         killaurameleefullychargedlolts = false 
