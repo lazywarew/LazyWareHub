@@ -1,4 +1,5 @@
 
+
 if isstscrptloaded then
     return
 end
@@ -427,7 +428,7 @@ local blacklistedautolootitemsts = {
     ["Meat stew"] = {},
     ["Bread"] = {},
     ["Note"] = {},
-    ["Red apple"] = {}
+    ["Red apple"] = {},
     ["Poison"] = {},
     ["Flax leaf"] = {}
 }
