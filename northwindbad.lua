@@ -427,9 +427,16 @@ local blacklistedautolootitemsts = {
     ["Meat stew"] = {},
     ["Bread"] = {},
     ["Note"] = {},
+    ["Lock pick"] = {},
+    ["Fur bedroll"] = {},
+    ["Fish stew"] = {},
+    ["Bayonet"] = {},
+    ["Grenade"] = {},
+    ["Gun oil"] = {},
     ["Red apple"] = {},
     ["Poison"] = {},
     ["Flax leaf"] = {}
+
 }
 
 --// auto drag stuff
