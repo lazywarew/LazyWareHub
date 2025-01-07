@@ -1,3 +1,18 @@
+getgenv().TSSettings = {
+	key = "dogsarecute", --//  i removed key system btw so this is useless
+
+	--// UI SETTINGS
+	Style = 1,
+	SizeX = 500,
+	SizeY = 350,
+	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
+	MainFrame = Color3.fromRGB(0, 0, 0),
+}
+
+function guiprotectionfunctionts(gui)
+gui.Parent = game.CoreGui
+end
+
 
 
 if isstscrptloaded then
@@ -860,15 +875,15 @@ end
 function sendtoxicmessagets(playername)
     local autotoxicwordsts = {
         [1] = {msg = "Thanks for the loot "..playername.." <3 (dm storken to get your loot back <3) - 5XT54D98Jc"},
-        [2] = {msg = "Tell Tyberius to stop devving"},
+        [2] = {msg = "Tell Tyberius to stop devving - 5XT54D98Jc"},
         [3] = {msg = "Omg did someone just kill you? And now your getting looted aswell????? 🤣 - 5XT54D98Jc"},
         [4] = {msg = "Did you die that fast? You should probably play aimlabs for a little bit. - 5XT54D98Jc"},
         [5] = {msg = "If you have any spare pounds donate them to Storken please - 5XT54D98Jc"},
-        [6] = {msg = "No anticheat???"},
+        [6] = {msg = "No anticheat??? - 5XT54D98Jc"},
         [7] = {msg = "Captinwheeler, I've dug for ages and still not found you. 💀 - 5XT54D98Jc"},
         [8] = {msg = "Wow thats alot of items "..playername.." <3 Thank you - 5XT54D98Jc"},
         [9] = {msg = "Almost 2 months still no anticheat? - 5XT54D98Jc"},
-        [10] = {msg = "I think Peanut loves manual banning."},
+        [10] = {msg = "I think Peanut loves manual banning. - 5XT54D98Jc"},
         [11] = {msg = "You guys should tell ryez to keep his promises :) - 5XT54D98Jc"},
         [12] = {msg = "Banning people isn't very nice of you Ranger - 5XT54D98Jc "},
         [13] = {msg = "Tell Envymaestro to get more active and remove Ranger please🥰 - 5XT54D98Jc"},
