@@ -1,5 +1,4 @@
 
-
 if isstscrptloaded then
     return
 end
@@ -543,7 +542,9 @@ if typeof(v) == "table" and rawget(v,"RayCastProjectile") then
     projectilerayhandlerlolts = v
 end 
 if typeof(v) == "table" and rawget(v,"Cutlass") and rawget(v,"Boarding axe") and rawget(v,"Knife") and typeof(v["Cutlass"]) == "table"  and typeof(v["Boarding axe"]) == "table" then 
-    sharedweapondatalolts = v
+    if v["Cutlass"]["Constants"] then 
+      sharedweapondatalolts = v
+    end 
 end
 end
 
