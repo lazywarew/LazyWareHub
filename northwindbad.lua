@@ -1,4 +1,3 @@
-
 if isstscrptloaded then
     return
 end
@@ -160,6 +159,7 @@ local animalespval = false
 local chestesp = false
 local treasurechestespval = false 
 local playerremainespval = false
+local playerhouseespval = false 
 
 
 local function Get2DPosition(PartPosition) 
@@ -301,7 +301,7 @@ local function UpdateTracerLines()
     
             local To, Visible = Get2DPosition(tracerdata.TracerPart.Position)
 
-               if treasurechestespval == true then
+               if  Visible == true and treasurechestespval == true then
 
                    TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
                    TracerLine.Color = Color3.fromRGB(255, 215, 110)
@@ -325,14 +325,14 @@ local function UpdateTracerLines()
     
             local To, Visible = Get2DPosition(tracerdata.TracerPart.Position)
 
-               if Visible == true and  playerremainespval == true then
+               if Visible == true and  playerhouseespval == true then
 
                    TracerLine.From = Vector2.new(mycamts.ViewportSize.X / 2, mycamts.ViewportSize.Y /1)
-                   TracerLine.Color = Color3.fromRGB(85, 30, 255)
+                   TracerLine.Color = Color3.fromRGB(25, 165, 160)
                    TracerLine.To = To
                    TracerLine.Visible = true
 
-                   TracerLineText.Color = Color3.fromRGB(85, 30, 255)
+                   TracerLineText.Color = Color3.fromRGB(25, 165, 160)
                    TracerLineText.Position = Vector2.new(To.X,To.Y-65)
                    TracerLineText.Text = TracerLineTextText.."[ "..tostring(DistanceBetweenUsAndTarget).."]"
                    TracerLineText.Visible = true
@@ -348,8 +348,10 @@ local function UpdateTracerLines()
 end
 
 
-RunService.RenderStepped:Connect(function() 
+task.spawn(function()
+ RunService.RenderStepped:Connect(function() 
 	UpdateTracerLines()
+ end)
 end)
 
 --// stupid default stats
@@ -660,36 +662,42 @@ end))
 
 task.wait(1.250)
 
-local OldProjectileRayCastts = projectilerayhandlerlolts.RayCastProjectile
+local oldnamecallts
+oldnamecallts = hookmetamethod(game, "__namecall", newcclosure(function(self,...)
+   local method = getnamecallmethod();
+    if  method == "Raycast" and silentaimval == true  and not checkcaller()    then
 
-projectilerayhandlerlolts.RayCastProjectile = function(self,...)
-    local args = {...}
-    if silentaimval == true then
-        local closestskidtous  = nil 
-           
-        if fovcirclets.Visible == true and fovcirclets.Radius>0 then 
-            closestskidtous = getclosestplrtocirclets(fovcirclets.Radius) 
-        else
-            closestskidtous = getclosestplrtocirclets(defaultfovsize) 
+
+    local callingscriptlol = getcallingscript(self)
+    if tostring(callingscriptlol.Name)=="ControlModule" then 
+    return oldnamecallts(self,...)
+    end 
+
+
+   local args = {...}
+
+   if args[3] == nil  then 
+   return oldnamecallts(self,...)
+   end 
+
+   local raycastparms = args[3]
+   local raycastinstances = raycastparms["FilterDescendantsInstances"]
+
+if raycastinstances[1] and raycastinstances[2] == nil  and tostring(raycastinstances[1].Name) == "TargetFilter" and raycastinstances[4] == nil then
+      if closestskidtous   then
+     local stupidraypos = args[1]
+     local newstupiddirection =  (stupidhitpart.Position-stupidraypos).Unit*(stupidhitpart.Position-stupidraypos).Magnitude
+      args[2] = newstupiddirection
+      
+        if stupidhitpart then
+         stupidhitpart = nil
         end
-
-
-        if closestskidtous and closestskidtous.Character and me.Character and me.Character.PrimaryPart then
-            local stupidhitpart = choosehitpart(silentaimhitpartts,closestskidtous.Character)
-            if stupidhitpart then 
-                --//args[3] = bullet range,args[4] = bullet drop
-                local stupidraypos = args[1]
-                local newstupiddirection =  (stupidhitpart.Position-stupidraypos).Unit*(stupidhitpart.Position-stupidraypos).Magnitude
-                args[2] = newstupiddirection
-                return OldProjectileRayCastts(self,unpack(args))
-            end
-            return OldProjectileRayCastts(self,...)
-        end
-
-        return OldProjectileRayCastts(self,...)
+       return oldnamecallts(self,unpack(args))
+      end 
+    end 
     end
-    return OldProjectileRayCastts(self,...)
-end
+     return oldnamecallts(self,...)
+end))
 
 --[[]
 local oldnamecallts
@@ -958,16 +966,17 @@ end
             end 
           end
         end 
-
-        if autotoxicvalts == true then
-            if didwelootedanythinglolts == true then  
-            sendtoxicmessagets(closestlootplayerts.Name)
-            end 
-        end
-      end 
-      closestlootplayerts = nil
     end 
   end
+end
+
+if autotoxicvalts == true then
+    if didwelootedanythinglolts == true then  
+    sendtoxicmessagets(closestlootplayerts.Name)
+    end 
+end 
+
+closestlootplayerts = nil
 end 
 
 function findandteleportclosestskidundermapts()
@@ -1060,7 +1069,8 @@ function findanddmgskidts()
     
             local randomdirectionlolnums = math.random(1, 2)
             local chosenrandomdirectionlolts 
-    
+
+
             if randomdirectionlolnums == 1 then 
                 chosenrandomdirectionlolts = "Right" 
             elseif randomdirectionlolnums == 2 then 
@@ -1428,7 +1438,7 @@ me.CharacterAdded:Connect(function(newchar)
     end
     if treasurechestespval == true then 
     if string.len(obj.Name)>=19 and string.sub(obj.Name,0,19) == "Treasure hunt board" then 
-        DrawNewLine(obj,"Treasurechest","Carriable Treasure Chest")
+        DrawNewLine(obj.PrimaryPart,"Treasurechest","Carriable Treasure Chest")
     end
      end     
     end)
@@ -1449,9 +1459,9 @@ me.CharacterAdded:Connect(function(newchar)
 if noobworkspace:FindFirstChild("Props")  then
 noobworkspace.Props.PlayerHouses.ChildAdded:Connect(function(child) do
 task.wait(5)
-if chestesp == true then
-if child:IsA("Model") and child.Name == "Wooden chest" then
-DrawNewLine(child.PrimaryPart, "Housechest","House Chest")
+if playerhouseespval == true then
+if child:IsA("Model")  then
+DrawNewLine(child.PrimaryPart, "Housechest","Player house")
 end
 end
 end
@@ -2024,14 +2034,14 @@ misctab.Toggle({
     })
     
     esptab.Toggle({
-    Text = "house chest  esp",
+    Text = "player house esp",
     Callback = function(Value)
-    if chestesp == false then
-    chestesp = true
-    if game:GetService("Workspace"):FindFirstChild("Props") then
-    for i,v in pairs(game:GetService("Workspace").Props.PlayerHouses:GetDescendants()) do
-    if v:IsA("Model") and v.Name == "Wooden chest" then
-    DrawNewLine(v.PrimaryPart, "Housechest","House Chest")
+    playerhouseespval = Value
+    if playerhouseespval == true then
+    if noobworkspace:FindFirstChild("Props") then
+    for i,v in pairs(noobworkspace.Props.PlayerHouses:GetChildren()) do
+    if v:IsA("Model")  then
+    DrawNewLine(v.PrimaryPart, "Housechest","Player house")
     end
     end
     end
@@ -2112,5 +2122,19 @@ while task.wait() do
         if me.Character and me.Character:FindFirstChild("HumanoidRootPart") then 
             updateplayerhitboxests()
         end
+    end
+    if silentaimval == true then 
+        if me.Character and me.Character:FindFirstChild("HumanoidRootPart")  then
+      
+        if fovcirclets.Visible == true and fovcirclets.Radius>0 then 
+           closestskidtous = getclosestplrtocirclets(fovcirclets.Radius) 
+       else
+           closestskidtous = getclosestplrtocirclets(defaultfovsize) 
+       end
+
+       if closestskidtous then 
+        stupidhitpart = choosehitpart(silentaimhitpartts,closestskidtous.Character)
+       end
+    end
     end
 end
