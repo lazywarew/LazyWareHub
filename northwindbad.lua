@@ -1,3 +1,18 @@
+getgenv().TSSettings = {
+	key = "dogsarecute", --//  i removed key system btw so this is useless
+
+	--// UI SETTINGS
+	Style = 1,
+	SizeX = 500,
+	SizeY = 350,
+	Theme = "Light", --// Light,Dark,Mocha,Aqua,Jester,
+	MainFrame = Color3.fromRGB(0, 0, 0),
+}
+
+function guiprotectionfunctionts(gui)
+gui.Parent = game.CoreGui
+end
+
 
 if isstscrptloaded then
     return
@@ -435,7 +450,10 @@ local blacklistedautolootitemsts = {
     ["Gun oil"] = {},
     ["Red apple"] = {},
     ["Poison"] = {},
-    ["Flax leaf"] = {}
+    ["Flax leaf"] = {},
+    ["Cannon ball"] = {},
+    ["Egg"] = {},
+    ["Flour"] = {}
 
 }
 
