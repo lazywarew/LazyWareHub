@@ -1,5 +1,4 @@
 
-
 if isstscrptloaded then
     return
 end
@@ -369,7 +368,7 @@ local rndmnewfuncts = Random.new()
 local currentkillauratargetts = nil
 local killaurameleechargedlolts = false 
 local killaurameleefullychargedlolts = false 
-local killauradistancets = 12
+local killauradistancets = 14
 local killauravalts = false
 
 --// autofarm related stuff
@@ -1400,7 +1399,7 @@ plrservicets.PlayerAdded:Connect(function(player)
                 local HumanoidRootPart = playerchar:FindFirstChild("HumanoidRootPart")
                 local PlayerEntityData = wrapperstuffcraplol:Wrap(player)
                 if PlayerEntityData.FirstName then 
-                local TracerText = PlayerEntityData.FirstName.." "..PlayerEntityData.LastName
+                local TracerText = v.Name
                 DrawNewLine(HumanoidRootPart, "Player",TracerText)
                 end 
             end
@@ -1427,6 +1426,11 @@ me.CharacterAdded:Connect(function(newchar)
     DrawNewLine(obj.PrimaryPart, "Playerremains","Player Remains")
     end
     end
+    if treasurechestespval == true then 
+    if string.len(obj.Name)>=19 and string.sub(obj.Name,0,19) == "Treasure hunt board" then 
+        DrawNewLine(obj,"Treasurechest","Carriable Treasure Chest")
+    end
+     end     
     end)
     end
         
@@ -1776,7 +1780,41 @@ misctab.Button({
 })
     
 
-    
+misctab.Button({
+    Text = 'christmas dance anim',
+    Callback = function()
+            local ChristmasDanceAnimId = "rbxassetid://123916700143279"
+
+            local animator = me.Character.Humanoid:FindFirstChildOfClass("Animator")
+            
+            local existingTrack
+            for _, track in ipairs(animator:GetPlayingAnimationTracks()) do
+                if track.Animation and track.Animation.AnimationId == ChristmasDanceAnimId then
+                    existingTrack = track
+                    break
+                end
+            end
+
+            if existingTrack then
+                existingTrack:Stop()
+                existingTrack:Destroy()
+            else
+                local animation = Instance.new("Animation")
+                animation.AnimationId = ChristmasDanceAnimId
+
+                local animationTrack = animator:LoadAnimation(animation)
+                animationTrack:Play()
+            end
+    end,
+    Menu = {
+        Information = function(self)
+            MainTab.Banner({
+                Text = 'makes you do christmas dance'
+            })
+        end
+    }
+})
+
 	
 	misctab.TextField({
 	Text = "bag capacity",
@@ -1933,7 +1971,7 @@ misctab.Toggle({
     local PlayerEntityData = wrapperstuffcraplol:Wrap(v)
     if PlayerEntityData then 
      if PlayerEntityData.FirstName then 
-    local TracerText = PlayerEntityData.FirstName.." "..PlayerEntityData.LastName
+    local TracerText = v.Name 
     DrawNewLine(HumanoidRootPart, "Player",TracerText)
      end 
     end 
@@ -1974,6 +2012,11 @@ misctab.Toggle({
     for i,v in pairs(targetfilterfolder.TreasureHuntMarkers:GetChildren()) do
     DrawNewLine(v,"Treasurechest","Treasure Chest")
     end
+    for i,v in pairs(noobworkspace.Carriables:GetChildren()) do 
+        if v.Parent and string.len(v.Name)>=19 and string.sub(v.Name,0,19) == "Treasure hunt board" then 
+            DrawNewLine(v.PrimaryPart,"Treasurechest","Carriable Treasure Chest")
+        end 
+        end 
     end
     end
     end,
