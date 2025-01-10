@@ -888,7 +888,7 @@ function sendtoxicmessagets(playername)
     local autotoxicwordsts = {
         [1] = {msg = "Thanks for the loot "..playername.." <3 (dm storken to get your loot back <3) - 5XT54D98Jc"},
         [2] = {msg = "Tell Tyberius to stop devving - 5XT54D98Jc"},
-        [3] = {msg = "Omg did someone just kill you? And now your getting looted aswell????? 🤣 - 5XT54D98Jc"},
+        [3] = {msg = "Storken + Wistful = 🥰💖💝💘💞💓❣️ - 5XT54D98Jc"},
         [4] = {msg = "Did you die that fast? You should probably play aimlabs for a little bit. - 5XT54D98Jc"},
         [5] = {msg = "If you have any spare pounds donate them to Storken please - 5XT54D98Jc"},
         [6] = {msg = "No anticheat??? - 5XT54D98Jc"},
@@ -902,8 +902,7 @@ function sendtoxicmessagets(playername)
         [14] = {msg = "Spread love not hate🥰, Your loot is going to the poor, so uuh me :) - 5XT54D98Jc"},
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut. - 5XT54D98Jc"},
         [16] = {msg = "Lazyware > everything else - 5XT54D98Jc"},
-        [17] = {msg = "Captinwheeler deserted. - 5XT54D98Jc"},
-        [18] = {msg = "lazyware - WcYaXvj5GB"},
+        [17] = {msg = "lazyware - WcYaXvj5GB"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
