@@ -1545,7 +1545,7 @@ task.wait(2)
 
 
 local MainTab = Material.Load({
-    Title = "Northwind  - [discord.gg/WcYaXvj5GB]",
+    Title = "Northwind  - [discord.gg/5XT54D98Jc]",
     Style = TSSettings.Style,
     SizeX = TSSettings.SizeX,
     SizeY = TSSettings.SizeY,
