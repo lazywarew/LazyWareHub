@@ -372,7 +372,7 @@ local rndmnewfuncts = Random.new()
 local currentkillauratargetts = nil
 local killaurameleechargedlolts = false 
 local killaurameleefullychargedlolts = false 
-local killauradistancets = 14
+local killauradistancets = 12
 local killauravalts = false
 
 --// autofarm related stuff
@@ -386,7 +386,6 @@ local orepickaxetypeslolts = {
 
 local oreautofarmvalts = false 
 local oretoautofarmvalts = ""
-local backuporestoautofarmts = {} --// if oretoautofarm not found the ores in this list get farmed 
 local currentoreautofarmstagelolts = 0
 
 
@@ -509,12 +508,45 @@ if canweusefilesystemlibraryts == false then
    return
 end
 
+local UserScriptConfig = {
+    ["BackupOresToFarm"] = {},
+    ["PlayChristmasEmote"] = false,
+    ["BagSpace"] = 50,
+    ["LoadInfYield"] = false,
+    ["KillAura"] = false,
+    ["AutoLoot"] = false,
+    ["AutoLootFilter"] = false,
+    ["AutoToxic"] = false,
+    ["AutoRespawn"] = false,
+    ["InfStamina"] = false,
+    ["ExtraSpeedAndJumpPower"] = false,
+}
 
+function CheckAndLoadConfig()
 if isfolder("LazyWare") and isfolder("LazyWare/Northwind") then
-    local myconfigfilets = readfile("LazyWare/Northwind/Config.json")
-    local jsondecodedconfigts = stupidhttpservice:JSONDecode(myconfigfilets)
-    backuporestoautofarmts = jsondecodedconfigts.backuporestofarm
+    if isfile("LazyWare/Northwind/Config.json") then
+        local myconfigfilets = readfile("LazyWare/Northwind/Config.json")
+        local jsondecodedconfigts = stupidhttpservice:JSONDecode(myconfigfilets)
+
+        
+        for i,v in pairs(jsondecodedconfigts) do 
+            if UserScriptConfig[i] ~= nil then
+                UserScriptConfig[i] = v 
+            end 
+        end 
+    else
+        writefile("LazyWare/Northwind/Config.json", stupidhttpservice:JSONEncode(UserScriptConfig))
+    end
+else
+    makefolder("LazyWare")
+    makefolder("LazyWare/Northwind")
+
+    writefile("LazyWare/Northwind/Config.json", stupidhttpservice:JSONEncode(UserScriptConfig))
+end
 end 
+
+
+CheckAndLoadConfig()
 
 if noobreplicatedstorage:FindFirstChild("DefinEvents") then 
 defineventsfolder = noobreplicatedstorage:FindFirstChild("DefinEvents")
@@ -888,7 +920,7 @@ function sendtoxicmessagets(playername)
     local autotoxicwordsts = {
         [1] = {msg = "Thanks for the loot "..playername.." <3 (dm storken to get your loot back <3) - 5XT54D98Jc"},
         [2] = {msg = "Tell Tyberius to stop devving - 5XT54D98Jc"},
-        [3] = {msg = "Storken + Wistful = 🥰💖💝💘💞💓❣️ - 5XT54D98Jc"},
+        [3] = {msg = "Omg did someone just kill you? And now your getting looted aswell????? 🤣 - 5XT54D98Jc"},
         [4] = {msg = "Did you die that fast? You should probably play aimlabs for a little bit. - 5XT54D98Jc"},
         [5] = {msg = "If you have any spare pounds donate them to Storken please - 5XT54D98Jc"},
         [6] = {msg = "No anticheat??? - 5XT54D98Jc"},
@@ -902,7 +934,8 @@ function sendtoxicmessagets(playername)
         [14] = {msg = "Spread love not hate🥰, Your loot is going to the poor, so uuh me :) - 5XT54D98Jc"},
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut. - 5XT54D98Jc"},
         [16] = {msg = "Lazyware > everything else - 5XT54D98Jc"},
-        [17] = {msg = "lazyware - WcYaXvj5GB"},
+        [17] = {msg = "Captinwheeler deserted. - 5XT54D98Jc"},
+        [18] = {msg = "lazyware - WcYaXvj5GB"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
@@ -1218,7 +1251,7 @@ function autofarmoreslolts()
 
                     --// check for backup autofarm ores 
                     if itemtominelol == nil then 
-                        for i,v in pairs(backuporestoautofarmts) do 
+                        for i,v in pairs(UserScriptConfig.BackupOresToFarm) do 
                             itemtominelol = findclosestitemnearuslolts(noobworkspace.StaticProps.Resources,v.Name,650,true)
                             if itemtominelol then 
                                 break 
@@ -1227,7 +1260,7 @@ function autofarmoreslolts()
                     end 
 
                     if itemtominelol == nil then 
-                        for i,v in pairs(backuporestoautofarmts) do 
+                        for i,v in pairs(UserScriptConfig.BackupOresToFarm) do 
                             itemtominelol = findclosestitemnearuslolts(noobworkspace.TargetFilter.Resources,v.Name,650,true)
                             if itemtominelol then 
                                 break 
@@ -1399,6 +1432,30 @@ end
 end
 end
 
+function playchristmasanim()
+    local ChristmasDanceAnimId = "rbxassetid://123916700143279"
+
+    local animator = me.Character.Humanoid:FindFirstChildOfClass("Animator")
+    
+    local existingTrack
+    for _, track in ipairs(animator:GetPlayingAnimationTracks()) do
+        if track.Animation and track.Animation.AnimationId == ChristmasDanceAnimId then
+            existingTrack = track
+            break
+        end
+    end
+
+    if existingTrack then
+        existingTrack:Stop()
+        existingTrack:Destroy()
+    else
+        local animation = Instance.new("Animation")
+        animation.AnimationId = ChristmasDanceAnimId
+
+        local animationTrack = animator:LoadAnimation(animation)
+        animationTrack:Play()
+    end
+end 
 
 plrservicets.PlayerAdded:Connect(function(player)
     task.wait(1)
@@ -1670,7 +1727,7 @@ misctab.Toggle({
 	Callback = function(Value)
         extraspeedandjumppowervalts = Value
 	end,
-  Enabled = extraspeedandjumppowervalts 
+  Enabled = UserScriptConfig.ExtraSpeedAndJumpPower 
 })
 
 misctab.Toggle({
@@ -1678,10 +1735,8 @@ misctab.Toggle({
 	Callback = function(Value)
      killauravalts = Value
 	end,
-    Enabled = killauravalts
+    Enabled = UserScriptConfig.KillAura
 })
-
-
 
 
 misctab.Toggle({
@@ -1689,7 +1744,7 @@ misctab.Toggle({
 	Callback = function(Value)
      autotoxicvalts = Value
 	end,
-    Enabled = autotoxicvalts
+    Enabled = UserScriptConfig.AutoToxic
 })
 
 misctab.TextField({
@@ -1792,30 +1847,9 @@ misctab.Button({
     
 
 misctab.Button({
-    Text = 'christmas dance anim',
+    Text = 'christmas anim',
     Callback = function()
-            local ChristmasDanceAnimId = "rbxassetid://123916700143279"
-
-            local animator = me.Character.Humanoid:FindFirstChildOfClass("Animator")
-            
-            local existingTrack
-            for _, track in ipairs(animator:GetPlayingAnimationTracks()) do
-                if track.Animation and track.Animation.AnimationId == ChristmasDanceAnimId then
-                    existingTrack = track
-                    break
-                end
-            end
-
-            if existingTrack then
-                existingTrack:Stop()
-                existingTrack:Destroy()
-            else
-                local animation = Instance.new("Animation")
-                animation.AnimationId = ChristmasDanceAnimId
-
-                local animationTrack = animator:LoadAnimation(animation)
-                animationTrack:Play()
-            end
+        playchristmasanim()
     end,
     Menu = {
         Information = function(self)
@@ -1827,22 +1861,21 @@ misctab.Button({
 })
 
 	
-	misctab.TextField({
-	Text = "bag capacity",
+    misctab.TextField({
+	Text = "bag space",
 	Callback = function(Value)
 		if tonumber(Value) then
 		    setbagspace(tonumber(Value))
-		    end
+		end
 	end,
 	})
 
-	  
    misctab.Toggle({
    Text = "inf stamina",
    Callback = function(Value)
     infstaminavalts = Value
    end,
-   Enabled = infstaminavalts
+   Enabled = UserScriptConfig.InfStamina
    })
 
    misctab.Toggle({
@@ -1850,7 +1883,7 @@ misctab.Button({
     Callback = function(Value)
     autorespawnondeadlolts = Value
     end,
-    Enabled = autorespawnondeadlolts
+    Enabled = UserScriptConfig.AutoRespawn
     })
 
    misctab.Toggle({
@@ -1858,7 +1891,7 @@ misctab.Button({
 	Callback = function(Value)
 	   autolootts = Value
 	end,
-	Enabled = autolootts
+	Enabled = UserScriptConfig.AutoLoot
 })
 
 misctab.Toggle({
@@ -1866,7 +1899,7 @@ misctab.Toggle({
 	Callback = function(Value)
 	   autolootfilterts = Value
 	end,
-	Enabled = autolootfilterts
+	Enabled = UserScriptConfig.AutoLootFilter
 })
 
 
@@ -2071,10 +2104,21 @@ misctab.Toggle({
     
 
 
+if  UserScriptConfig.LoadInfYield == true then 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end 
+
+if  UserScriptConfig.PlayChristmasEmote == true then 
+    playchristmasanim()
+end 
+
+if UserScriptConfig.BagSpace>50 then 
+    setbagspace(UserScriptConfig.BagSpace)
+end 
+
+
 for i,v in pairs(infstaminalol) do 
 local oldsetstaminalol = v.SetStamina
-
-
 v.SetStamina = function(self, ...)
         local args = {...}
         if infstaminavalts == true then
