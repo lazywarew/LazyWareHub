@@ -935,7 +935,7 @@ function sendtoxicmessagets(playername)
         [15] = {msg = "Storken was the greatest asset to SLC, too bad you had to ruin it MLGPeanut. - 5XT54D98Jc"},
         [16] = {msg = "Lazyware > everything else - 5XT54D98Jc"},
         [17] = {msg = "Captinwheeler deserted. - 5XT54D98Jc"},
-        [18] = {msg = "lazyware - WcYaXvj5GB"},
+        [18] = {msg = "lazyware - 5XT54D98Jc"},
     }
 
     local randomtoxicmsgindex = math.random(1,#autotoxicwordsts)
